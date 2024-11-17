@@ -5,7 +5,8 @@
 Agent::Agent()
 {
 	AddComponent<SpriteRenderer>();
-	//GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\jiwoo.bmp", L"Tile", );
+	GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo.bmp.bmp", L"bishojo", { 736,989 });
+	m_vPos = { 500,500 };
 }
 
 Agent::~Agent()
