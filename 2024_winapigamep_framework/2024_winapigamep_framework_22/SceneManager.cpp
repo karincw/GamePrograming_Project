@@ -1,18 +1,16 @@
 #include "pch.h"
 #include "SceneManager.h"
 #include "Scene.h"
-#include "TitleScene.h"
-#include "GameScene.h"
+#include "StageScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
-	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
-	RegisterScene(L"GameScene",std::make_shared<GameScene>());
+	RegisterScene(L"StageScene",std::make_shared<StageScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"TitleScene");
+	LoadScene(L"StageScene");
 }
 
 void SceneManager::Update()

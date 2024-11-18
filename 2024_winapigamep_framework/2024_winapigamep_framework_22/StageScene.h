@@ -3,6 +3,7 @@
 class StageScene :
     public Scene
 {
-
+public:
+	void Init() override;
 };
 

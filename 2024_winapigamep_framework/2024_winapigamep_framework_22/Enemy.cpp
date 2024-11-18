@@ -20,7 +20,7 @@ void Enemy::Render(HDC _hdc)
 {	
 	//HBRUSH brush = CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256));
 	//HBRUSH oldbrush = (HBRUSH)SelectObject(_hdc, brush);
-	Vec2 vPos = GetPos();
+	Vec2 vPos = GetTransform();
 	Vec2 vSize = GetSize();
 	RECT_RENDER(_hdc, vPos.x, vPos.y
 		, vSize.x, vSize.y);

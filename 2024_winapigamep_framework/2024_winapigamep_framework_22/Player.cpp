@@ -33,7 +33,7 @@ Player::~Player()
 }
 void Player::Update()
 {
-	Vec2 vPos = GetPos();
+	Vec2 vPos = GetTransform();
 	//if(GET_KEY(KEY_TYPE::LEFT))
 	if (GET_KEY(KEY_TYPE::A))
 		vPos.x -= 100.f * fDT;
@@ -46,7 +46,7 @@ void Player::Update()
 
 void Player::Render(HDC _hdc)
 {
-	Vec2 vPos = GetPos();
+	Vec2 vPos = GetTransform();
 	Vec2 vSize = GetSize();
 	//RECT_RENDER(_hdc, vPos.x, vPos.y
 	//	, vSize.x, vSize.y);
@@ -74,7 +74,7 @@ void Player::Render(HDC _hdc)
 void Player::CreateProjectile()
 {
 	Projectile* pProj = new Projectile;
-	Vec2 vPos = GetPos();
+	Vec2 vPos = GetTransform();
 	vPos.y -= GetSize().y / 2.f;
 	pProj->SetPos(vPos);
 	pProj->SetSize({30.f,30.f});

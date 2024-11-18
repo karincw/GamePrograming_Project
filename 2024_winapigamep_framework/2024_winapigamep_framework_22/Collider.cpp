@@ -2,6 +2,7 @@
 #include "Collider.h"
 #include "Object.h"
 #include "GDISelector.h"
+#include "Transform.h"
 UINT Collider::m_sNextID = 0;
 Collider::Collider()
 	: m_vSize(30.f, 30.f)
@@ -17,7 +18,8 @@ Collider::~Collider()
 void Collider::LateUpdate()
 {
 	const Object* pOwner = GetOwner();
-	Vec2 vPos = pOwner->GetPos();
+	Transform trm = pOwner->GetTransform();
+	Vec2 vPos = trm.GetPosition();
 	m_vLatePos = vPos + m_vOffsetPos;
 }
 

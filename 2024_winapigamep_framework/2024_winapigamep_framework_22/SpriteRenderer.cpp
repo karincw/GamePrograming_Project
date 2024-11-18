@@ -2,6 +2,7 @@
 #include "SpriteRenderer.h"
 #include "ResourceManager.h"
 #include "Object.h"
+#include "Transform.h"
 
 SpriteRenderer::SpriteRenderer()
 	:m_pTex(nullptr),
@@ -22,9 +23,9 @@ void SpriteRenderer::LateUpdate()
 void SpriteRenderer::Render(HDC _hdc)
 {
 	if (m_pTex == nullptr) return;
-
-	Vec2 vPos = m_pOwner->GetPos();
-	Vec2 vSize = m_pOwner->GetSize();
+	Transform trm = m_pOwner->GetTransform();
+	Vec2 vPos = trm.GetPosition();
+	Vec2 vSize = trm.GetScale();
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 

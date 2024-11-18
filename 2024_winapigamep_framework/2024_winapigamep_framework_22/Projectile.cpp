@@ -25,7 +25,7 @@ Projectile::~Projectile()
 
 void Projectile::Update()
 {
-	Vec2 vPos = GetPos();
+	Vec2 vPos = GetTransform();
 	// 삼각함수의 단위가 2가지가 있다.
 	// 라디안, 디그리
 	//vPos.x += cosf(m_angle) * 500.f * fDT;
@@ -43,7 +43,7 @@ void Projectile::Update()
 
 void Projectile::Render(HDC _hdc)
 {
-	Vec2 vPos = GetPos();
+	Vec2 vPos = GetTransform();
 	Vec2 vSize = GetSize();
 	//ELLIPSE_RENDER(_hdc, vPos.x, vPos.y
 	//	, vSize.x, vSize.y);

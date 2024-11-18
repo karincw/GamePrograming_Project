@@ -1,6 +1,7 @@
 #pragma once
 class Collider;
 class Component;
+class Transform;
 class Object
 {
 public:
@@ -12,10 +13,7 @@ public:
 	virtual void Render(HDC _hdc) abstract;
 	void ComponentRender(HDC _hdc);
 public:
-	void SetPos(Vec2 _vPos) { m_vPos = _vPos; }
-	void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
-	const Vec2& GetPos() const { return m_vPos; }
-	const Vec2& GetSize() const { return m_vSize; }
+	const Transform& GetTransform() const;
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
