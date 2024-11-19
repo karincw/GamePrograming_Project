@@ -1,11 +1,11 @@
 #pragma once
 #include "Object.h"
-class Agent :
-	public Object
+class Tile :
+    public Object
 {
 public:
-	Agent();
-	~Agent();
+	Tile();
+	~Tile();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;

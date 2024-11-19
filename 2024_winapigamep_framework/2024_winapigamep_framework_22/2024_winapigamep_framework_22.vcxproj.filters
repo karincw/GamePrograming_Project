@@ -35,6 +35,12 @@
     <Filter Include="Engine\07. Module">
       <UniqueIdentifier>{ec499769-3097-4d06-8abb-b25ff4a1a933}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Don%27tUse">
+      <UniqueIdentifier>{57c6e4bb-0a27-4e5f-8414-c953264511b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Scene\Don%27tUse">
+      <UniqueIdentifier>{e651512f-225e-442c-bb88-2dd5cf3366de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -70,32 +76,14 @@
     <ClInclude Include="InputManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="Vec2.h">
       <Filter>Engine\99. Header</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Engine\02. Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="ResourceBase.h">
       <Filter>Engine\05. Resource</Filter>
@@ -127,12 +115,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Agent.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="BackGroundObject.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
@@ -142,7 +124,33 @@
     <ClInclude Include="Rigidbody2D.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Enemy.h">
+      <Filter>Engine\03. Object\Don%27tUse</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\03. Object\Don%27tUse</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Engine\03. Object\Don%27tUse</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Engine\04. Scene\Don%27tUse</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Engine\04. Scene\Don%27tUse</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -173,29 +181,11 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="ResourceBase.cpp">
       <Filter>Engine\05. Resource</Filter>
@@ -227,12 +217,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Agent.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGroundObject.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
@@ -242,6 +226,32 @@
     <ClCompile Include="Rigidbody2D.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Engine\03. Object\Don%27tUse</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine\03. Object\Don%27tUse</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Engine\03. Object\Don%27tUse</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Engine\04. Scene\Don%27tUse</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Engine\04. Scene\Don%27tUse</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -18,8 +18,8 @@ Collider::~Collider()
 void Collider::LateUpdate()
 {
 	const Object* pOwner = GetOwner();
-	Transform trm = pOwner->GetTransform();
-	Vec2 vPos = trm.GetPosition();
+	Transform* trm = m_pOwner->GetComponent<Transform>();
+	Vec2 vPos = trm->GetPosition();
 	m_vLatePos = vPos + m_vOffsetPos;
 }
 

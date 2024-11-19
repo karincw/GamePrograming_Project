@@ -2,8 +2,9 @@
 #include "Object.h"
 #include "TimeManager.h"
 #include "InputManager.h"
-#include "Transform.h"
 #include "Component.h"
+#include "Collider.h"
+#include "Transform.h"
 Object::Object()
 	: m_vPos{}
 	, m_vSize{}
@@ -44,11 +45,6 @@ void Object::ComponentRender(HDC _hdc)
 	}
 }
 
-const Transform& Object::GetTransform() const
-{
-	return *dynamic_cast<Transform*>(m_vecComponents[0]);
-}
-
 void Object::EnterCollision(Collider* _other)
 {
 }
@@ -59,6 +55,11 @@ void Object::StayCollision(Collider* _other)
 
 void Object::ExitCollision(Collider* _other)
 {
+}
+
+Transform* Object::GetTransform()
+{
+	return dynamic_cast<Transform*>(m_vecComponents[0]);
 }
 
 //void Object::Update()
