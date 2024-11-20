@@ -5,6 +5,8 @@
 #include "Texture.h"
 #include "TimeManager.h"
 #include "Transform.h"
+#include "Action.h"
+#include "Object.h"
 Animation::Animation()
 	: m_pAnimator(nullptr)
 	, m_CurFrame(0)
@@ -14,19 +16,30 @@ Animation::Animation()
 	, m_PostProcessingDC()
 	, m_PostProcessingBitMap()
 	, m_PostProcessingBitInfo{}
+	, animationEndEvent(nullptr)
+	, eventflag(false)
 {
+	animationEndEvent = new Action<Object*>();
 }
 
 Animation::~Animation()
 {
 	::DeleteDC(m_PostProcessingDC);
 	::DeleteObject(m_PostProcessingBitMap);
+	delete animationEndEvent;
 }
 
 void Animation::Update()
 {
 	if (m_pAnimator->GetRepeatcnt() <= 0)
 	{
+		if (eventflag)
+		{
+			Object* pObj = m_pAnimator->GetOwner();
+			animationEndEvent->Invoke(pObj);
+			eventflag = false;
+		}
+		//여기서 애니메이션이 끝났을때 액션 발행
 		m_CurFrame = m_vecAnimFrame.size() - 1;
 		return;
 	}
@@ -37,6 +50,7 @@ void Animation::Update()
 		// 일단 모은 시간에서 현재 진행한 시간을 빼고
 		m_fAccTime -= m_vecAnimFrame[m_CurFrame].fDuration;
 		++m_CurFrame; // 다음프레임으로 옮기기
+
 		if (m_CurFrame >= m_vecAnimFrame.size()) // 한바퀴 돌게하고싶어
 		{
 			if (!m_pAnimator->GetRepeat())
@@ -44,7 +58,6 @@ void Animation::Update()
 			m_CurFrame = 0;
 			m_fAccTime = 0.f;
 		}
-
 	}
 }
 
@@ -79,7 +92,7 @@ void Animation::Render(HDC _hdc)
 	//	, (m_pTex->GetHeight())
 	//	, SRCCOPY
 	//); //리사이즈
-	
+
 
 	TransparentBlt(_hdc
 		, (int)(position.x - scale.x / 2)

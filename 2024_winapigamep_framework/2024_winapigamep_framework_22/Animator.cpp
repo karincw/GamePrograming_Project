@@ -64,6 +64,7 @@ void Animator::PlayAnimation(const wstring& _strName, bool _IsRepeat, int _repea
 	m_pCurrentAnimation->SetFrame(0);
 	m_IsRepeat = _IsRepeat;
 	m_repeatcnt = _repeatcnt;
+	m_pCurrentAnimation->eventflag = true;
 }
 
 void Animator::StopAnimation()

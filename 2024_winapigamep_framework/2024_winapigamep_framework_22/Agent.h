@@ -13,5 +13,13 @@ public:
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other)override;
 	void ExitCollision(Collider* _other)override;
-};
+	Vec2 GetRollingDir() { return RollingDir; }
+public:
+	bool isRolling;
 
+private:
+	bool isRun;
+	bool isRight;
+	Vec2 RollingDir;
+};
+void PlayRun(Object* owner);

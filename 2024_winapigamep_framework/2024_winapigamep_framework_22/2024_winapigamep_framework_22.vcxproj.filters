@@ -151,6 +151,9 @@
     <ClInclude Include="Tile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Engine\07. Module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
