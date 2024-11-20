@@ -5,11 +5,8 @@
 
 Tile::Tile()
 {
+	GetTransform()->SetScale({ 300,300 });
 	AddComponent<SpriteRenderer>();
-	SpriteRenderer* sp = GetComponent<SpriteRenderer>();
-	sp->CreateTexture(L"Texture\\bishojo.bmp", L"bishojo");
-
-	GetTransform()->SetScale({ 200,200 });
 }
 
 Tile::~Tile()

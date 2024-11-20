@@ -40,14 +40,11 @@ private:
 	UINT   m_CurFrame; // 현재 프레임
 	float  m_fAccTime; // 누적 시간
 	int	   m_repeatcnt; // 반복 횟수
-	float m_reSizeRatio;
+	float m_reSizeRatioX;
+	float m_reSizeRatioY;
 	wstring m_strName;
 	Animator* m_pAnimator;
 	Texture* m_pTex; // 애니메이션 텍스처
-
-	HBITMAP m_PostProcessingBitMap;
-	BITMAP m_PostProcessingBitInfo;
-	HDC m_PostProcessingDC;
 
 	vector<tAnimFrame> m_vecAnimFrame;
 	bool m_IsRotate;

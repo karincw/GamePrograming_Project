@@ -10,6 +10,8 @@
 #include "Rigidbody2D.h"
 #include "Action.h"
 
+#define SPEED 200
+
 void PlayRun(Object* owner)
 {
 	Agent* agent = dynamic_cast<Agent*>(owner);
@@ -31,7 +33,7 @@ void PlayRun(Object* owner)
 }
 
 Agent::Agent()
-	:isRight(false), isRun(false), isRolling(false)
+	:isRight(true), isRun(false), isRolling(false)
 	, RollingDir({ 0,0 })
 {
 	//AddComponent<Rigidbody2D>();
@@ -42,22 +44,22 @@ Agent::Agent()
 
 	AddComponent<Animator>();
 	Animator* animator = GetComponent<Animator>();
-	animator->CreateTexture(L"Texture\\character_sheet.bmp", L"character_sheet");
+	animator->CreateTexture(L"Texture\\Noah_sheet.bmp", L"Noah_sheet");
+
 	animator->CreateAnimation(L"Character_Idle_r", Vec2(0, 0), Vec2(32, 32), Vec2(32, 0), 1, 0.1f);
-	animator->CreateAnimation(L"Character_Run_r", Vec2(0, 32), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
-	animator->CreateAnimation(L"Character_Rolling_r", Vec2(0, 64), Vec2(32, 32), Vec2(32, 0), 6, 0.1f);
-
 	animator->CreateAnimation(L"Character_Idle_l", Vec2(0, 96), Vec2(32, 32), Vec2(32, 0), 1, 0.1f);
-	animator->CreateAnimation(L"Character_Run_l", Vec2(0, 128), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
-	animator->CreateAnimation(L"Character_Rolling_l", Vec2(0, 160), Vec2(32, 32), Vec2(32, 0), 6, 0.1f);
 
-	animator->PlayAnimation(L"Character_Run_r", true);
+	animator->CreateAnimation(L"Character_Run_r", Vec2(0, 32), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
+	animator->CreateAnimation(L"Character_Run_l", Vec2(0, 128), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
+
+	animator->CreateAnimation(L"Character_Rolling_r", Vec2(0, 64), Vec2(32, 32), Vec2(32, 0), 6, 0.1f);
+	animator->CreateAnimation(L"Character_Rolling_l", Vec2(0, 160), Vec2(32, 32), Vec2(32, 0), 6, 0.1f);
 
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
 	col->SetOffSetPos({ 0, 48 });
-	animator->FindAnimation(L"Character_Rolling_l")->animationEndEvent->Insert(PlayRun);
 	animator->FindAnimation(L"Character_Rolling_r")->animationEndEvent->Insert(PlayRun);
+	animator->FindAnimation(L"Character_Rolling_l")->animationEndEvent->Insert(PlayRun);
 
 	col->SetSize({ 32,32 });
 }
@@ -91,7 +93,7 @@ void Agent::Update()
 
 	if (!isRolling)
 	{
-		if (moveDir.x == 0 && moveDir.y == 0)
+		if (moveDir.Length() == 0)
 		{
 			std::wstring animationName = L"Character_Idle";
 			if (isRight)
@@ -101,6 +103,17 @@ void Agent::Update()
 
 			GetComponent<Animator>()->PlayAnimation(animationName, true);
 			isRun = false;
+		}
+		else if (!isRun && moveDir.y != 0)
+		{
+			std::wstring animationName = L"Character_Run";
+			if (isRight)
+				animationName += L"_r";
+			else
+				animationName += L"_l";
+
+			GetComponent<Animator>()->PlayAnimation(animationName, true);
+			isRun = true;
 		}
 		else if (!isRun || (isRight && moveDir.x < 0))
 		{
@@ -112,17 +125,6 @@ void Agent::Update()
 		{
 			GetComponent<Animator>()->PlayAnimation(L"Character_Run_r", true);
 			isRight = true;
-			isRun = true;
-		}
-		else if (!isRun && moveDir.y != 0)
-		{
-			std::wstring animationName = L"Character_Run";
-			if (isRight)
-				animationName += L"_r";
-			else
-				animationName += L"_l";
-
-			GetComponent<Animator>()->PlayAnimation(animationName, true);
 			isRun = true;
 		}
 
@@ -145,11 +147,11 @@ void Agent::Update()
 			isRun = false;
 		}
 
-		GetTransform()->Translate(moveDir * 100 * dt);
+		GetTransform()->Translate(moveDir * SPEED * dt);
 	}
 	else
 	{
-		GetTransform()->Translate(RollingDir * 100 * dt);
+		GetTransform()->Translate(RollingDir * SPEED * dt);
 	}
 
 }

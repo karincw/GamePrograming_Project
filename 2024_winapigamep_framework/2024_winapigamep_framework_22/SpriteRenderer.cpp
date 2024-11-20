@@ -6,7 +6,8 @@
 #include "Texture.h"
 SpriteRenderer::SpriteRenderer()
 	:m_pTex(nullptr),
-	m_pKey(L"")
+	m_pKey(L""),
+	isStretchBlt(true)
 {
 
 }
@@ -18,6 +19,7 @@ SpriteRenderer::~SpriteRenderer()
 
 void SpriteRenderer::LateUpdate()
 {
+
 }
 
 void SpriteRenderer::Render(HDC _hdc)
@@ -29,30 +31,28 @@ void SpriteRenderer::Render(HDC _hdc)
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
 
-	//::BitBlt(_hdc
-	//	, (int)(vPos.x - vSize.x / 2)
-	//	, (int)(vPos.y - vSize.y / 2)
-	//	, width, height,
-	//	m_pTex->GetTexDC()
-	//	, 0, 0, SRCCOPY
-	//);
-
-	StretchBlt(_hdc
-		, (int)(vPos.x - vSize.x / 2)
-		, (int)(vPos.y - vSize.y / 2)
-		, vSize.x, vSize.y
-		, m_pTex->GetTexDC()
-		, 0, 0
-		, width, height,
-		SRCCOPY
+	::BitBlt(_hdc
+		, (int)(vPos.x - vSize.x / 2), (int)(vPos.y - vSize.y / 2), width, height,
+		m_pTex->GetTexDC()
+		, 0, 0, SRCCOPY
 	);
+
 }
 
 void SpriteRenderer::CreateTexture(const wstring& _path, const wstring& keyName)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(keyName, _path);
 	m_pKey = keyName;
+
+	Object* pObj = GetOwner();
+	Transform* trm = pObj->GetComponent<Transform>();
+	Vec2 scale = trm->GetScale();
+	float ratioX = scale.x / m_pTex->GetWidth();
+	float ratioY = scale.y / m_pTex->GetHeight();
+
+	m_pTex = m_pTex->MakeStretchTex(ratioX, ratioY);
 }
+
 
 Texture* SpriteRenderer::GetTexture()
 {
