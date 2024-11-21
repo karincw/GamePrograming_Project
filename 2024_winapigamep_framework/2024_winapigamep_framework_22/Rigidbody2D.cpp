@@ -30,10 +30,11 @@ void Rigidbody2D::SetVelocity(Vec2 velo)
 void Rigidbody2D::LateUpdate()
 {
 	float dt = GET_SINGLE(TimeManager)->GetDT();
-	Transform trm = m_pOwner->GetTransform();
-	Vec2 vPos = trm.GetPosition();
+	Transform* trm = m_pOwner->GetComponent<Transform>();
+	Vec2 vPos = trm->GetPosition();
 	_speed.y += _gravity * _gravityScale * dt;
 	vPos += _speed * dt;
+	trm->SetPosition(vPos);
 }
 
 void Rigidbody2D::Render(HDC _hdc)

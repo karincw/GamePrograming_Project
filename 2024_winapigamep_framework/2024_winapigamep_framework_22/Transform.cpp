@@ -3,8 +3,7 @@
 
 Transform::Transform()
 	:_position({ 0,0 })
-	, _rotation(0)
-	, _scale({ 1,1 })
+	, _scale({ 0,0 })
 {
 
 }

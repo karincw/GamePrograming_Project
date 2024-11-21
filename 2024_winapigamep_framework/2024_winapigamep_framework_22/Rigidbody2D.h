@@ -9,9 +9,8 @@ public:
 	void LateUpdate() override;
 	void Render(HDC _hdc) override;
 public:
-	inline void SetGravityScale(float gravity, float gravityScale)
+	inline void SetGravityScale(float gravityScale)
 	{
-		_gravity = gravity;
 		_gravityScale = gravityScale;
 	}
 public:

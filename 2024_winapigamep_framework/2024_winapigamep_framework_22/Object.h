@@ -13,8 +13,6 @@ public:
 	virtual void Render(HDC _hdc) abstract;
 	void ComponentRender(HDC _hdc);
 public:
-	const Transform& GetTransform() const;
-public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
@@ -46,9 +44,8 @@ public:
 		}
 		return component;
 	}
+	Transform* GetTransform();
 protected:
-	Vec2 m_vPos;
-	Vec2 m_vSize;
 	vector<Component*> m_vecComponents;
 };
 

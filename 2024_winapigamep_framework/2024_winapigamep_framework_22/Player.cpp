@@ -21,7 +21,7 @@ Player::Player()
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
 	this->AddComponent<Collider>();
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
+	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", Vec2(0.f, 150.f),
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
 

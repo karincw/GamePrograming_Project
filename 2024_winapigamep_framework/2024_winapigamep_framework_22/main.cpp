@@ -10,7 +10,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     BaseWindow game;
     //_CrtSetBreakAlloc(306);
-    //_CRTDBG_ALLOC_MEM_DF; // 할당
+    _CRTDBG_ALLOC_MEM_DF; // 할당
     _CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
     //_CrtSetBreakAlloc(번호);
     game.Run(hInstance, lpCmdLine, nCmdShow);

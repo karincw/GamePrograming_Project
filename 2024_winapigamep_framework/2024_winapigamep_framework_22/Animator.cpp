@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "ResourceManager.h"
 Animator::Animator()
 	: m_pCurrentAnimation(nullptr)
 	, m_IsRepeat(false)
+	, m_pTex(nullptr)
 {
 }
 
@@ -30,7 +32,12 @@ void Animator::Render(HDC _hdc)
 		m_pCurrentAnimation->Render(_hdc);
 }
 
-void Animator::CreateAnimation(const wstring& _strName, Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _framecount, float _fDuration, bool _isRotate)
+void Animator::CreateTexture(const wstring& _path, const wstring& keyName)
+{
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(keyName, _path);
+}
+
+void Animator::CreateAnimation(const wstring& _strName, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, UINT _framecount, float _fDuration, bool _isRotate)
 {
 	Animation* pAnim = FindAnimation(_strName);
 	if (pAnim != nullptr)
@@ -39,7 +46,7 @@ void Animator::CreateAnimation(const wstring& _strName, Texture* _pTex, Vec2 _vL
 	pAnim = new Animation;
 	pAnim->SetName(_strName);
 	pAnim->SetAnimator(this);
-	pAnim->Create(_pTex, _vLT, _vSliceSize, _vStep, _framecount, _fDuration, _isRotate);
+	pAnim->Create(m_pTex, _vLT, _vSliceSize, _vStep, _framecount, _fDuration, _isRotate);
 	m_mapAnimations.insert({ _strName,pAnim });
 }
 
@@ -57,6 +64,7 @@ void Animator::PlayAnimation(const wstring& _strName, bool _IsRepeat, int _repea
 	m_pCurrentAnimation->SetFrame(0);
 	m_IsRepeat = _IsRepeat;
 	m_repeatcnt = _repeatcnt;
+	m_pCurrentAnimation->eventflag = true;
 }
 
 void Animator::StopAnimation()
