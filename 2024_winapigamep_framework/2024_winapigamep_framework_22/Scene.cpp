@@ -2,8 +2,13 @@
 #include "Scene.h"
 #include "Object.h"
 #include "CollisionManager.h"
+#include "Camera.h"
+#include "Transform.h"
 Scene::Scene()
 {
+	Camera* cam = new Camera;
+	currentCamera = cam;
+	cam->SetScene(this);
 }
 
 Scene::~Scene()
@@ -31,7 +36,7 @@ void Scene::Update()
 				m_vecObj[i][j]->Update();
 		}
 	}
-	
+
 }
 
 void Scene::LateUpdate()
@@ -46,7 +51,7 @@ void Scene::LateUpdate()
 }
 
 void Scene::Render(HDC _hdc)
-{ 
+{
 	//for (UINT i = 0; i < (UINT)LAYER::END; ++i)
 	//{
 	//	for (size_t j = 0; j < m_vecObj[i].size(); ++j)
@@ -80,4 +85,5 @@ void Scene::Release()
 		m_vecObj[i].clear();
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
+	delete currentCamera;
 }

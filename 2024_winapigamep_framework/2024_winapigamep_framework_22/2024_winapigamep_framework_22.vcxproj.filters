@@ -41,6 +41,9 @@
     <Filter Include="Engine\04. Scene\Don%27tUse">
       <UniqueIdentifier>{e651512f-225e-442c-bb88-2dd5cf3366de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\06. Component\RenderCompo">
+      <UniqueIdentifier>{91e78eb3-f099-4a00-a947-bff097c7092b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -109,15 +112,6 @@
     <ClInclude Include="EventManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
     <ClInclude Include="StageScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
@@ -148,11 +142,21 @@
     <ClInclude Include="TitleScene.h">
       <Filter>Engine\04. Scene\Don%27tUse</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
+    <ClInclude Include="BishojoObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Engine\07. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\06. Component\RenderCompo</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Engine\06. Component\RenderCompo</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Engine\06. Component\RenderCompo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -214,15 +218,6 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
     <ClCompile Include="StageScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
@@ -253,8 +248,18 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>Engine\04. Scene\Don%27tUse</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
+    <ClCompile Include="BishojoObject.cpp">
       <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Animation.cpp">
+      <Filter>Engine\06. Component\RenderCompo</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Engine\06. Component\RenderCompo</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Engine\06. Component\RenderCompo</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

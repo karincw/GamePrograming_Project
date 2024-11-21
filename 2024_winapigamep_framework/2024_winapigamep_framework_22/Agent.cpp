@@ -3,19 +3,22 @@
 #include "SpriteRenderer.h"
 #include "InputManager.h"
 #include "Transform.h"
+#include "SceneManager.h"
 #include "TimeManager.h"
 #include "Animator.h"
 #include "Animation.h"
 #include "Collider.h"
-#include "Rigidbody2D.h"
+#include "Scene.h"
+#include "Camera.h"
 #include "Action.h"
 
 #define SPEED 200
 
+
 void PlayRun(Object* owner)
 {
 	Agent* agent = dynamic_cast<Agent*>(owner);
-	agent->isRolling = false;
+
 
 	Animator* ani = agent->GetComponent<Animator>();
 	std::wstring animationName = L"Character_Idle";
@@ -30,11 +33,20 @@ void PlayRun(Object* owner)
 	}
 
 	agent->GetComponent<Animator>()->PlayAnimation(animationName, true);
+
+	agent->isRolling = false;
+
+	auto func = [](Object* obj) {
+		Agent* agent = dynamic_cast<Agent*>(obj);
+		agent->canRolling = true;
+		};
+
+	GET_SINGLE(TimeManager)->DelayRun(3, func, owner);
 }
 
 Agent::Agent()
 	:isRight(true), isRun(false), isRolling(false)
-	, RollingDir({ 0,0 })
+	, RollingDir({ 0,0 }), canRolling(true)
 {
 	//AddComponent<Rigidbody2D>();
 	//Rigidbody2D* rb = GetComponent<Rigidbody2D>();
@@ -62,6 +74,7 @@ Agent::Agent()
 	animator->FindAnimation(L"Character_Rolling_l")->animationEndEvent->Insert(PlayRun);
 
 	col->SetSize({ 32,32 });
+	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
 }
 
 Agent::~Agent()
@@ -128,7 +141,7 @@ void Agent::Update()
 			isRun = true;
 		}
 
-		if (GET_KEYDOWN(KEY_TYPE::SPACE) && moveDir.Length() > 0)
+		if (GET_KEYDOWN(KEY_TYPE::SPACE) && moveDir.Length() > 0 && canRolling)
 		{
 			Animator* ani = GetComponent<Animator>();
 			std::wstring animationName = L"Character_Rolling";
@@ -145,13 +158,17 @@ void Agent::Update()
 			RollingDir = moveDir * 2;
 			isRolling = true;
 			isRun = false;
+			canRolling = false;
 		}
-
-		GetTransform()->Translate(moveDir * SPEED * dt);
+		moveDir = moveDir * SPEED * dt;
+		GetTransform()->Translate(moveDir);
+		cam->GetTransform()->Translate(moveDir);
 	}
 	else
 	{
-		GetTransform()->Translate(RollingDir * SPEED * dt);
+		moveDir = RollingDir * SPEED * dt;
+		GetTransform()->Translate(moveDir);
+		cam->GetTransform()->Translate(moveDir);
 	}
 
 }

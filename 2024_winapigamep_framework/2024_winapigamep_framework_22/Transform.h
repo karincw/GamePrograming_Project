@@ -13,13 +13,10 @@ public:
 public:
 	void SetPosition(Vec2 v) { _position = v; }
 	void SetScale(Vec2 v) { _scale = v; }
-	void SetRotation(float r) { _rotation = r; }
 	Vec2 GetPosition() { return _position; };
 	Vec2 GetScale() { return _scale; };
-	float GetRotation() { return _rotation; };
 private:
 	Vec2 _position;
-	float _rotation;
 	Vec2 _scale;
 };
 

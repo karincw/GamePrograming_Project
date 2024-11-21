@@ -1,5 +1,5 @@
 #pragma once
-#include<vector>
+#include "pch.h"
 template<typename t>
 class Action
 {
@@ -14,6 +14,7 @@ public:
 	}
 
 public:
+	// 일반함수 포인터
 	using FuncvoidType = void(*)(t);
 	// 반환형(*=> 포인터이다)(인자)
 	//// 함수포인터

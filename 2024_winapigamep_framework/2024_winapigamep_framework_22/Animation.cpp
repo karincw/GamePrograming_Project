@@ -7,6 +7,9 @@
 #include "Transform.h"
 #include "Action.h"
 #include "Object.h"
+#include "Camera.h"
+#include "Scene.h"
+#include "SceneManager.h"
 Animation::Animation()
 	: m_pAnimator(nullptr)
 	, m_CurFrame(0)
@@ -63,32 +66,12 @@ void Animation::Render(HDC _hdc)
 	Transform* trm = pObj->GetComponent<Transform>();
 	Vec2 position = trm->GetPosition();
 	Vec2 scale = trm->GetScale();
-	// 오프셋 적용
+
+	// 오프셋 
 	position = position + m_vecAnimFrame[m_CurFrame].vOffset;
 
-	//TransparentBlt(m_PostProcessingDC
-	//	, 0, 0
-	//	, m_pTex->GetWidth(), m_pTex->GetHeight()
-	//	, m_pTex->GetTexDC()
-	//	, 0, 0
-	//	, m_pTex->GetWidth(), m_pTex->GetHeight()
-	//	, RGB(255, 0, 255)
-	//);
-
-	//StretchBlt(_hdc
-	////StretchBlt(m_PostProcessingDC
-	//	, 0
-	//	, 0
-	//	, m_pTex->GetWidth() * m_reSizeRatio
-	//	, m_pTex->GetHeight() * m_reSizeRatio
-	//	, m_pTex->GetTexDC()
-	//	, 0
-	//	, 0
-	//	, (m_pTex->GetWidth())
-	//	, (m_pTex->GetHeight())
-	//	, SRCCOPY
-	//); //리사이즈
-
+	Camera* cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
+	position -= cam->GetTransform()->GetPosition();
 
 	TransparentBlt(_hdc
 		, (int)(position.x - scale.x / 2)
@@ -101,7 +84,6 @@ void Animation::Render(HDC _hdc)
 		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.x * m_reSizeRatioX)
 		, (int)(m_vecAnimFrame[m_CurFrame].vSlice.y * m_reSizeRatioY)
 		, RGB(255, 0, 255));
-	//실질적 그리기
 }
 
 void Animation::Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, int _framecount, float _fDuration, bool _isRotate)
@@ -114,6 +96,7 @@ void Animation::Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep,
 	m_reSizeRatioY = scale.y / _vSliceSize.y;
 	m_pTex = _pTex;
 
+	// 리사이즈 이미지
 	m_pTex = m_pTex->MakeStretchTex(m_reSizeRatioX, m_reSizeRatioY);
 
 	m_IsRotate = _isRotate;

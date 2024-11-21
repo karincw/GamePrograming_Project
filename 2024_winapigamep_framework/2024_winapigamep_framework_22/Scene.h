@@ -1,6 +1,7 @@
 #pragma once
 //#include "Object.h"
 class Object; // 클래스 전방선언
+class Camera; 
 class Scene
 {
 public:
@@ -12,6 +13,11 @@ public:
 	virtual void LateUpdate();
 	virtual void Render(HDC _hdc);
 	virtual void Release();
+public:
+	Camera* GetCamera() 
+	{
+		return currentCamera;
+	}
 public:
 	void AddObject(Object* _obj, LAYER _type)
 	{
@@ -25,5 +31,6 @@ private:
 	//Object m_obj;
 	//Object* m_pObj;
 	vector<Object*> m_vecObj[(UINT)LAYER::END];
+	Camera* currentCamera;
 };
 

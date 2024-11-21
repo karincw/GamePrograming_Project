@@ -46,8 +46,6 @@ public:
 	}
 	Transform* GetTransform();
 protected:
-	Vec2 m_vPos;
-	Vec2 m_vSize;
 	vector<Component*> m_vecComponents;
 };
 

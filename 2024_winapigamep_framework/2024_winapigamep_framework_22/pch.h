@@ -12,6 +12,7 @@
 #include<unordered_set>
 #include<string>
 #include<algorithm>
+#include<functional>
 #include<ctime>
 #define _USE_MATH_DEFINES
 #include<math.h>

@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "SpriteRenderer.h"
+#include "SceneManager.h"
+#include "Scene.h"
+#include "Camera.h"
 #include "ResourceManager.h"
 #include "Object.h"
 #include "Transform.h"
@@ -30,6 +33,9 @@ void SpriteRenderer::Render(HDC _hdc)
 	Vec2 vSize = trm->GetScale();
 	int width = m_pTex->GetWidth();
 	int height = m_pTex->GetHeight();
+
+	Camera* cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
+	vPos -= cam->GetTransform()->GetPosition();
 
 	::BitBlt(_hdc
 		, (int)(vPos.x - vSize.x / 2), (int)(vPos.y - vSize.y / 2), width, height,

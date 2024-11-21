@@ -6,9 +6,7 @@
 #include "Collider.h"
 #include "Transform.h"
 Object::Object()
-	: m_vPos{}
-	, m_vSize{}
-	, m_IsDie(false)
+	: m_IsDie(false)
 {
 	AddComponent<Transform>();
 }

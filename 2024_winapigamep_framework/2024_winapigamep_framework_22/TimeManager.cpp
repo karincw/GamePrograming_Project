@@ -6,7 +6,7 @@ void TimeManager::Init()
 {
 	// 카운트를 측정해서 가져온다.
 	::QueryPerformanceCounter(&m_llPrevCnt);
-	
+
 	// 초당 카운트 횟수(1초당 1000만) 반환
 	::QueryPerformanceFrequency(&m_llFrequency);
 }
@@ -14,7 +14,7 @@ void TimeManager::Init()
 void TimeManager::Update()
 {
 	::QueryPerformanceCounter(&m_llCurCnt);
-	
+
 	//m_dT  = ;
 	// deltatime(변화시간) : 한 프레임에 걸린 시간 
 	m_dT = (float)(m_llCurCnt.QuadPart - m_llPrevCnt.QuadPart)
@@ -40,9 +40,25 @@ void TimeManager::Update()
 		//POINT mousepos = GET_SINGLE(InputManager)->GetMousePos();
 		POINT mousepos = GET_MOUSEPOS;
 		static wchar_t buf[100] = {};
-		swprintf_s(buf, L"FPS: %d, DT: %f, Mouse: (%d, %d)",m_fps, m_dT
-										,mousepos.x, mousepos.y);
+		swprintf_s(buf, L"FPS: %d, DT: %f, Mouse: (%d, %d)", m_fps, m_dT
+			, mousepos.x, mousepos.y);
 		::SetWindowText(GET_SINGLE(Core)->GetHwnd()
-						, buf);
+			, buf);
 	}
+
+	if (timer >= time && flag == false)
+	{
+		func(player);
+		flag = true;
+	}
+	timer += m_dT;
+}
+
+void TimeManager::DelayRun(float t, std::function<void(Object*)> f, Object* obj)
+{
+	player = obj;
+	flag = false;
+	timer = 0;
+	time = t;
+	func = f;
 }
