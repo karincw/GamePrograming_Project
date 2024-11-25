@@ -69,21 +69,21 @@ void StageScene::Init()
 	tile16->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 - trm->GetScale().x * 0.5f, SCREEN_HEIGHT / 2 + trm->GetScale().y * 1.5f });
 
 	//tile1->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo1_resize.bmp", L"bishojo1");
-	tile1->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo1.bmp", L"bishojo1");
-	tile2->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo2.bmp", L"bishojo2");
-	tile3->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo3.bmp", L"bishojo3");
-	tile4->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo4.bmp", L"bishojo4");
-	tile5->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo5.bmp", L"bishojo5");
-	tile6->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo6.bmp", L"bishojo6");
-	tile7->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo7.bmp", L"bishojo7");
-	tile8->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo8.bmp", L"bishojo8");
-	tile9->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo9.bmp", L"bishojo9");
-	tile10->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo10.bmp", L"bishojo10");
-	tile11->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo11.bmp", L"bishojo11");
-	tile12->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo12.bmp", L"bishojo12");
-	tile13->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo13.bmp", L"bishojo13");
-	tile14->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo14.bmp", L"bishojo14");
-	tile15->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo15.bmp", L"bishojo15");
-	tile16->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo16.bmp", L"bishojo16");
+	//tile1->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo1.bmp", L"bishojo1");
+	//tile2->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo2.bmp", L"bishojo2");
+	//tile3->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo3.bmp", L"bishojo3");
+	//tile4->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo4.bmp", L"bishojo4");
+	//tile5->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo5.bmp", L"bishojo5");
+	//tile6->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo6.bmp", L"bishojo6");
+	//tile7->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo7.bmp", L"bishojo7");
+	//tile8->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo8.bmp", L"bishojo8");
+	//tile9->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo9.bmp", L"bishojo9");
+	//tile10->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo10.bmp", L"bishojo10");
+	//tile11->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo11.bmp", L"bishojo11");
+	//tile12->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo12.bmp", L"bishojo12");
+	//tile13->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo13.bmp", L"bishojo13");
+	//tile14->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo14.bmp", L"bishojo14");
+	//tile15->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo15.bmp", L"bishojo15");
+	//tile16->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo16.bmp", L"bishojo16");
 
 }
