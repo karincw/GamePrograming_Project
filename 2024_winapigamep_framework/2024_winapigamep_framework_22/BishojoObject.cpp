@@ -5,7 +5,7 @@
 
 BishojoObject::BishojoObject()
 {
-	GetTransform()->SetScale({ 210,260 });
+	GetTransform()->SetScale({ 500,700 });
 	AddComponent<SpriteRenderer>();
 }
 

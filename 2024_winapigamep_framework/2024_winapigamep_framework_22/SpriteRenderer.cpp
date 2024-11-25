@@ -10,7 +10,7 @@
 SpriteRenderer::SpriteRenderer()
 	:m_pTex(nullptr),
 	m_pKey(L""),
-	isStretchBlt(true)
+	backgroundRemove(true)
 {
 
 }
@@ -36,12 +36,18 @@ void SpriteRenderer::Render(HDC _hdc)
 
 	Camera* cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
 	vPos -= cam->GetTransform()->GetPosition();
-
-	::BitBlt(_hdc
-		, (int)(vPos.x - vSize.x / 2), (int)(vPos.y - vSize.y / 2), width, height,
-		m_pTex->GetTexDC()
-		, 0, 0, SRCCOPY
-	);
+	if (backgroundRemove)
+		TransparentBlt(_hdc
+			, (int)(vPos.x - vSize.x / 2), (int)(vPos.y - vSize.y / 2), width, height,
+			m_pTex->GetTexDC()
+			, 0, 0, width, height, RGB(255, 0, 255)
+		);
+	else
+		::BitBlt(_hdc
+			, (int)(vPos.x - vSize.x / 2), (int)(vPos.y - vSize.y / 2), width, height,
+			m_pTex->GetTexDC()
+			, 0, 0, SRCCOPY
+		);
 
 }
 
