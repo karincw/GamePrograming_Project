@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "BishojoObject.h"
 #include "SpriteRenderer.h"
+#include "Crossbow.h"
 
 void StageScene::Init()
 {
@@ -41,6 +42,8 @@ void StageScene::Init()
 	BishojoObject* tile16 = new BishojoObject;
 	AddObject(tile16, LAYER::DEFAULT);
 
+	Crossbow* crossBow = new Crossbow;
+	AddObject(crossBow, LAYER::PLAYER);
 
 	Agent* agent = new Agent;
 	AddObject(agent, LAYER::DEFAULT);

@@ -148,7 +148,6 @@
     <ClInclude Include="Action.h">
       <Filter>Engine\07. Module</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component\RenderCompo</Filter>
     </ClInclude>
@@ -157,6 +156,12 @@
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Engine\06. Component\RenderCompo</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Crossbow.h">
+      <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +256,6 @@
     <ClCompile Include="BishojoObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component\RenderCompo</Filter>
     </ClCompile>
@@ -260,6 +264,12 @@
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Engine\06. Component\RenderCompo</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Crossbow.cpp">
+      <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

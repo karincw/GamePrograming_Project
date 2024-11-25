@@ -13,7 +13,7 @@ public:
 public:
 	void CreateTexture(const wstring& _path, const wstring& keyName);
 	Texture* GetTexture();
-	bool isStretchBlt;
+	bool backgroundRemove;
 private:
 	Texture* m_pTex;
 	wstring m_pKey;
