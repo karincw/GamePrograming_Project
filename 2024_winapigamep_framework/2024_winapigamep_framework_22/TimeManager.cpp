@@ -46,19 +46,19 @@ void TimeManager::Update()
 			, buf);
 	}
 
-	if (timer >= time && flag == false)
+	if (delayRun_Timer >= delayRun_Time && flag == false)
 	{
 		func(player);
 		flag = true;
 	}
-	timer += m_dT;
+	delayRun_Timer += m_dT;
 }
 
 void TimeManager::DelayRun(float t, std::function<void(Object*)> f, Object* obj)
 {
 	player = obj;
 	flag = false;
-	timer = 0;
-	time = t;
+	delayRun_Timer = 0;
+	delayRun_Time = t;
 	func = f;
 }

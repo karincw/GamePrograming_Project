@@ -124,9 +124,6 @@
     <ClInclude Include="Player.h">
       <Filter>Engine\03. Object\Don%27tUse</Filter>
     </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Engine\03. Object\Don%27tUse</Filter>
-    </ClInclude>
     <ClInclude Include="Agent.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -161,6 +158,12 @@
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Crossbow.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
@@ -235,9 +238,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Engine\03. Object\Don%27tUse</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Engine\03. Object\Don%27tUse</Filter>
-    </ClCompile>
     <ClCompile Include="Agent.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
@@ -269,6 +269,12 @@
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="Crossbow.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>

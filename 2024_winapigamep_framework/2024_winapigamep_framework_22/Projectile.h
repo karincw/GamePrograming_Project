@@ -1,6 +1,5 @@
 #pragma once
 #include "Object.h"
-class Texture;
 class Projectile : public Object
 {
 public:
@@ -18,14 +17,18 @@ public:
 		m_vDir = _dir;
 		m_vDir.Normalize();
 	}
+	void SetSpeed(float s)
+	{
+		m_speed = s;
+	}
 public:
 	virtual void EnterCollision(Collider* _other);
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
-private:
+protected:
 	//float m_dir;
 	float m_angle;
+	float m_speed;
 	Vec2 m_vDir;
-	Texture* m_pTex;
 };
 

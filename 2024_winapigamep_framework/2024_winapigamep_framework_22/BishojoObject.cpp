@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "BishojoObject.h"
 #include "SpriteRenderer.h"
-#include "Transform.h"
+
 
 BishojoObject::BishojoObject()
 {

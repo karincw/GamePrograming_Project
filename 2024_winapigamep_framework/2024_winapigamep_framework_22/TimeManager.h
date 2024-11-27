@@ -1,5 +1,11 @@
 #pragma once
 class Object;
+
+class delayStruct
+{
+public:
+	float delay_Time, delay_EndTime;
+};
 class TimeManager
 {
 	DECLARE_SINGLE(TimeManager);
@@ -22,7 +28,7 @@ private:
 	float		  m_frametime = 0.f;
 
 	//DelayRun
-	float timer = 0, time = 0;
+	float delayRun_Timer = 0, delayRun_Time = 0;
 	std::function<void(Object*)> func = nullptr;
 	bool flag = true;
 	Object* player;
