@@ -48,10 +48,6 @@ Agent::Agent()
 	:isRight(true), isRun(false), isRolling(false)
 	, RollingDir({ 0,0 }), canRolling(true)
 {
-	//AddComponent<Rigidbody2D>();
-	//Rigidbody2D* rb = GetComponent<Rigidbody2D>();
-	//rb->SetGravityScale(1);
-
 	GetTransform()->SetScale({ 128, 128 });
 
 	AddComponent<Animator>();
@@ -75,6 +71,8 @@ Agent::Agent()
 
 	col->SetSize({ 32,32 });
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
+
+	SetName(L"Player");
 }
 
 Agent::~Agent()
@@ -176,6 +174,7 @@ void Agent::Render(HDC _hdc)
 
 void Agent::EnterCollision(Collider* _other)
 {
+	std::cout << "asd";
 }
 
 void Agent::StayCollision(Collider* _other)

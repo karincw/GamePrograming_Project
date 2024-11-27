@@ -2,6 +2,7 @@
 #include "BishojoScene.h"
 #include "Object.h"
 #include "Agent.h"
+#include "CollisionManager.h"
 
 #include "BishojoObject.h"
 #include "SpriteRenderer.h"
@@ -9,6 +10,10 @@
 
 void BishojoScene::Init()
 {
+	CollisionManager* cm = GET_SINGLE(CollisionManager);
+	cm->CheckReset();
+	cm->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
+
 	BishojoObject* tile1 = new BishojoObject;
 	AddObject(tile1, LAYER::DEFAULT);
 	BishojoObject* tile2 = new BishojoObject;

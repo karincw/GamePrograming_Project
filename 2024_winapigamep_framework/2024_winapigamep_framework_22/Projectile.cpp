@@ -39,15 +39,3 @@ void Projectile::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
 }
-
-void Projectile::EnterCollision(Collider* _other)
-{
-}
-
-void Projectile::StayCollision(Collider* _other)
-{
-}
-
-void Projectile::ExitCollision(Collider* _other)
-{
-}
