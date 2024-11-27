@@ -25,7 +25,6 @@ void Arrow::EnterCollision(Collider* _other)
 	Object* pOtherObj = _other->GetOwner();
 	if (pOtherObj->GetName() == L"Player")
 	{
-		//GET_SINGLE(EventManager)->DeleteObject(this);
 		std::cout << "PlayerHit\n";
 	}
 }

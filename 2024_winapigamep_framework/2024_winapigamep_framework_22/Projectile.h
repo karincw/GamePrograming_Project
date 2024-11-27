@@ -21,10 +21,6 @@ public:
 	{
 		m_speed = s;
 	}
-public:
-	virtual void EnterCollision(Collider* _other);
-	virtual void StayCollision(Collider* _other);
-	virtual void ExitCollision(Collider* _other);
 protected:
 	//float m_dir;
 	float m_angle;
