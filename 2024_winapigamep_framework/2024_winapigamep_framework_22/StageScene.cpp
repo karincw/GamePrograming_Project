@@ -2,7 +2,7 @@
 #include "StageScene.h"
 #include "Object.h"
 #include "Agent.h"
-#include "Transform.h"
+
 #include "BishojoObject.h"
 #include "SpriteRenderer.h"
 #include "Crossbow.h"
@@ -42,7 +42,7 @@ void StageScene::Init()
 	BishojoObject* tile16 = new BishojoObject;
 	AddObject(tile16, LAYER::DEFAULT);
 
-	Crossbow* crossBow = new Crossbow;
+	Crossbow* crossBow = new Crossbow(3);
 	AddObject(crossBow, LAYER::PLAYER);
 
 	Agent* agent = new Agent;

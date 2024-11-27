@@ -4,7 +4,7 @@
 #include "InputManager.h"
 #include "Component.h"
 #include "Collider.h"
-#include "Transform.h"
+
 Object::Object()
 	: m_IsDie(false)
 {

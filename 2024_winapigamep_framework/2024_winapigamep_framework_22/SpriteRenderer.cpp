@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "ResourceManager.h"
 #include "Object.h"
-#include "Transform.h"
+
 #include "Texture.h"
 SpriteRenderer::SpriteRenderer()
 	:m_pTex(nullptr),

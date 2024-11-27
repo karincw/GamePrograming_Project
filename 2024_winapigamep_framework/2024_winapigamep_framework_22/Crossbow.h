@@ -1,13 +1,19 @@
 #pragma once
 #include "Object.h"
-class Crossbow :
-	public Object
+
+template<typename T>
+class Action;
+
+class Crossbow : public Object
 {
 public:
-	Crossbow();
-	virtual ~Crossbow();
+	Crossbow(float time);
+	~Crossbow();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
+	void Fire();
+private:
+	float _timer;
 };
 

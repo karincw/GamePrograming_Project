@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Camera.h"
 #include "Scene.h"
-#include "Transform.h"
+
 
 Camera::Camera()
 	:currentScene(nullptr)

@@ -3,7 +3,7 @@
 #include "Object.h"
 #include "CollisionManager.h"
 #include "Camera.h"
-#include "Transform.h"
+
 Scene::Scene()
 {
 	Camera* cam = new Camera;

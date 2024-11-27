@@ -2,7 +2,7 @@
 #include "Rigidbody2D.h"
 #include "Object.h"
 #include "TimeManager.h"
-#include "Transform.h"
+
 
 Rigidbody2D::Rigidbody2D()
 	: _gravity(9.8f)
