@@ -12,7 +12,7 @@
 #include "Camera.h"
 #include "Action.h"
 
-#define SPEED 200
+#define SPEED 350
 
 
 void PlayRun(Object* owner)
@@ -41,7 +41,7 @@ void PlayRun(Object* owner)
 		agent->canRolling = true;
 		};
 
-	GET_SINGLE(TimeManager)->DelayRun(3, func, owner);
+	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
 }
 
 Agent::Agent()
@@ -145,14 +145,10 @@ void Agent::Update()
 		{
 			Animator* ani = GetComponent<Animator>();
 			std::wstring animationName = L"Character_Rolling";
-			if (moveDir.x >= 0)
-			{
+			if (isRight)
 				animationName += L"_r";
-			}
-			else if (moveDir.x < 0)
-			{
+			else
 				animationName += L"_l";
-			}
 
 			ani->PlayAnimation(animationName, false);
 			RollingDir = moveDir * 2;

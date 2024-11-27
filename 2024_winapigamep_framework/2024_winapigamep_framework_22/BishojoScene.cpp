@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "StageScene.h"
+#include "BishojoScene.h"
 #include "Object.h"
 #include "Agent.h"
 
@@ -7,7 +7,7 @@
 #include "SpriteRenderer.h"
 #include "Crossbow.h"
 
-void StageScene::Init()
+void BishojoScene::Init()
 {
 	BishojoObject* tile1 = new BishojoObject;
 	AddObject(tile1, LAYER::DEFAULT);

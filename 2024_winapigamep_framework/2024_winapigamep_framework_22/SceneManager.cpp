@@ -1,16 +1,16 @@
 #include "pch.h"
 #include "SceneManager.h"
 #include "Scene.h"
-#include "StageScene.h"
+#include "PigScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
-	RegisterScene(L"StageScene",std::make_shared<StageScene>());
+	RegisterScene(L"PigScene",std::make_shared<PigScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"StageScene");
+	LoadScene(L"PigScene");
 }
 
 void SceneManager::Update()
