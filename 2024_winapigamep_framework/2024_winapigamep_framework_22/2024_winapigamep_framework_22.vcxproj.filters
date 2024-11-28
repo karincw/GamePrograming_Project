@@ -112,9 +112,6 @@
     <ClInclude Include="EventManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="StageScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Rigidbody2D.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
@@ -166,6 +163,14 @@
     <ClInclude Include="Arrow.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="BishojoScene.h" />
+    <ClInclude Include="TileObject.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PigScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapTileObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -226,9 +231,6 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
-    <ClCompile Include="StageScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Rigidbody2D.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
@@ -277,5 +279,13 @@
     <ClCompile Include="Arrow.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="BishojoScene.cpp" />
+    <ClCompile Include="TileObject.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PigScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapTileObject.cpp" />
   </ItemGroup>
 </Project>
