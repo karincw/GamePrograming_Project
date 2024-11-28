@@ -3,6 +3,9 @@
 #include "Object.h"
 #include "CollisionManager.h"
 #include "Camera.h"
+#include "SceneManager.h"
+#include "Scene.h"
+#include "Camera.h"
 
 Scene::Scene()
 {
@@ -37,6 +40,7 @@ void Scene::Update()
 		}
 	}
 
+
 }
 
 void Scene::LateUpdate()
@@ -64,10 +68,36 @@ void Scene::Render(HDC _hdc)
 	{
 		for (size_t j = 0; j < m_vecObj[i].size();)
 		{
-			if (!m_vecObj[i][j]->GetIsDead())
-				m_vecObj[i][j++]->Render(_hdc);
+			Object* nowObj = m_vecObj[i][j];
+
+			if (!nowObj->GetIsDead())
+			{
+				bool Render = true;
+				Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
+				Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
+				Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
+				Transform* trm = nowObj->GetTransform();
+				Vec2 position = trm->GetPosition();
+				Vec2 scale = trm->GetScale();
+
+				if (position.x + scale.x * 2 < LeftTop.x)
+					Render = false;
+				else if (position.x - scale.x * 2 > RightBottom.x)
+					Render = false;
+				else if (position.y + scale.y * 2 < LeftTop.y)
+					Render = false;
+				else if (position.y - scale.y * 2 > RightBottom.y)
+					Render = false;
+
+				if (Render)
+					m_vecObj[i][j]->Render(_hdc);
+
+				j++;
+			}
 			else
+			{
 				m_vecObj[i].erase(m_vecObj[i].begin() + j);
+			}
 		}
 	}
 

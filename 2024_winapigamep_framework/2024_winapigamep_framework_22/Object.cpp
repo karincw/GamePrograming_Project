@@ -55,11 +55,6 @@ void Object::ExitCollision(Collider* _other)
 {
 }
 
-Transform* Object::GetTransform()
-{
-	return dynamic_cast<Transform*>(m_vecComponents[0]);
-}
-
 //void Object::Update()
 //{
 //	if (GET_KEY(KEY_TYPE::LEFT))

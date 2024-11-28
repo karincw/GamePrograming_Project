@@ -44,7 +44,10 @@ public:
 		}
 		return component;
 	}
-	Transform* GetTransform();
+	Transform* GetTransform()
+	{
+		return dynamic_cast<Transform*>(m_vecComponents[0]);
+	}
 protected:
 	vector<Component*> m_vecComponents;
 };

@@ -13,40 +13,40 @@
 #include "Action.h"
 
 #define SPEED 350
+#define ROLLING_SPEED 500
 
 
 void PlayRun(Object* owner)
 {
 	Agent* agent = dynamic_cast<Agent*>(owner);
-
-
-	Animator* ani = agent->GetComponent<Animator>();
-	std::wstring animationName = L"Character_Idle";
-	Vec2 dir = agent->GetRollingDir();
-	if (dir.x >= 0)
-	{
-		animationName += L"_r";
-	}
-	else if (dir.x < 0)
-	{
-		animationName += L"_l";
-	}
-
-	agent->GetComponent<Animator>()->PlayAnimation(animationName, true);
-
 	agent->isRolling = false;
 
 	auto func = [](Object* obj) {
 		Agent* agent = dynamic_cast<Agent*>(obj);
 		agent->canRolling = true;
+		agent->isRun = false;
+		};
+
+	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
+}
+
+void EndHit(Object* owner)
+{
+	Agent* agent = dynamic_cast<Agent*>(owner);
+	agent->isHit = false;
+
+	auto func = [](Object* obj) {
+		Agent* agent = dynamic_cast<Agent*>(obj);
+		agent->canHit = true;
 		};
 
 	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
 }
 
 Agent::Agent()
-	:isRight(true), isRun(false), isRolling(false)
-	, RollingDir({ 0,0 }), canRolling(true)
+	: isRight(true), isRun(false)
+	, isRolling(false), canRolling(true)
+	, isHit(false), canHit(true)
 {
 	GetTransform()->SetScale({ 128, 128 });
 
@@ -63,11 +63,17 @@ Agent::Agent()
 	animator->CreateAnimation(L"Character_Rolling_r", Vec2(0, 64), Vec2(32, 32), Vec2(32, 0), 6, 0.1f);
 	animator->CreateAnimation(L"Character_Rolling_l", Vec2(0, 160), Vec2(32, 32), Vec2(32, 0), 6, 0.1f);
 
+	animator->CreateAnimation(L"Character_Hit_l", Vec2(0, 192), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
+	animator->CreateAnimation(L"Character_Hit_r", Vec2(0, 224), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
+
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
 	col->SetOffSetPos({ 0, 48 });
 	animator->FindAnimation(L"Character_Rolling_r")->animationEndEvent->Insert(PlayRun);
 	animator->FindAnimation(L"Character_Rolling_l")->animationEndEvent->Insert(PlayRun);
+
+	animator->FindAnimation(L"Character_Hit_l")->animationEndEvent->Insert(EndHit);
+	animator->FindAnimation(L"Character_Hit_r")->animationEndEvent->Insert(EndHit);
 
 	col->SetSize({ 32,32 });
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
@@ -102,7 +108,7 @@ void Agent::Update()
 
 	moveDir.Normalize();
 
-	if (!isRolling)
+	if (!isRolling && !isHit)
 	{
 		if (moveDir.Length() == 0)
 		{
@@ -131,12 +137,14 @@ void Agent::Update()
 			GetComponent<Animator>()->PlayAnimation(L"Character_Run_l", true);
 			isRight = false;
 			isRun = true;
+
 		}
 		else if (!isRun || (!isRight && moveDir.x > 0))
 		{
 			GetComponent<Animator>()->PlayAnimation(L"Character_Run_r", true);
 			isRight = true;
 			isRun = true;
+
 		}
 
 		if (GET_KEYDOWN(KEY_TYPE::SPACE) && moveDir.Length() > 0 && canRolling)
@@ -149,18 +157,18 @@ void Agent::Update()
 				animationName += L"_l";
 
 			ani->PlayAnimation(animationName, false);
-			RollingDir = moveDir * 2;
 			isRolling = true;
 			isRun = false;
 			canRolling = false;
+			rollingDir = moveDir;
 		}
 		moveDir = moveDir * SPEED * dt;
 		GetTransform()->Translate(moveDir);
 		cam->GetTransform()->Translate(moveDir);
 	}
-	else
+	else if (!isHit && isRolling)
 	{
-		moveDir = RollingDir * SPEED * dt;
+		moveDir = rollingDir * ROLLING_SPEED * dt;
 		GetTransform()->Translate(moveDir);
 		cam->GetTransform()->Translate(moveDir);
 	}
@@ -174,7 +182,22 @@ void Agent::Render(HDC _hdc)
 
 void Agent::EnterCollision(Collider* _other)
 {
-	std::cout << "asd";
+	if (canHit && !isRolling)
+	{
+		Animator* ani = GetComponent<Animator>();
+		ani->StopAnimation();
+
+		std::wstring animationName = L"Character_Hit";
+		if (isRight)
+			animationName += L"_r";
+		else
+			animationName += L"_l";
+
+		ani->PlayAnimation(animationName, false);
+		isHit = true;
+		canHit = false;
+		isRun = false;
+	}
 }
 
 void Agent::StayCollision(Collider* _other)
