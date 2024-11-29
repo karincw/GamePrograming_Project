@@ -15,6 +15,7 @@
 #define SPEED 350
 #define ROLLING_SPEED 500
 
+#pragma region Callback Actions
 
 void PlayRun(Object* owner)
 {
@@ -29,7 +30,6 @@ void PlayRun(Object* owner)
 
 	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
 }
-
 void EndHit(Object* owner)
 {
 	Agent* agent = dynamic_cast<Agent*>(owner);
@@ -42,6 +42,8 @@ void EndHit(Object* owner)
 
 	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
 }
+
+#pragma endregion
 
 Agent::Agent()
 	: isRight(true), isRun(false)

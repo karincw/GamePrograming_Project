@@ -26,4 +26,3 @@ private:
 	Vec2 rollingDir;
 	Camera* cam;
 };
-void PlayRun(Object* owner);
