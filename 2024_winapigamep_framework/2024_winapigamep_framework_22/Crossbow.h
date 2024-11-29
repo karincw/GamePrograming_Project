@@ -7,7 +7,7 @@ class Action;
 class Crossbow : public Object
 {
 public:
-	Crossbow(float time);
+	Crossbow(float time, wstring dir);
 	~Crossbow();
 public:
 	void Update() override;
@@ -15,5 +15,7 @@ public:
 	void Fire();
 private:
 	float _timer;
+	float _time;
+	wstring _dir;
 };
 

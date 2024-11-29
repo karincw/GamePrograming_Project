@@ -14,15 +14,15 @@ public:
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other)override;
 	void ExitCollision(Collider* _other)override;
-	Vec2 GetRollingDir() { return RollingDir; }
 public:
 	bool isRolling;
 	bool canRolling;
+	bool isHit;
+	bool canHit;
+	bool isRun;
 
 private:
-	bool isRun;
 	bool isRight;
-	Vec2 RollingDir;
+	Vec2 rollingDir;
 	Camera* cam;
 };
-void PlayRun(Object* owner);

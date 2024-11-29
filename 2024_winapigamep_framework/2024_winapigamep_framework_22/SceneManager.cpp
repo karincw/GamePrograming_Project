@@ -2,15 +2,17 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "PigScene.h"
+#include "BishojoScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
 	RegisterScene(L"PigScene",std::make_shared<PigScene>());
+	RegisterScene(L"BishojoScene",std::make_shared<BishojoScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"PigScene");
+	LoadScene(L"BishojoScene");
 }
 
 void SceneManager::Update()
