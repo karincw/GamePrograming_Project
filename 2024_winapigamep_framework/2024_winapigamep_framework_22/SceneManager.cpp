@@ -12,7 +12,7 @@ void SceneManager::Init()
 	RegisterScene(L"BishojoScene",std::make_shared<BishojoScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"BishojoScene");
+	LoadScene(L"PigScene");
 }
 
 void SceneManager::Update()
