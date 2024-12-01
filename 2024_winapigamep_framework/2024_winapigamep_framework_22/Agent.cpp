@@ -75,7 +75,7 @@ Agent::Agent()
 	animator->FindAnimation(L"Character_Hit_l")->animationEndEvent->Insert(EndHit);
 	animator->FindAnimation(L"Character_Hit_r")->animationEndEvent->Insert(EndHit);
 
-	col->SetSize({ 32,64 });a
+	col->SetSize({ 32,64 });
 	col->SetOffSetPos({ 0,16 });
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
 

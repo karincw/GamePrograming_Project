@@ -1,13 +1,11 @@
 #pragma once
 #include "Object.h"
-class FallTileObject :
+class Explosion :
     public Object
 {
 public:
-	bool isEnter = false;
-public:
-	FallTileObject();
-	~FallTileObject();
+	Explosion();
+	~Explosion();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
