@@ -15,7 +15,7 @@ void PigScene::Init()
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	cm->CheckReset();
 	cm->CheckLayer(LAYER::TRAP, LAYER::PLAYER);
-	cm->CheckLayer(LAYER::FALL, LAYER::PLAYER);
+	cm->CheckLayer(LAYER::TRAP, LAYER::PLAYER);
 
 	Agent* agent = new Agent;
 	AddObject(agent, LAYER::PLAYER);
@@ -104,7 +104,7 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 		break;
 	case TILE::FALL:
 		tile = new FallTileObject;
-		AddObject(tile, LAYER::FALL);
+		AddObject(tile, LAYER::TRAP);
 		break;
 	}
 	
