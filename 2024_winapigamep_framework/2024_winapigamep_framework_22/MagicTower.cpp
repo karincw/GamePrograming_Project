@@ -61,7 +61,7 @@ void MagicTower::Fire()
 		if (p->GetName() == L"Player")
 			pPlayer = p;
 	}
-	dirVec = pPlayer->GetTransform()->GetPosition() - GetTransform()->GetPosition();
+	dirVec = pPlayer->GetTransform()->GetPosition() + Vec2(0, -16) - GetTransform()->GetPosition();
 
 	arrow->SetDir(dirVec);
 	arrow->SetSpeed(750);
