@@ -12,7 +12,7 @@
 #include "Action.h"
 
 #define SPEED 350
-#define ROLLING_SPEED 500
+#define ROLLING_SPEED 600
 
 #pragma region Callback Actions
 
@@ -24,7 +24,6 @@ void EndRolling(Object* owner)
 	auto func = [](Object* obj) {
 		Agent* agent = dynamic_cast<Agent*>(obj);
 		agent->canRolling = true;
-		agent->isRun = false;
 		};
 
 	GET_SINGLE(TimeManager)->DelayRun(0.2f, func, owner);
@@ -75,7 +74,10 @@ Agent::Agent()
 	animator->FindAnimation(L"Character_Hit_l")->animationEndEvent->Insert(EndHit);
 	animator->FindAnimation(L"Character_Hit_r")->animationEndEvent->Insert(EndHit);
 
-	col->SetSize({ 32,64 });a
+	col->SetSize({ 32,64 });
+
+
+
 	col->SetOffSetPos({ 0,16 });
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
 
