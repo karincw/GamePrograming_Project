@@ -2,7 +2,6 @@
 #include "Agent.h"
 #include "SpriteRenderer.h"
 #include "InputManager.h"
-
 #include "SceneManager.h"
 #include "TimeManager.h"
 #include "Animator.h"
@@ -17,7 +16,7 @@
 
 #pragma region Callback Actions
 
-void PlayRun(Object* owner)
+void EndRolling(Object* owner)
 {
 	Agent* agent = dynamic_cast<Agent*>(owner);
 	agent->isRolling = false;
@@ -28,7 +27,7 @@ void PlayRun(Object* owner)
 		agent->isRun = false;
 		};
 
-	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
+	GET_SINGLE(TimeManager)->DelayRun(0.2f, func, owner);
 }
 void EndHit(Object* owner)
 {
@@ -70,19 +69,18 @@ Agent::Agent()
 
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
-	col->SetOffSetPos({ 0, 48 });
-	animator->FindAnimation(L"Character_Rolling_r")->animationEndEvent->Insert(PlayRun);
-	animator->FindAnimation(L"Character_Rolling_l")->animationEndEvent->Insert(PlayRun);
+	animator->FindAnimation(L"Character_Rolling_r")->animationEndEvent->Insert(EndRolling);
+	animator->FindAnimation(L"Character_Rolling_l")->animationEndEvent->Insert(EndRolling);
 
 	animator->FindAnimation(L"Character_Hit_l")->animationEndEvent->Insert(EndHit);
 	animator->FindAnimation(L"Character_Hit_r")->animationEndEvent->Insert(EndHit);
 
-	col->SetSize({ 32,32 });
+	col->SetSize({ 32,64 });
+	col->SetOffSetPos({ 0,16 });
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
 
 	SetName(L"Player");
 }
-
 Agent::~Agent()
 {
 }

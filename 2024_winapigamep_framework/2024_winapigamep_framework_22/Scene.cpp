@@ -37,6 +37,30 @@ void Scene::Update()
 		{
 			if (!m_vecObj[i][j]->GetIsDead())
 				m_vecObj[i][j]->Update();
+			// 이거 해야도ㅟㅁ
+			Object* nowObj = m_vecObj[i][j];
+
+			bool Update = true;
+			Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
+			Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
+			Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
+			Transform* trm = nowObj->GetTransform();
+			Vec2 position = trm->GetPosition();
+			Vec2 scale = trm->GetScale();
+
+			if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
+				Update = false;
+			else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
+				Update = false;
+			else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
+				Update = false;
+			else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
+				Update = false;
+
+			if (Update)
+				m_vecObj[i][j]->LateUpdate();
+
+			j++;
 		}
 	}
 
@@ -49,7 +73,29 @@ void Scene::LateUpdate()
 	{
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			m_vecObj[i][j]->LateUpdate();
+			Object* nowObj = m_vecObj[i][j];
+
+			bool Update = true;
+			Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
+			Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
+			Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
+			Transform* trm = nowObj->GetTransform();
+			Vec2 position = trm->GetPosition();
+			Vec2 scale = trm->GetScale();
+
+			if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
+				Update = false;
+			else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
+				Update = false;
+			else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
+				Update = false;
+			else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
+				Update = false;
+
+			if (Update)
+				m_vecObj[i][j]->LateUpdate();
+
+			j++;
 		}
 	}
 }
@@ -80,13 +126,13 @@ void Scene::Render(HDC _hdc)
 				Vec2 position = trm->GetPosition();
 				Vec2 scale = trm->GetScale();
 
-				if (position.x + scale.x * 2 < LeftTop.x)
+				if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
 					Render = false;
-				else if (position.x - scale.x * 2 > RightBottom.x)
+				else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
 					Render = false;
-				else if (position.y + scale.y * 2 < LeftTop.y)
+				else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
 					Render = false;
-				else if (position.y - scale.y * 2 > RightBottom.y)
+				else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
 					Render = false;
 
 				if (Render)

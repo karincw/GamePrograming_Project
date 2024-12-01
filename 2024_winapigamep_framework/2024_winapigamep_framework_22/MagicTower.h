@@ -4,11 +4,11 @@
 template<typename T>
 class Action;
 
-class Crossbow : public Object
+class MagicTower : public Object
 {
 public:
-	Crossbow(float time, wstring dir);
-	~Crossbow();
+	MagicTower(float time, wstring dir);
+	~MagicTower();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
