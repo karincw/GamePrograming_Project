@@ -1,21 +1,25 @@
 #include "pch.h"
 #include "Explosion.h"
 #include "Animator.h"
+#include "Animation.h"
 #include "Collider.h"
 
 Explosion::Explosion()
 {
-	GetTransform()->SetScale({ 1000,1000 });
+	GetTransform()->SetScale({ 400,400 });
 
 	AddComponent<Animator>();
 	Animator* animator = GetComponent<Animator>();
 	animator->CreateTexture(L"Texture\\Explosion.bmp", L"Explosion_Sheet");
-	animator->CreateAnimation(L"Explosion", Vec2(0, 0), Vec2(166, 166), Vec2(166, 0), 8, 0.1f);
+
+	animator->CreateAnimation(L"Explosion", Vec2(0, 0), Vec2(128, 144), Vec2(128, 0), 11, 0.07f);
 	animator->PlayAnimation(L"Explosion", false);
 
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
-	col->SetSize({ 166,166 });
+	col->SetOffSetPos(Vec2(-30, -20));
+	col->SetSize({ 150,150 });
+
 }
 
 Explosion::~Explosion()
