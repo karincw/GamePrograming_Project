@@ -4,19 +4,39 @@
 #include "Transform.h"
 #include "Collider.h"
 #include "Animator.h"
+#include "Animation.h"
 #include "TimeManager.h"
+#include "Explosion.h"
+#include "Scene.h"
+#include "SceneManager.h"
+#include "Action.h"
 
 void TrapTileObject::ExplosionTile(Object* owner) {
+
+
 	auto func = [](Object* obj) {
+		Explosion* boom = new Explosion();
+		Transform* trm = boom->GetTransform();
+		trm->SetScale(Vec2(22, 22));
+		trm->SetPosition(obj->GetTransform()->GetPosition());
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(boom, LAYER::PROJECTILE);
+
 		TrapTileObject* tile = dynamic_cast<TrapTileObject*>(obj);
 		Animator* ani = tile->GetComponent<Animator>();
-		ani->StopAnimation();
 		ani->PlayAnimation(L"TrapTile_Idle", true);
-		tile->isEnter = false;
+
+		auto func = [](Object* obj) {
+			TrapTileObject* tile = dynamic_cast<TrapTileObject*>(obj);
+			tile->isEnter = false;
 		};
+
+		GET_SINGLE(TimeManager)->DelayRun(0.8f, func, obj);
+	};
 
 	GET_SINGLE(TimeManager)->DelayRun(1.0f, func, owner);
 }
+
+
 
 TrapTileObject::TrapTileObject()
 {

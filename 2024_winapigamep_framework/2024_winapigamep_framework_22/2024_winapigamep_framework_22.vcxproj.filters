@@ -154,9 +154,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Crossbow.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -172,6 +169,8 @@
     </ClInclude>
     <ClInclude Include="TrapTileObject.h" />
     <ClInclude Include="FallTileObject.h" />
+    <ClInclude Include="MagicTower.h" />
+    <ClInclude Include="Explosion.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -271,9 +270,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Crossbow.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
@@ -289,5 +285,7 @@
     </ClCompile>
     <ClCompile Include="TrapTileObject.cpp" />
     <ClCompile Include="FallTileObject.cpp" />
+    <ClCompile Include="MagicTower.cpp" />
+    <ClCompile Include="Explosion.cpp" />
   </ItemGroup>
 </Project>

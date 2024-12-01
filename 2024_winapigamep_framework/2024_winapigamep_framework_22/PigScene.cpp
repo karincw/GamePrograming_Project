@@ -86,6 +86,8 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
+
+	CreateTile({ 256, 0 }, TILE::TRAP);
 }
 
 void PigScene::CreateTile(Vec2 vec, TILE tileType)
