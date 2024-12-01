@@ -7,7 +7,7 @@ class Action;
 class MagicTower : public Object
 {
 public:
-	MagicTower(float time, wstring dir);
+	MagicTower(float time);
 	~MagicTower();
 public:
 	void Update() override;
@@ -16,6 +16,5 @@ public:
 private:
 	float _timer;
 	float _time;
-	wstring _dir;
 };
 

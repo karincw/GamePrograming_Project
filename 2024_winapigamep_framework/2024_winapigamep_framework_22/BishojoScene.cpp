@@ -46,8 +46,8 @@ void BishojoScene::Init()
 	BishojoObject* tile16 = new BishojoObject;
 	AddObject(tile16, LAYER::DEFAULT);
 
-	MagicTower* crossBow = new MagicTower(0.3f, L"Right");
-	AddObject(crossBow, LAYER::ENEMY);
+	MagicTower* crossBow = new MagicTower(0.3f);
+	AddObject(crossBow, LAYER::TRAP);
 	crossBow->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
 
 	Agent* agent = new Agent;

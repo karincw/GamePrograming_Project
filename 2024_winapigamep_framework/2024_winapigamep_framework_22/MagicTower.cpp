@@ -9,10 +9,9 @@
 #include "Scene.h"
 
 
-MagicTower::MagicTower(float time, wstring dir)
+MagicTower::MagicTower(float time)
 	:_timer(0)
 {
-	_dir = dir;
 	_time = time;
 
 	GetTransform()->SetScale({ 64,64 });
@@ -21,7 +20,7 @@ MagicTower::MagicTower(float time, wstring dir)
 	SpriteRenderer* sp = GetComponent<SpriteRenderer>();
 	sp->SetOwner(this);
 
-	sp->CreateTexture(L"Texture\\CrossBow_" + dir + L".bmp", L"Crossbow" + dir);
+	sp->CreateTexture(L"Texture\\MagicTower.bmp", L"MagicTower");
 
 }
 
@@ -49,10 +48,10 @@ void MagicTower::Fire()
 {
 	Arrow* arrow = new Arrow();
 	Transform* trm = arrow->GetTransform();
-	trm->SetScale(Vec2(48, 32));
-	trm->SetPosition(GetTransform()->GetPosition());
-	arrow->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\arrow_" + _dir + L".bmp", L"Arrow" + _dir);
-	arrow->GetComponent<Collider>()->SetSize(Vec2(48, 32));
+	trm->SetScale(Vec2(22, 22));
+	trm->SetPosition(GetTransform()->GetPosition() + Vec2(0, -16));
+	arrow->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\Bullet.bmp", L"Bullet");
+	arrow->GetComponent<Collider>()->SetSize(Vec2(32, 32));
 	Vec2 dirVec = { 0.f, 0.f };
 
 	Object* pPlayer = nullptr;
