@@ -33,6 +33,7 @@ void TrapTileObject::ExplosionTile(Object* owner) {
 		};
 
 	GET_SINGLE(TimeManager)->DelayRun(1.0f, func, owner);
+	SetName(L"FireTrap");
 }
 
 

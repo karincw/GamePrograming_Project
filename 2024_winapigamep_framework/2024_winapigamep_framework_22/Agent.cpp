@@ -184,7 +184,9 @@ void Agent::Render(HDC _hdc)
 
 void Agent::EnterCollision(Collider* _other)
 {
-	if (_other->GetOwner()->GetName() != L"Arrow") return;
+	std::wstring name = _other->GetOwner()->GetName();
+	std::wcout << name << "\n";
+	if ((name != L"Explosion")) return;
 
 	if (canHit && !isRolling)
 	{

@@ -2,7 +2,13 @@
 #include "Explosion.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "Action.h"
 #include "Collider.h"
+
+
+void DeleteExplosion(Object* owner) {
+	owner->SetDead();
+}
 
 Explosion::Explosion()
 {
@@ -13,13 +19,15 @@ Explosion::Explosion()
 	animator->CreateTexture(L"Texture\\Explosion.bmp", L"Explosion_Sheet");
 
 	animator->CreateAnimation(L"Explosion", Vec2(0, 0), Vec2(128, 144), Vec2(128, 0), 11, 0.07f);
-	animator->PlayAnimation(L"Explosion", false);
+	animator->FindAnimation(L"Explosion")->animationEndEvent->Insert(DeleteExplosion);
 
+	SetName(L"Explosion");
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
 	col->SetOffSetPos(Vec2(-30, -20));
-	col->SetSize({ 150,150 });
+	col->SetSize({ 256, 256 });
 
+	animator->PlayAnimation(L"Explosion", false);
 }
 
 Explosion::~Explosion()
