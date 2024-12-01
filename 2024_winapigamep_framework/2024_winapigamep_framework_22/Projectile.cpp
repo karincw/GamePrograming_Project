@@ -39,7 +39,7 @@ void Projectile::Update()
 	Vec2 position = trm->GetPosition();
 	Vec2 scale = trm->GetScale();
 
-	if (position.x - scale.x * 2 < LeftTop.x)
+	if (position.x + scale.x * 2 < LeftTop.x)
 	{
 		GET_SINGLE(EventManager)->DeleteObject(this);
 	}

@@ -1,15 +1,15 @@
 #include "pch.h"
-#include "Crossbow.h"
+#include "MagicTower.h"
 #include "SpriteRenderer.h"
 #include "Arrow.h"
-#include "SceneManager.h"
 #include "TimeManager.h"
-#include "Scene.h"
 #include "Collider.h"
 #include "Action.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 
-Crossbow::Crossbow(float time, wstring dir)
+MagicTower::MagicTower(float time, wstring dir)
 	:_timer(0)
 {
 	_dir = dir;
@@ -25,12 +25,12 @@ Crossbow::Crossbow(float time, wstring dir)
 
 }
 
-Crossbow::~Crossbow()
+MagicTower::~MagicTower()
 {
 
 }
 
-void Crossbow::Update()
+void MagicTower::Update()
 {
 	_timer += fDT;
 	if (_timer >= _time)
@@ -40,12 +40,12 @@ void Crossbow::Update()
 	}
 }
 
-void Crossbow::Render(HDC _hdc)
+void MagicTower::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
 }
 
-void Crossbow::Fire()
+void MagicTower::Fire()
 {
 	Arrow* arrow = new Arrow();
 	Transform* trm = arrow->GetTransform();
@@ -55,22 +55,14 @@ void Crossbow::Fire()
 	arrow->GetComponent<Collider>()->SetSize(Vec2(48, 32));
 	Vec2 dirVec = { 0.f, 0.f };
 
-	if (_dir == L"Left")
+	Object* pPlayer = nullptr;
+	auto players = GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(LAYER::PLAYER);
+	for (auto p : players)
 	{
-		dirVec = { -1.f, 0.f };
+		if (p->GetName() == L"Player")
+			pPlayer = p;
 	}
-	else if (_dir == L"Right")
-	{
-		dirVec = { 1.f, 0.f };
-	}
-	else if (_dir == L"Down")
-	{
-		dirVec = { 0.f, 1.f };
-	}
-	else if (_dir == L"Up")
-	{
-		dirVec = { 0.f, -1.f };
-	}
+	dirVec = pPlayer->GetTransform()->GetPosition() - GetTransform()->GetPosition();
 
 	arrow->SetDir(dirVec);
 	arrow->SetSpeed(750);

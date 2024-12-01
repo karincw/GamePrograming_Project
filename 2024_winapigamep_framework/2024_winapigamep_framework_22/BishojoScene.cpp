@@ -3,10 +3,9 @@
 #include "Object.h"
 #include "Agent.h"
 #include "CollisionManager.h"
-
 #include "BishojoObject.h"
 #include "SpriteRenderer.h"
-#include "Crossbow.h"
+#include "MagicTower.h"
 
 void BishojoScene::Init()
 {
@@ -47,7 +46,7 @@ void BishojoScene::Init()
 	BishojoObject* tile16 = new BishojoObject;
 	AddObject(tile16, LAYER::DEFAULT);
 
-	Crossbow* crossBow = new Crossbow(0.3f, L"Right");
+	MagicTower* crossBow = new MagicTower(0.3f, L"Right");
 	AddObject(crossBow, LAYER::ENEMY);
 	crossBow->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
 
