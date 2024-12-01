@@ -7,10 +7,16 @@
 #include "TrapTileObject.h"
 #include "FallTileObject.h"
 #include "SpriteRenderer.h"
+#include "CollisionManager.h"
 
 
 void PigScene::Init()
 {
+	CollisionManager* cm = GET_SINGLE(CollisionManager);
+	cm->CheckReset();
+	cm->CheckLayer(LAYER::TRAP, LAYER::PLAYER);
+	cm->CheckLayer(LAYER::FALL, LAYER::PLAYER);
+
 	Agent* agent = new Agent;
 	AddObject(agent, LAYER::PLAYER);
 	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
