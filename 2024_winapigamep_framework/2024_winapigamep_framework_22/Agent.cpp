@@ -182,6 +182,8 @@ void Agent::Render(HDC _hdc)
 
 void Agent::EnterCollision(Collider* _other)
 {
+	if (_other->GetOwner()->GetName() != L"Arrow") return;
+
 	if (canHit && !isRolling)
 	{
 		Animator* ani = GetComponent<Animator>();

@@ -4,11 +4,10 @@ enum class LAYER
 	DEFAULT,
 	BACKGROUND,
 	TRAP,
-	FALL,
-	PLAYER,
 	PROJECTILE,
 	ENEMY,
 	// UI
+	PLAYER,
 	END = 30
 };
 
