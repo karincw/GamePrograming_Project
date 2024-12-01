@@ -20,6 +20,7 @@ Collider::~Collider()
 
 void Collider::LateUpdate()
 {
+	if (!_enable) return;
 	const Object* pOwner = GetOwner();
 	Transform* trm = m_pOwner->GetComponent<Transform>();
 	Vec2 vPos = trm->GetPosition();
@@ -28,6 +29,7 @@ void Collider::LateUpdate()
 
 void Collider::Render(HDC _hdc)
 {
+	if (!_enable) return;
 	PEN_TYPE ePen = PEN_TYPE::GREEN;
 	if (m_showDebug)
 		ePen = PEN_TYPE::RED;
@@ -39,17 +41,20 @@ void Collider::Render(HDC _hdc)
 
 void Collider::EnterCollision(Collider* _other)
 {
+	if (!_enable) return;
 	m_showDebug = true;
 	GetOwner()->EnterCollision(_other);
 }
 
 void Collider::StayCollision(Collider* _other)
 {
+	if (!_enable) return;
 	GetOwner()->StayCollision(_other);
 }
 
 void Collider::ExitCollision(Collider* _other)
 {
+	if (!_enable) return;
 	m_showDebug = false;
 	GetOwner()->ExitCollision(_other);
 }
