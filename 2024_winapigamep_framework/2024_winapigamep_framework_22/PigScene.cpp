@@ -15,6 +15,7 @@ void PigScene::Init()
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	cm->CheckReset();
 	cm->CheckLayer(LAYER::TRAP, LAYER::PLAYER);
+	cm->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
 
 	Agent* agent = new Agent;
 	AddObject(agent, LAYER::PLAYER);
@@ -30,8 +31,8 @@ void PigScene::Init()
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 2, true, true);
-	tilePos.x -= 768;
-	tilePos.y += 512;
+	tilePos.x -= 512;
+	tilePos.y += 384;
 	// Boom Trap
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 4, true, true);
 	CreateTile({ tilePos.x, tilePos.y - 1280}, TILE::TRAP);
@@ -123,7 +124,7 @@ Vec2 PigScene::CreateVerticalTileGroup(Vec2 startVec, TILE tileType, int x, int 
 		startVec.x = vecX;
 		startVec.y += dirY * 256;
 	}
-	if (isJump) startVec.y += dirY * 256;
+	if (isJump) startVec.y += dirY * 128;
 	return startVec;
 }
 
@@ -139,6 +140,6 @@ Vec2 PigScene::CreateHorizontalTileGroup(Vec2 startVec, TILE tileType, int x, in
 		startVec.y = vecY;
 		startVec.x += dirX * 256;
 	}
-	if(isJump) startVec.x += dirX * 256;
+	if(isJump) startVec.x += dirX * 128;
 	return startVec;
 }

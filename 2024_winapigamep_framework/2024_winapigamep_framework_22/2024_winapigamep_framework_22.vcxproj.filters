@@ -167,10 +167,16 @@
     <ClInclude Include="PigScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TrapTileObject.h" />
-    <ClInclude Include="FallTileObject.h" />
     <ClInclude Include="MagicTower.h" />
-    <ClInclude Include="Explosion.h" />
+    <ClInclude Include="FallTileObject.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapTileObject.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -283,9 +289,15 @@
     <ClCompile Include="PigScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="TrapTileObject.cpp" />
-    <ClCompile Include="FallTileObject.cpp" />
     <ClCompile Include="MagicTower.cpp" />
-    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="FallTileObject.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapTileObject.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
