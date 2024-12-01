@@ -17,8 +17,7 @@ void TrapTileObject::ExplosionTile(Object* owner) {
 	auto func = [](Object* obj) {
 		Explosion* boom = new Explosion();
 		Transform* trm = boom->GetTransform();
-		trm->SetScale(Vec2(22, 22));
-		trm->SetPosition(obj->GetTransform()->GetPosition());
+		trm->SetPosition(obj->GetTransform()->GetPosition() + Vec2(30, 20));
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(boom, LAYER::PROJECTILE);
 
 		TrapTileObject* tile = dynamic_cast<TrapTileObject*>(obj);
@@ -28,10 +27,10 @@ void TrapTileObject::ExplosionTile(Object* owner) {
 		auto func = [](Object* obj) {
 			TrapTileObject* tile = dynamic_cast<TrapTileObject*>(obj);
 			tile->isEnter = false;
-		};
+			};
 
 		GET_SINGLE(TimeManager)->DelayRun(0.8f, func, obj);
-	};
+		};
 
 	GET_SINGLE(TimeManager)->DelayRun(1.0f, func, owner);
 }
