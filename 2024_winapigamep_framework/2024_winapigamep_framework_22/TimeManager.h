@@ -1,10 +1,20 @@
 #pragma once
 class Object;
 
-class delayStruct
+class DelayStruct
 {
 public:
-	float delay_Time, delay_EndTime;
+	DelayStruct(float t, std::function<void(Object*)> f, Object* obj)
+	{
+		time = t;
+		func = f;
+		owner = obj;
+	}
+public:
+	float timer = 0, time = 0;
+	std::function<void(Object*)> func = nullptr;
+	bool flag = false;
+	Object* owner;
 };
 class TimeManager
 {
@@ -28,9 +38,6 @@ private:
 	float		  m_frametime = 0.f;
 
 	//DelayRun
-	float delayRun_Timer = 0, delayRun_Time = 0;
-	std::function<void(Object*)> func = nullptr;
-	bool flag = true;
-	Object* player;
+	std::vector<DelayStruct> delays = {};
 };
 

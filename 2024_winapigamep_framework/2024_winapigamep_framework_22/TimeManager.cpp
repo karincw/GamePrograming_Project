@@ -46,19 +46,26 @@ void TimeManager::Update()
 			, buf);
 	}
 
-	if (delayRun_Timer >= delayRun_Time && flag == false)
+	for (size_t i = 0; i < delays.size();)
 	{
-		func(player);
-		flag = true;
+		if (!delays[i].flag)
+		{
+			delays[i].timer += m_dT;
+			if (delays[i].timer >= delays[i].time)
+			{
+				delays[i].flag = true;
+				delays[i].func(delays[i].owner);
+			}
+			i++;
+		}
+		else
+		{
+			delays.erase(delays.begin() + i);
+		}
 	}
-	delayRun_Timer += m_dT;
 }
 
 void TimeManager::DelayRun(float t, std::function<void(Object*)> f, Object* obj)
 {
-	player = obj;
-	flag = false;
-	delayRun_Timer = 0;
-	delayRun_Time = t;
-	func = f;
+	delays.push_back(DelayStruct(t, f, obj));
 }
