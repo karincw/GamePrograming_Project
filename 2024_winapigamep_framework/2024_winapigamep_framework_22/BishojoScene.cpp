@@ -89,5 +89,4 @@ void BishojoScene::Init()
 	tile14->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo14.bmp", L"bishojo14");
 	tile15->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo15.bmp", L"bishojo15");
 	tile16->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo16.bmp", L"bishojo16");
-
 }
