@@ -31,14 +31,14 @@ void PigScene::Init()
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 2, true, true);
-	tilePos.x -= 512;
+	tilePos.x -= 640;
 	tilePos.y += 384;
 	// Boom Trap
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 4, true, true);
-	CreateTile({ tilePos.x, tilePos.y - 1280}, TILE::TRAP);
-	CreateTile({ tilePos.x + 256, tilePos.y - 1024 }, TILE::TRAP);
-	CreateTile({ tilePos.x, tilePos.y - 768 }, TILE::TRAP);
-	CreateTile({ tilePos.x + 256, tilePos.y - 512 }, TILE::TRAP);
+	CreateTile({ tilePos.x, tilePos.y - 1152 }, TILE::TRAP);
+	CreateTile({ tilePos.x + 256, tilePos.y - 896 }, TILE::TRAP);
+	CreateTile({ tilePos.x, tilePos.y - 640 }, TILE::TRAP);
+	CreateTile({ tilePos.x + 256, tilePos.y - 384 }, TILE::TRAP);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::TRAP, 2, 1, true, false);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
@@ -47,7 +47,7 @@ void PigScene::Init()
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, false);
-	tilePos.x += 768;
+	tilePos.x += 640;
 	tilePos.y -= 256;
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 4, 2, true, false);
 	CreateHorizontalTileGroup({ tilePos.x - 512, tilePos.y - 256 }, TILE::FALL, 2, 1, true, false);
