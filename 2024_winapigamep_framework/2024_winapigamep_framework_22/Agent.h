@@ -20,6 +20,7 @@ public:
 	bool isHit;
 	bool canHit;
 	bool isRun;
+	Vec2 prevVec = { 0, 0 };
 
 private:
 	bool isRight;

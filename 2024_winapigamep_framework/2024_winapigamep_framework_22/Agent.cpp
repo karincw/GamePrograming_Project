@@ -187,8 +187,10 @@ void Agent::EnterCollision(Collider* _other)
 	std::wstring name = _other->GetOwner()->GetName();
 	std::wcout << name << "\n";
 	if ((name != L"Explosion")) return;
+	
+	bool isBackground = name != L"FireTrap" && name != L"FallTrap" && name != L"Tile";
 
-	if (canHit && !isRolling)
+	if (canHit && !isRolling || isBackground)
 	{
 		Animator* ani = GetComponent<Animator>();
 		ani->StopAnimation();
@@ -212,4 +214,15 @@ void Agent::StayCollision(Collider* _other)
 
 void Agent::ExitCollision(Collider* _other)
 {
+	std::wstring name = _other->GetOwner()->GetName();
+
+	if (name == L"FireTrap" || name == L"FallTrap") return;
+	if (name == L"Tile") {
+		prevVec = _other->GetOwner()->GetTransform()->GetPosition();
+	}
+	else {
+
+
+		GetTransform()->SetPosition(prevVec);
+	}
 }

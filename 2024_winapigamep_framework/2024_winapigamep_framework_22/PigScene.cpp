@@ -16,6 +16,7 @@ void PigScene::Init()
 	cm->CheckReset();
 	cm->CheckLayer(LAYER::TRAP, LAYER::PLAYER);
 	cm->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
+	cm->CheckLayer(LAYER::BACKGROUND, LAYER::PLAYER);
 
 	Agent* agent = new Agent;
 	AddObject(agent, LAYER::PLAYER);
@@ -88,7 +89,7 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
 
-	CreateTile({ 256, 0 }, TILE::TRAP);
+	CreateTile({ 256, 0 }, TILE::FALL);
 }
 
 void PigScene::CreateTile(Vec2 vec, TILE tileType)
