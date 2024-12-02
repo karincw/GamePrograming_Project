@@ -160,7 +160,6 @@
     <ClInclude Include="Arrow.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="BishojoScene.h" />
     <ClInclude Include="TileObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -169,8 +168,17 @@
     </ClInclude>
     <ClInclude Include="TrapTileObject.h" />
     <ClInclude Include="FallTileObject.h" />
-    <ClInclude Include="MagicTower.h" />
     <ClInclude Include="Explosion.h" />
+    <ClInclude Include="BishojoScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicTower.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="StarLazer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -276,7 +284,6 @@
     <ClCompile Include="Arrow.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="BishojoScene.cpp" />
     <ClCompile Include="TileObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
@@ -285,7 +292,16 @@
     </ClCompile>
     <ClCompile Include="TrapTileObject.cpp" />
     <ClCompile Include="FallTileObject.cpp" />
-    <ClCompile Include="MagicTower.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="BishojoScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicTower.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="StarLazer.cpp" />
   </ItemGroup>
 </Project>

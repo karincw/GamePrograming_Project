@@ -10,8 +10,9 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "Action.h"
+#include "CircleCollider.h"
 
-#define SPEED 350
+#define SPEED 100
 #define ROLLING_SPEED 600
 
 #pragma region Callback Actions
@@ -66,17 +67,16 @@ Agent::Agent()
 	animator->CreateAnimation(L"Character_Hit_l", Vec2(0, 192), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
 	animator->CreateAnimation(L"Character_Hit_r", Vec2(0, 224), Vec2(32, 32), Vec2(32, 0), 8, 0.1f);
 
-	AddComponent<Collider>();
-	Collider* col = GetComponent<Collider>();
+	AddComponent<CircleCollider>();
+	CircleCollider* col = GetComponent<CircleCollider>();
 	animator->FindAnimation(L"Character_Rolling_r")->animationEndEvent->Insert(EndRolling);
 	animator->FindAnimation(L"Character_Rolling_l")->animationEndEvent->Insert(EndRolling);
 
 	animator->FindAnimation(L"Character_Hit_l")->animationEndEvent->Insert(EndHit);
 	animator->FindAnimation(L"Character_Hit_r")->animationEndEvent->Insert(EndHit);
 
-	col->SetSize({ 32,64 });
-
-
+	//col->SetSize({ 32,64 });
+	col->SetRadius(32);
 
 	col->SetOffSetPos({ 0,16 });
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();

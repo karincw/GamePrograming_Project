@@ -56,6 +56,6 @@ void Collider::StayCollision(Collider* _other)
 void Collider::ExitCollision(Collider* _other)
 {
 	if (!_enable) return;
-	m_showDebug = false;
 	GetOwner()->ExitCollision(_other);
+	m_showDebug = false;
 }

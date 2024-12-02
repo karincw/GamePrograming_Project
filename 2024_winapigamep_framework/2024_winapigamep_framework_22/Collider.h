@@ -15,7 +15,7 @@ public:
 	void ExitCollision(Collider* _other); // 충돌해제
 	const UINT& GetID() const { return m_ID; }
 public:
-	void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
+	virtual void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
 	const Vec2& GetSize() const { return m_vSize; }
 	void SetOffSetPos(Vec2 _vOffsetPos)
 	{
@@ -26,7 +26,7 @@ public:
 	{
 		return m_vLatePos;
 	}
-private:
+protected:
 	bool m_showDebug = false;
 	UINT m_ID; // 충돌체 고유 ID값
 	static UINT m_sNextID;
