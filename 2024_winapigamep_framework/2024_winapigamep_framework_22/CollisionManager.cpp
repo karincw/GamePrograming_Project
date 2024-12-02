@@ -62,7 +62,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 	{
 		Collider* pLeftCollider = vecLeftLayer[i]->GetComponent<Collider>();
 		// 충돌체 없는 경우
-		if (nullptr == pLeftCollider)
+		if (nullptr == pLeftCollider || !pLeftCollider->GetEnable())
 			continue;
 		for (size_t j = 0; j < vecRightLayer.size(); j++)
 		{

@@ -13,6 +13,7 @@
 
 void TrapTileObject::ExplosionTile(Object* owner) {
 
+	owner->GetComponent<Collider>()->SetEnable(false);
 
 	auto func = [](Object* obj) {
 		Explosion* boom = new Explosion();
@@ -27,6 +28,7 @@ void TrapTileObject::ExplosionTile(Object* owner) {
 		auto func = [](Object* obj) {
 			TrapTileObject* tile = dynamic_cast<TrapTileObject*>(obj);
 			tile->isEnter = false;
+			obj->GetComponent<Collider>()->SetEnable(true);
 			};
 
 		GET_SINGLE(TimeManager)->DelayRun(0.8f, func, obj);

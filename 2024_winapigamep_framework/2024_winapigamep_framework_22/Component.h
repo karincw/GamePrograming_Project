@@ -12,9 +12,10 @@ public:
 	void SetOwner(Object* _owner) { m_pOwner = _owner; }
 	Object* GetOwner() const { return m_pOwner; }
 public:
-	inline void SetEnable(bool state){ _enable = state; }
+	inline void SetEnable(bool state) { _enable = state; }
+	inline bool GetEnable() { return  _enable; }
 protected:
 	Object* m_pOwner;
-	bool _enable;
+	bool _enable = true;
 };
 
