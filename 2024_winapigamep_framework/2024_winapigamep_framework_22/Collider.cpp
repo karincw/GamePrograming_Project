@@ -2,15 +2,16 @@
 #include "Collider.h"
 #include "Object.h"
 #include "GDISelector.h"
-
 #include "Scene.h"
 #include "SceneManager.h"
 #include "Camera.h"
+
 UINT Collider::m_sNextID = 0;
 Collider::Collider()
 	: m_vSize(30.f, 30.f)
 	, m_vLatePos(0.f, 0.f)
 	, m_vOffsetPos(0.f, 0.f)
+	, m_ID(m_sNextID++)
 {
 }
 
