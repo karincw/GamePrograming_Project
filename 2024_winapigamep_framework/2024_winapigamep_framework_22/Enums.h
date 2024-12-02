@@ -6,7 +6,7 @@ enum class LAYER
 	TRAP,
 	PROJECTILE,
 	ENEMY,
-	// UI
+	UI,
 	PLAYER,
 	END = 30
 };

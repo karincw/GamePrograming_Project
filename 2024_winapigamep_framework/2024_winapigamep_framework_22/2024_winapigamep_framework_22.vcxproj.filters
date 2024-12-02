@@ -177,6 +177,9 @@
     <ClInclude Include="TrapTileObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleText.h" />
+    <ClInclude Include="TestText.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -299,5 +302,8 @@
     <ClCompile Include="TrapTileObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleText.cpp" />
+    <ClCompile Include="TestText.cpp" />
   </ItemGroup>
 </Project>
