@@ -180,6 +180,9 @@
     <ClInclude Include="Title.h" />
     <ClInclude Include="TitleText.h" />
     <ClInclude Include="TestText.h" />
+    <ClInclude Include="PlayButton.h" />
+    <ClInclude Include="ExitButton.h" />
+    <ClInclude Include="DirectionArrow.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -305,5 +308,8 @@
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="TitleText.cpp" />
     <ClCompile Include="TestText.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
+    <ClCompile Include="DirectionArrow.cpp" />
   </ItemGroup>
 </Project>

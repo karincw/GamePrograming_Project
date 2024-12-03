@@ -175,6 +175,8 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DirectionArrow.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="MagicTower.h" />
     <ClInclude Include="Define.h" />
@@ -204,6 +206,7 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="PigScene.h" />
+    <ClInclude Include="PlayButton.h" />
     <ClInclude Include="Player.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -253,6 +256,8 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DirectionArrow.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="MagicTower.cpp" />
     <ClCompile Include="Enemy.cpp">
@@ -279,6 +284,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="PigScene.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
     <ClCompile Include="Player.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

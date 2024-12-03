@@ -4,10 +4,11 @@
 
 TitleText::TitleText()
 {
-	GetTransform()->SetScale({ 600,300 });
+	GetTransform()->SetScale({ 500,250 });
 	AddComponent<SpriteRenderer>();
 	SpriteRenderer* spriteRenderer = GetComponent<SpriteRenderer>();
 	spriteRenderer->CreateTexture(L"Texture\\TitleText.bmp", L"TitleText");
+	GetTransform()->SetPosition({ 350 , SCREEN_HEIGHT / 4 });
 }
 
 TitleText::~TitleText()
