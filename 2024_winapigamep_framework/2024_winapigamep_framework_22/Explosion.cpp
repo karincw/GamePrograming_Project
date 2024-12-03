@@ -27,6 +27,7 @@ Explosion::Explosion()
 	col->SetOffSetPos(Vec2(-30, -20));
 	col->SetSize({ 256, 256});
 
+	SetName(L"Explosion");
 }
 
 Explosion::~Explosion()

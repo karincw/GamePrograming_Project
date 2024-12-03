@@ -119,6 +119,7 @@ void Agent::Update()
 	{
 		SetMoveToBeforeTile(this);
 		Hit();
+		isGroundCheck = true;
 	}
 	if (!isRolling)
 		isGroundCheck = false;
@@ -219,9 +220,9 @@ void Agent::Render(HDC _hdc)
 void Agent::EnterCollision(Collider* _other) //오직 피격만 구현
 {
 	std::wstring name = _other->GetOwner()->GetName();
-	if (name != L"Bullet" && name != L"Lazer") return;
+	if (name != L"Bullet" && name != L"Lazer" && name != L"Explosion") return;
 
-	if (canHit && !isRolling)
+	if (!isRolling)
 		Hit();
 }
 
@@ -239,6 +240,8 @@ void Agent::ExitCollision(Collider* _other)
 
 void Agent::Hit()
 {
+	if (!canHit) return;
+
 	Animator* ani = GetComponent<Animator>();
 	ani->StopAnimation();
 

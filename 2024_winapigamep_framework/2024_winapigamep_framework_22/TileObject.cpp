@@ -33,16 +33,16 @@ void TileObject::Render(HDC _hdc)
 
 void TileObject::EnterCollision(Collider* _other)
 {
+}
+
+void TileObject::StayCollision(Collider* _other)
+{
 	Object* obj = _other->GetOwner();
 	if (obj->GetName() == L"Player")
 	{
 		Agent* pObj = dynamic_cast<Agent*>(obj);
 		pObj->backUpTile = this;
 	}
-}
-
-void TileObject::StayCollision(Collider* _other)
-{
 }
 
 void TileObject::ExitCollision(Collider* _other)
