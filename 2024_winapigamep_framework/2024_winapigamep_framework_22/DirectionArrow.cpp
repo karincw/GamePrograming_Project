@@ -46,6 +46,7 @@ void DirectionArrow::Update()
 			TerminateProcess(hProcess, 0);
 			break;
 		}
+		asdf
 	}
 }
 
