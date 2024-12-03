@@ -157,7 +157,7 @@
     <ClInclude Include="Projectile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Arrow.h">
+    <ClInclude Include="Bullet.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="TileObject.h">
@@ -192,6 +192,9 @@
     </ClInclude>
     <ClInclude Include="RenderUtils.h">
       <Filter>Engine\07. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Lazer.h">
+      <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,7 +298,7 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Arrow.cpp">
+    <ClCompile Include="Bullet.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="TileObject.cpp">
@@ -330,6 +333,9 @@
     </ClCompile>
     <ClCompile Include="RenderUtils.cpp">
       <Filter>Engine\07. Module</Filter>
+    </ClCompile>
+    <ClCompile Include="Lazer.cpp">
+      <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

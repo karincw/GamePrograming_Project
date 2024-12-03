@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Texture.h"
+#include "ResourceManager.h"
 #include <assert.h>
 #include "Core.h"
+static int StretchID = 0;
 Texture::Texture()
 	: m_hDC(nullptr)
 	, m_hBit(nullptr)
@@ -40,7 +42,6 @@ Texture::~Texture()
 	{
 		::DeleteDC(m_StretchDC);
 		::DeleteObject(m_StretchBit);
-		delete makedTex;
 	}
 }
 
@@ -75,5 +76,6 @@ Texture* Texture::MakeStretchTex(float ratioX, float ratioY)
 	);
 
 	makedTex = new Texture(m_StretchDC, m_StretchBit);
+	GET_SINGLE(ResourceManager)->TestureAdd(std::to_wstring(StretchID++), makedTex);
 	return makedTex;
 }

@@ -43,6 +43,11 @@ Texture* ResourceManager::TextureFind(const wstring& _key)
 	return nullptr;
 }
 
+void ResourceManager::TestureAdd(const wstring& _key, Texture* _tex)
+{
+	m_mapTextures.insert({ _key,_tex });
+}
+
 void ResourceManager::Release()
 {
 	map<wstring, Texture*>::iterator iter;

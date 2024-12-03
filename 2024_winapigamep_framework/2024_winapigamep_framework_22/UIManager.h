@@ -17,7 +17,9 @@ public:
 public:
 	void RenderHP(HDC _hdc);
 	void RenderRolling(HDC _hdc);
-
+public:
+	float GetHPPercent() { return m_hpPercent; }
+	void SetHPPercent(float per) { m_hpPercent = per; }
 private:
 	UIPosition m_hpPos;
 	float m_hpPercent;

@@ -6,10 +6,13 @@ void UIManager::Init()
 {
 	m_hpPercent = 100.f;
 
-	m_hpPos = { 472.5f / 800 * SCREEN_WIDTH,
-		((538.0f - 50.0f) + (568.0f - 50.0f)) / 2 / 600 * SCREEN_HEIGHT,
-		415.0f / 800 * SCREEN_WIDTH,
-		30.0f / 600 * SCREEN_HEIGHT };
+	m_hpPos = 
+	{ 
+		SCREEN_WIDTH / 3 * 2.3f,
+		SCREEN_HEIGHT - 50,
+		SCREEN_WIDTH / 3,
+		30
+	};
 }
 
 void UIManager::Render(HDC _hdc)

@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "MagicTower.h"
 #include "SpriteRenderer.h"
-#include "Arrow.h"
 #include "TimeManager.h"
 #include "Collider.h"
 #include "Action.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Bullet.h"
 
 
 MagicTower::MagicTower(float time)
@@ -46,12 +46,12 @@ void MagicTower::Render(HDC _hdc)
 
 void MagicTower::Fire()
 {
-	Arrow* arrow = new Arrow();
-	Transform* trm = arrow->GetTransform();
+	Bullet* bullet = new Bullet();
+	Transform* trm = bullet->GetTransform();
 	trm->SetScale(Vec2(22, 22));
 	trm->SetPosition(GetTransform()->GetPosition() + Vec2(0, -16));
-	arrow->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\Bullet.bmp", L"Bullet");
-	arrow->GetComponent<Collider>()->SetSize(Vec2(32, 32));
+	bullet->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\Bullet_Red.bmp", L"Bullet_Red");
+	bullet->GetComponent<Collider>()->SetSize(Vec2(32, 32));
 	Vec2 dirVec = { 0.f, 0.f };
 
 	Object* pPlayer = nullptr;
@@ -63,9 +63,9 @@ void MagicTower::Fire()
 	}
 	dirVec = pPlayer->GetTransform()->GetPosition() + Vec2(0, -16) - GetTransform()->GetPosition();
 
-	arrow->SetDir(dirVec);
-	arrow->SetSpeed(750);
-	arrow->SetName(L"Arrow");
+	bullet->SetDir(dirVec);
+	bullet->SetSpeed(750);
+	bullet->SetName(L"Bullet");
 
-	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(arrow, LAYER::PROJECTILE);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(bullet, LAYER::PROJECTILE);
 }

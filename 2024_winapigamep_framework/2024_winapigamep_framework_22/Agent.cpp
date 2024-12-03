@@ -9,10 +9,12 @@
 #include "Collider.h"
 #include "Scene.h"
 #include "Camera.h"
+#include "UIManager.h"
 #include "Action.h"
 
 #define SPEED 350
 #define ROLLING_SPEED 600
+#define DAMAGE 10
 
 #pragma region Callback Actions
 
@@ -42,6 +44,17 @@ void EndHit(Object* owner)
 }
 
 #pragma endregion
+
+bool ApplyDamage()
+{
+	UIManager* uiManager = GET_SINGLE(UIManager);
+	uiManager->SetHPPercent(uiManager->GetHPPercent() - DAMAGE);
+	if (uiManager->GetHPPercent() <= 0)
+	{
+		return false;
+	}
+	return true;
+}
 
 Agent::Agent()
 	: isRight(true), isRun(false)
@@ -182,7 +195,7 @@ void Agent::Render(HDC _hdc)
 
 void Agent::EnterCollision(Collider* _other)
 {
-	if (_other->GetOwner()->GetName() != L"Arrow") return;
+	if (_other->GetOwner()->GetName() != L"Bullet") return;
 
 	if (canHit && !isRolling)
 	{
@@ -196,6 +209,12 @@ void Agent::EnterCollision(Collider* _other)
 			animationName += L"_l";
 
 		ani->PlayAnimation(animationName, false);
+		
+		if (!ApplyDamage())
+		{
+			//Á×¾úÀ½
+		}
+		
 		isHit = true;
 		canHit = false;
 		isRun = false;

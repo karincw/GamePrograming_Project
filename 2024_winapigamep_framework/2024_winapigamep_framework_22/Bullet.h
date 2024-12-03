@@ -1,11 +1,11 @@
 #pragma once
 #include "Projectile.h"
-class Arrow :
+class Bullet :
 	public Projectile
 {
 public:
-	Arrow();
-	~Arrow();
+	Bullet();
+	~Bullet();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;

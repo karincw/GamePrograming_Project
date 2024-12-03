@@ -85,6 +85,7 @@ void Scene::Render(HDC _hdc)
 
 void Scene::Release()
 {
+	delete currentCamera;
 	for (size_t i = 0; i < (UINT)LAYER::END; i++)
 	{
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
@@ -94,5 +95,4 @@ void Scene::Release()
 		m_vecObj[i].clear();
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
-	delete currentCamera;
 }
