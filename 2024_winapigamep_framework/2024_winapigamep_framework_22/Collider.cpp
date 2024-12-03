@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "SceneManager.h"
 #include "Camera.h"
+#include "Action.h"
 
 UINT Collider::m_sNextID = 0;
 Collider::Collider()
@@ -13,10 +14,16 @@ Collider::Collider()
 	, m_vOffsetPos(0.f, 0.f)
 	, m_ID(m_sNextID++)
 {
+	collisionEnterEvent = new VariadicAction<Collider*, Object*>();
+	collisionStayEvent = new VariadicAction<Collider*, Object*>();
+	collisionExitEvent = new VariadicAction<Collider*, Object*>();
 }
 
 Collider::~Collider()
 {
+	delete collisionEnterEvent;
+	delete collisionStayEvent;
+	delete collisionExitEvent;
 }
 
 void Collider::LateUpdate()
@@ -45,12 +52,14 @@ void Collider::EnterCollision(Collider* _other)
 	if (!_enable) return;
 	m_showDebug = true;
 	GetOwner()->EnterCollision(_other);
+	collisionEnterEvent->Invoke(_other, GetOwner());
 }
 
 void Collider::StayCollision(Collider* _other)
 {
 	if (!_enable) return;
 	GetOwner()->StayCollision(_other);
+	collisionStayEvent->Invoke(_other, GetOwner());
 }
 
 void Collider::ExitCollision(Collider* _other)
@@ -58,4 +67,5 @@ void Collider::ExitCollision(Collider* _other)
 	if (!_enable) return;
 	GetOwner()->ExitCollision(_other);
 	m_showDebug = false;
+	collisionExitEvent->Invoke(_other, GetOwner());
 }

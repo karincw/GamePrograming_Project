@@ -32,7 +32,7 @@ void TrapTileObject::ExplosionTile(Object* owner) {
 		GET_SINGLE(TimeManager)->DelayRun(0.8f, func, obj);
 		};
 
-	GET_SINGLE(TimeManager)->DelayRun(1.0f, func, owner);
+	GET_SINGLE(TimeManager)->DelayRun(0.75f, func, owner);
 }
 
 
@@ -53,6 +53,7 @@ TrapTileObject::TrapTileObject()
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
 	col->SetSize({ 256,256 });
+	SetName(L"Tile");
 }
 
 TrapTileObject::~TrapTileObject()
@@ -70,6 +71,10 @@ void TrapTileObject::Render(HDC _hdc)
 
 void TrapTileObject::EnterCollision(Collider* _other)
 {
+}
+
+void TrapTileObject::StayCollision(Collider* _other)
+{
 	if (_other->GetOwner()->GetName() == L"Player" && !isEnter) {
 		isEnter = true;
 		Animator* ani = GetComponent<Animator>();
@@ -77,10 +82,6 @@ void TrapTileObject::EnterCollision(Collider* _other)
 		ani->PlayAnimation(L"TrapTile_Warning", true);
 		ExplosionTile(this);
 	}
-}
-
-void TrapTileObject::StayCollision(Collider* _other)
-{
 }
 
 void TrapTileObject::ExitCollision(Collider* _other)

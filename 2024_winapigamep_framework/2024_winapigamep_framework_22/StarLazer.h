@@ -1,20 +1,24 @@
 #pragma once
 #include "Object.h"
 class Lazer;
+
 class StarLazer : public Object
 {
 public:
 	StarLazer(Vec2 position);
-	virtual ~StarLazer();
+	~StarLazer();
 public:
-	virtual void Update() override;
-	virtual void Render(HDC _hdc) override;
+	void Update()                         override;
+	void Render(HDC _hdc)                 override;
+	void EnterCollision(Collider* _other) override;
+	void StayCollision(Collider* _other)  override;
+	void ExitCollision(Collider* _other)  override;
 public:
-	void EnterCollision(Collider* _other)override;
-	void StayCollision(Collider* _other)override;
-	void ExitCollision(Collider* _other)override;
+	void OpenHorizontal();
+	void OpenVertical();
 
 private:
 	Lazer* lazers[4];
+	bool isHorizontal = true;
 };
 

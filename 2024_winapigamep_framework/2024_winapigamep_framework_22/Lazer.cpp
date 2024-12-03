@@ -60,6 +60,7 @@ Lazer::Lazer(LAZER_DIR dir, Vec2 Scale)
 	col->SetOffSetPos(GetColliderPos(dir, Scale));
 	col->SetSize(GetColliderScale(dir, Scale));
 
+	SetName(L"Lazer");
 	SetEnable(_enable);
 }
 

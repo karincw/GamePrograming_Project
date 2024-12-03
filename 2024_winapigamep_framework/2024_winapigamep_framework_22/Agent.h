@@ -1,6 +1,9 @@
 #pragma once
 #include "Object.h"
+template <typename T>
+class Action;
 class Camera;
+
 class Agent :
 	public Object
 {
@@ -14,15 +17,18 @@ public:
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other)override;
 	void ExitCollision(Collider* _other)override;
+	void Hit();
 public:
 	bool isRolling;
 	bool canRolling;
 	bool isHit;
 	bool canHit;
 	bool isRun;
+	bool isGroundCheck = true;
 
+	Object* backUpTile;
+	Camera* cam;
 private:
 	bool isRight;
 	Vec2 rollingDir;
-	Camera* cam;
 };

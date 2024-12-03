@@ -46,12 +46,11 @@ void MagicTower::Render(HDC _hdc)
 
 void MagicTower::Fire()
 {
-	Bullet* bullet = new Bullet();
+	Bullet* bullet = new Bullet(L"");
+
 	Transform* trm = bullet->GetTransform();
-	trm->SetScale(Vec2(22, 22));
 	trm->SetPosition(GetTransform()->GetPosition() + Vec2(0, -16));
-	bullet->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\Bullet_Red.bmp", L"Bullet_Red");
-	bullet->GetComponent<Collider>()->SetSize(Vec2(32, 32));
+
 	Vec2 dirVec = { 0.f, 0.f };
 
 	Object* pPlayer = nullptr;

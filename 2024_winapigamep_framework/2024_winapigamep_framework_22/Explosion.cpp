@@ -3,6 +3,13 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Collider.h"
+#include "Action.h"
+
+void EndExplosion(Object* owner)
+{
+	Explosion* ex = dynamic_cast<Explosion*>(owner);
+	ex->SetDead();
+}
 
 Explosion::Explosion()
 {
@@ -14,11 +21,11 @@ Explosion::Explosion()
 
 	animator->CreateAnimation(L"Explosion", Vec2(0, 0), Vec2(128, 144), Vec2(128, 0), 11, 0.07f);
 	animator->PlayAnimation(L"Explosion", false);
-
+	animator->FindAnimation(L"Explosion")->animationEndEvent->Insert(EndExplosion);
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
 	col->SetOffSetPos(Vec2(-30, -20));
-	col->SetSize({ 150,150 });
+	col->SetSize({ 256, 256});
 
 }
 

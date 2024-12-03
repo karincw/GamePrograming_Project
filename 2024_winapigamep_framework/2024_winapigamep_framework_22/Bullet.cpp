@@ -1,9 +1,14 @@
 #include "pch.h"
 #include "Bullet.h"
 #include "Collider.h"
+#include "SpriteRenderer.h"
 
-Bullet::Bullet()
+Bullet::Bullet(std::wstring t)
 {
+	GetTransform()->SetScale(Vec2(22, 22));
+	GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\Bullet_Red.bmp", L"Bullet_Red");
+
+	GetComponent<Collider>()->SetSize(Vec2(32, 32));
 }
 
 Bullet::~Bullet()
