@@ -5,10 +5,9 @@ enum class LAYER
 	BACKGROUND,
 	TRAP,
 	PROJECTILE,
-	ENEMY,
-	UI,
+	// UI
 	PLAYER,
-	END = 30
+	END
 };
 
 enum class PEN_TYPE

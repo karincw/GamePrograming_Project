@@ -157,32 +157,45 @@
     <ClInclude Include="Projectile.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Arrow.h">
+    <ClInclude Include="Bullet.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="BishojoScene.h" />
     <ClInclude Include="TileObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="PigScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="MagicTower.h" />
-    <ClInclude Include="FallTileObject.h">
+    <ClInclude Include="BishojoScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicTower.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapTileObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="Explosion.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="TrapTileObject.h">
+    <ClInclude Include="FallTileObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Title.h" />
-    <ClInclude Include="TitleText.h" />
-    <ClInclude Include="TestText.h" />
-    <ClInclude Include="PlayButton.h" />
-    <ClInclude Include="ExitButton.h" />
-    <ClInclude Include="DirectionArrow.h" />
+    <ClInclude Include="StarLazer.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderUtils.h">
+      <Filter>Engine\07. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Lazer.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -285,31 +298,44 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Arrow.cpp">
+    <ClCompile Include="Bullet.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="BishojoScene.cpp" />
     <ClCompile Include="TileObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="PigScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="MagicTower.cpp" />
+    <ClCompile Include="BishojoScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicTower.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
     <ClCompile Include="FallTileObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Explosion.cpp">
+    <ClCompile Include="StarLazer.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="TrapTileObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="Title.cpp" />
-    <ClCompile Include="TitleText.cpp" />
-    <ClCompile Include="TestText.cpp" />
-    <ClCompile Include="PlayButton.cpp" />
-    <ClCompile Include="ExitButton.cpp" />
-    <ClCompile Include="DirectionArrow.cpp" />
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderUtils.cpp">
+      <Filter>Engine\07. Module</Filter>
+    </ClCompile>
+    <ClCompile Include="Lazer.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

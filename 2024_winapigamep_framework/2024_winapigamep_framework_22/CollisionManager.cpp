@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Collider.h"
+#include "CircleCollider.h"
 void CollisionManager::Update()
 {
 	for (UINT Row = 0; Row < (UINT)LAYER::END; ++Row)
@@ -72,7 +73,7 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 				continue;
 
 			COLLIDER_ID colliderID; // 두 충돌체로만 만들 수 있는 ID
- 			colliderID.left_ID = pLeftCollider->GetID();
+			colliderID.left_ID = pLeftCollider->GetID();
 			colliderID.right_ID = pRightCollider->GetID();
 
 			iter = m_mapCollisionInfo.find(colliderID.ID);
@@ -127,20 +128,60 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 
 bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 {
-	Vec2 vLeftPos = _left->GetLatedUpatedPos();
-	Vec2 vRightPos = _right->GetLatedUpatedPos();
-	Vec2 vLeftSize = _left->GetSize();
-	Vec2 vRightSize = _right->GetSize();
+	CircleCollider* circleLeft = dynamic_cast<CircleCollider*>(_left);
+	CircleCollider* circleRight = dynamic_cast<CircleCollider*>(_right);
 
-	RECT leftRt = RECT_MAKE(vLeftPos.x, vLeftPos.y, vLeftSize.x, vLeftSize.y);
-	RECT rightRt = RECT_MAKE(vRightPos.x, vRightPos.y, vRightSize.x, vRightSize.y);
-	RECT rt;
-	return ::IntersectRect(&rt, &leftRt, &rightRt);
-	/*if (abs(vRightPos.x - vLeftPos.x) < (vLeftSize.x + vRightSize.x) / 2.f
-		&& abs(vRightPos.y - vLeftPos.y) < (vLeftSize.y + vRightSize.y) / 2.f)
+	if (circleLeft != nullptr && circleRight != nullptr) // 둘다 원
 	{
-		return true;
+		float maxDist = max(circleLeft->GetRadius(), circleRight->GetRadius());
+		auto leftPos = circleLeft->GetOwner()->GetTransform()->GetPosition();
+		auto rightPos = circleRight->GetOwner()->GetTransform()->GetPosition();
+		auto len = leftPos - rightPos;
+		if (maxDist >= len.Length())
+		{
+			return true;
+		}
 	}
+	else if (circleLeft != nullptr || circleRight != nullptr) // 하나만 원
+	{
+		bool leftIsCircle = circleLeft != nullptr ? true : false;
+		Object* square = leftIsCircle ? _right->GetOwner() : _left->GetOwner();
+		Object* circle = leftIsCircle ? _left->GetOwner() : _right->GetOwner();
 
-	return false;*/
+		Vec2 rectPos = square->GetTransform()->GetPosition() + square->GetComponent<Collider>()->GetOffSetPos();
+		Vec2 rectSize = square->GetComponent<Collider>()->GetSize();
+		Vec2 circlePos = circle->GetTransform()->GetPosition() + circle->GetComponent<CircleCollider>()->GetOffSetPos();
+		float circleRad = circle->GetComponent<CircleCollider>()->GetRadius();
+
+		// 2. 사각형의 경계를 구해올겁니다.
+		float left = rectPos.x - (rectSize.x / 2);
+		float right = rectPos.x + (rectSize.x / 2);
+		float top = rectPos.y - (rectSize.y / 2);
+		float bottom = rectPos.y + (rectSize.y / 2);
+
+		// 충돌체크를 위한 가장가까운 값을 가져올거야.
+		float closestX = std::clamp(circlePos.x, left, right);
+		float closestY = std::clamp(circlePos.y, top, bottom);
+
+		float dx = circlePos.x - closestX;
+		float dy = circlePos.y - closestY;
+		float dist = sqrt(dx * dx + dy * dy);
+
+		if (dist <= circleRad)
+			return true;
+	}
+	else //둘다 네모
+	{
+		Vec2 vLeftPos = _left->GetLatedUpatedPos();
+		Vec2 vRightPos = _right->GetLatedUpatedPos();
+		Vec2 vLeftSize = _left->GetSize();
+		Vec2 vRightSize = _right->GetSize();
+
+		RECT leftRt = RECT_MAKE(vLeftPos.x, vLeftPos.y, vLeftSize.x, vLeftSize.y);
+		RECT rightRt = RECT_MAKE(vRightPos.x, vRightPos.y, vRightSize.x, vRightSize.y);
+		RECT rt;
+		return ::IntersectRect(&rt, &leftRt, &rightRt);
+	}
+	return false;
+
 }

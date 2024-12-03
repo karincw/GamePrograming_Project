@@ -20,6 +20,7 @@ public:
 public:
 	Texture* TextureLoad(const wstring& _key, const wstring& _path);
 	Texture* TextureFind(const wstring& _key);
+	void TestureAdd(const wstring& _key, Texture* _tex);
 	void Release();
 public:
 	void LoadSound(const wstring& _key, const wstring& _path, bool _isLoop);

@@ -9,10 +9,12 @@
 #include "Collider.h"
 #include "Scene.h"
 #include "Camera.h"
+#include "UIManager.h"
 #include "Action.h"
 
 #define SPEED 350
 #define ROLLING_SPEED 600
+#define DAMAGE 10
 
 #pragma region Callback Actions
 
@@ -42,6 +44,17 @@ void EndHit(Object* owner)
 }
 
 #pragma endregion
+
+bool ApplyDamage()
+{
+	UIManager* uiManager = GET_SINGLE(UIManager);
+	uiManager->SetHPPercent(uiManager->GetHPPercent() - DAMAGE);
+	if (uiManager->GetHPPercent() <= 0)
+	{
+		return false;
+	}
+	return true;
+}
 
 Agent::Agent()
 	: isRight(true), isRun(false)
@@ -75,8 +88,6 @@ Agent::Agent()
 	animator->FindAnimation(L"Character_Hit_r")->animationEndEvent->Insert(EndHit);
 
 	col->SetSize({ 32,64 });
-
-
 
 	col->SetOffSetPos({ 0,16 });
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
@@ -184,13 +195,9 @@ void Agent::Render(HDC _hdc)
 
 void Agent::EnterCollision(Collider* _other)
 {
-	std::wstring name = _other->GetOwner()->GetName();
-	std::wcout << name << "\n";
-	if ((name != L"Explosion")) return;
-	
-	bool isBackground = name != L"FireTrap" && name != L"FallTrap" && name != L"Tile";
+	if (_other->GetOwner()->GetName() != L"Bullet") return;
 
-	if (canHit && !isRolling || isBackground)
+	if (canHit && !isRolling)
 	{
 		Animator* ani = GetComponent<Animator>();
 		ani->StopAnimation();
@@ -202,6 +209,12 @@ void Agent::EnterCollision(Collider* _other)
 			animationName += L"_l";
 
 		ani->PlayAnimation(animationName, false);
+		
+		if (!ApplyDamage())
+		{
+			//Á×¾úÀ½
+		}
+		
 		isHit = true;
 		canHit = false;
 		isRun = false;
@@ -214,15 +227,4 @@ void Agent::StayCollision(Collider* _other)
 
 void Agent::ExitCollision(Collider* _other)
 {
-	std::wstring name = _other->GetOwner()->GetName();
-
-	if (name == L"FireTrap" || name == L"FallTrap") return;
-	if (name == L"Tile") {
-		prevVec = _other->GetOwner()->GetTransform()->GetPosition();
-	}
-	else {
-
-
-		GetTransform()->SetPosition(prevVec);
-	}
 }

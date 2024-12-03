@@ -5,5 +5,6 @@ class BishojoScene :
 {
 public:
 	void Init() override;
+	void Render(HDC _hdc) override;
 };
 

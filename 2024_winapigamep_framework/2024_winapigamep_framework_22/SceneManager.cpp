@@ -2,7 +2,6 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "PigScene.h"
-#include "Title.h"
 #include "BishojoScene.h"
 void SceneManager::Init()
 {
@@ -10,11 +9,10 @@ void SceneManager::Init()
 
 	// ¾À µî·Ï
 	RegisterScene(L"PigScene",std::make_shared<PigScene>());
-	RegisterScene(L"Title",std::make_shared<Title>());
 	RegisterScene(L"BishojoScene",std::make_shared<BishojoScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"Title");
+	LoadScene(L"BishojoScene");
 }
 
 void SceneManager::Update()

@@ -4,8 +4,6 @@
 #include "CollisionManager.h"
 #include "Camera.h"
 #include "SceneManager.h"
-#include "Scene.h"
-#include "Camera.h"
 
 Scene::Scene()
 {
@@ -21,47 +19,12 @@ Scene::~Scene()
 
 void Scene::Update()
 {
-	//for (UINT i = 0; i < (UINT)LAYER::END; ++i)
-	//{
-	//	for (size_t j = 0; j < m_vecObj[i].size();)
-	//	{
-	//		if (!m_vecObj[i][j]->GetIsDead())
-	//			m_vecObj[i][j++]->Update();
-	//		else
-	//			m_vecObj[i].erase(m_vecObj[i].begin() + j);
-	//	}
-	//}
 	for (UINT i = 0; i < (UINT)LAYER::END; ++i)
 	{
 		for (size_t j = 0; j < m_vecObj[i].size(); ++j)
 		{
 			if (!m_vecObj[i][j]->GetIsDead())
 				m_vecObj[i][j]->Update();
-			// 이거 해야도ㅟㅁ
-
-			//Object* nowObj = m_vecObj[i][j];
-
-			//bool Update = true;
-			//Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
-			//Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
-			//Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
-			//Transform* trm = nowObj->GetTransform();
-			//Vec2 position = trm->GetPosition();
-			//Vec2 scale = trm->GetScale();
-
-			//if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
-			//	Update = false;
-			//else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
-			//	Update = false;
-			//else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
-			//	Update = false;
-			//else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
-			//	Update = false;
-
-			//if (Update)
-			//	m_vecObj[i][j]->LateUpdate();
-
-			//j++;
 		}
 	}
 
@@ -81,14 +44,6 @@ void Scene::LateUpdate()
 
 void Scene::Render(HDC _hdc)
 {
-	//for (UINT i = 0; i < (UINT)LAYER::END; ++i)
-	//{
-	//	for (size_t j = 0; j < m_vecObj[i].size(); ++j)
-	//	{
-	//		if (!m_vecObj[i][j]->GetIsDead())
-	//			m_vecObj[i][j]->Render(_hdc);
-	//	}
-	//}
 	for (UINT i = 0; i < (UINT)LAYER::END; ++i)
 	{
 		for (size_t j = 0; j < m_vecObj[i].size();)
@@ -130,7 +85,7 @@ void Scene::Render(HDC _hdc)
 
 void Scene::Release()
 {
-	// 오브젝트 삭제.
+	delete currentCamera;
 	for (size_t i = 0; i < (UINT)LAYER::END; i++)
 	{
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
@@ -140,5 +95,4 @@ void Scene::Release()
 		m_vecObj[i].clear();
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
-	delete currentCamera;
 }

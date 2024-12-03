@@ -6,6 +6,8 @@
 #include "BishojoObject.h"
 #include "SpriteRenderer.h"
 #include "MagicTower.h"
+#include "StarLazer.h"
+#include "UIManager.h"
 
 void BishojoScene::Init()
 {
@@ -46,9 +48,8 @@ void BishojoScene::Init()
 	BishojoObject* tile16 = new BishojoObject;
 	AddObject(tile16, LAYER::DEFAULT);
 
-	MagicTower* crossBow = new MagicTower(0.3f);
-	AddObject(crossBow, LAYER::TRAP);
-	crossBow->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
+	StarLazer* test = new StarLazer({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
+	AddObject(test, LAYER::TRAP);
 
 	Agent* agent = new Agent;
 	AddObject(agent, LAYER::PLAYER);
@@ -89,5 +90,10 @@ void BishojoScene::Init()
 	tile14->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo14.bmp", L"bishojo14");
 	tile15->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo15.bmp", L"bishojo15");
 	tile16->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo16.bmp", L"bishojo16");
+}
 
+void BishojoScene::Render(HDC _hdc)
+{
+	Scene::Render(_hdc);
+	GET_SINGLE(UIManager)->RenderHP(_hdc);
 }

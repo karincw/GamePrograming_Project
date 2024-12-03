@@ -27,7 +27,7 @@ void SpriteRenderer::LateUpdate()
 
 void SpriteRenderer::Render(HDC _hdc)
 {
-	if (m_pTex == nullptr) return;
+	if (m_pTex == nullptr || !_enable) return;
 	Transform* trm = m_pOwner->GetComponent<Transform>();
 	Vec2 vPos = trm->GetPosition();
 	Vec2 vSize = trm->GetScale();
