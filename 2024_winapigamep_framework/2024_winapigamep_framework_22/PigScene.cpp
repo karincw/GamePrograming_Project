@@ -102,18 +102,18 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 	case TILE::NORMAL:
 		tile = new TileObject;
 		AddObject(tile, LAYER::BACKGROUND);
-		tile->GetTransform()->SetPosition(vec);
 		break;
 	case TILE::TRAP:
-		//tile = new TrapTileObject;
-		//AddObject(tile, LAYER::TRAP);
+		tile = new TrapTileObject;
+		AddObject(tile, LAYER::TRAP);
 		break;
 	case TILE::FALL:
-		//tile = new FallTileObject;
-		//AddObject(tile, LAYER::TRAP);
+		tile = new FallTileObject;
+		AddObject(tile, LAYER::TRAP);
 		break;
 	}
 
+	tile->GetTransform()->SetPosition(vec);
 }
 
 Vec2 PigScene::CreateVerticalTileGroup(Vec2 startVec, TILE tileType, int x, int y, bool isDown, bool isJump = true)
