@@ -8,8 +8,8 @@
 #include "FallTileObject.h"
 #include "SpriteRenderer.h"
 #include "CollisionManager.h"
-#include "UIManager.h"
 #include "FollowTrap.h"
+#include "StarLazer.h"
 
 
 void PigScene::Init()
@@ -34,14 +34,14 @@ void PigScene::Init()
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 2, true, true);
-	tilePos.x -= 768;
-	tilePos.y += 512;
+	tilePos.x -= 640;
+	tilePos.y += 384;
 	// Boom Trap
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 4, true, true);
-	CreateTile({ tilePos.x, tilePos.y - 1280 }, TILE::TRAP);
-	CreateTile({ tilePos.x + 256, tilePos.y - 1024 }, TILE::TRAP);
-	CreateTile({ tilePos.x, tilePos.y - 768 }, TILE::TRAP);
-	CreateTile({ tilePos.x + 256, tilePos.y - 512 }, TILE::TRAP);
+	CreateTile({ tilePos.x, tilePos.y - 1152 }, TILE::TRAP);
+	CreateTile({ tilePos.x + 256, tilePos.y - 896 }, TILE::TRAP);
+	CreateTile({ tilePos.x, tilePos.y - 640 }, TILE::TRAP);
+	CreateTile({ tilePos.x + 256, tilePos.y - 384 }, TILE::TRAP);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::TRAP, 2, 1, true, false);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
@@ -50,7 +50,7 @@ void PigScene::Init()
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, false);
-	tilePos.x += 768;
+	tilePos.x += 640;
 	tilePos.y -= 256;
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 4, 2, true, false);
 	CreateHorizontalTileGroup({ tilePos.x - 512, tilePos.y - 256 }, TILE::FALL, 2, 1, true, false);
@@ -91,16 +91,8 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
 
-	//CreateTile({ 256, 0 }, TILE::TRAP);
-	FollowTrap* ft = new FollowTrap();
-	AddObject(ft, LAYER::PROJECTILE);
-	ft->GetTransform()->SetPosition({ 256, 0 });
-}
-
-void PigScene::Render(HDC _hdc)
-{
-	Scene::Render(_hdc);
-	GET_SINGLE(UIManager)->RenderHP(_hdc);
+	StarLazer* test = new StarLazer({ 500, -50 });
+	AddObject(test, LAYER::TRAP);
 }
 
 void PigScene::CreateTile(Vec2 vec, TILE tileType)
@@ -110,18 +102,18 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 	case TILE::NORMAL:
 		tile = new TileObject;
 		AddObject(tile, LAYER::BACKGROUND);
+		tile->GetTransform()->SetPosition(vec);
 		break;
 	case TILE::TRAP:
-		tile = new TrapTileObject;
-		AddObject(tile, LAYER::TRAP);
+		//tile = new TrapTileObject;
+		//AddObject(tile, LAYER::TRAP);
 		break;
 	case TILE::FALL:
-		tile = new FallTileObject;
-		AddObject(tile, LAYER::TRAP);
+		//tile = new FallTileObject;
+		//AddObject(tile, LAYER::TRAP);
 		break;
 	}
 
-	tile->GetTransform()->SetPosition(vec);
 }
 
 Vec2 PigScene::CreateVerticalTileGroup(Vec2 startVec, TILE tileType, int x, int y, bool isDown, bool isJump = true)
@@ -136,7 +128,7 @@ Vec2 PigScene::CreateVerticalTileGroup(Vec2 startVec, TILE tileType, int x, int 
 		startVec.x = vecX;
 		startVec.y += dirY * 256;
 	}
-	if (isJump) startVec.y += dirY * 256;
+	if (isJump) startVec.y += dirY * 128;
 	return startVec;
 }
 
@@ -152,6 +144,6 @@ Vec2 PigScene::CreateHorizontalTileGroup(Vec2 startVec, TILE tileType, int x, in
 		startVec.y = vecY;
 		startVec.x += dirX * 256;
 	}
-	if (isJump) startVec.x += dirX * 256;
+	if (isJump) startVec.x += dirX * 128;
 	return startVec;
 }

@@ -5,7 +5,7 @@ enum class LAYER
 	BACKGROUND,
 	TRAP,
 	PROJECTILE,
-	// UI
+	UI,
 	PLAYER,
 	END
 };

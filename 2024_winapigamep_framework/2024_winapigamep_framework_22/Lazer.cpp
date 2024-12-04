@@ -2,6 +2,7 @@
 #include "Lazer.h"
 #include "SpriteRenderer.h"
 #include "Collider.h"
+#include "Agent.h"
 
 std::wstring toString(LAZER_DIR dir)
 {
@@ -77,8 +78,14 @@ void Lazer::Render(HDC _hdc)
 	ComponentRender(_hdc);
 }
 
-void Lazer::EnterCollision(Collider* _other)
+void Lazer::StayCollision(Collider* _other)
 {
+	Object* obj = _other->GetOwner();
+	if (obj->GetName() == L"Player")
+	{
+		Agent* agent = dynamic_cast<Agent*>(obj);
+		agent->Hit();
+	}
 }
 
 void Lazer::SetEnable(bool state)
