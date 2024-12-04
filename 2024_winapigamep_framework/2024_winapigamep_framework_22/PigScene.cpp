@@ -56,9 +56,10 @@ void PigScene::Init()
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, false);
 	tilePos.x += 640;
 	tilePos.y -= 256;
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 4, 2, true, false);
-	CreateHorizontalTileGroup({ tilePos.x - 512, tilePos.y - 256 }, TILE::FALL, 2, 1, true, false);
-
+	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
+	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 1, true, false);
+	tilePos = CreateHorizontalTileGroup({ tilePos .x - 512, tilePos.y-256 }, TILE::FALL, 2, 1, true, false);
+	tilePos.y += 256;
 	// Cross
 	Vec2 tilePos2 = { tilePos.x - 256, tilePos.y - 512 };
 	tilePos2 = CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 3, false, false);
@@ -80,15 +81,12 @@ void PigScene::Init()
 	tilePos.y -= 128;
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 1, 1, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);

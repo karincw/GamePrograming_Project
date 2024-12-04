@@ -209,6 +209,7 @@ void Agent::Update()
 			isRun = false;
 			canRolling = false;
 			rollingDir = moveDir;
+			rollingSkillUI->CoolTimeAnimation();
 		}
 		moveDir = moveDir * SPEED * dt;
 
