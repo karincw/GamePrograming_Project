@@ -252,7 +252,7 @@ void Agent::ExitCollision(Collider* _other)
 
 void Agent::Hit()
 {
-	if (!canHit) return;
+	if (!canHit || isRolling) return;
 	isHit = true;
 	canHit = false;
 
