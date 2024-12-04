@@ -19,8 +19,8 @@ void SceneManager::Update()
 {
 	if (m_pCurrentScene == nullptr)
 		return;
-	m_pCurrentScene->LateUpdate();
 	m_pCurrentScene->Update();
+	m_pCurrentScene->LateUpdate();
 }
 
 void SceneManager::Render(HDC _hdc)

@@ -28,7 +28,7 @@ void FallTileObject::FallTile(Object* owner) {
 		};
 
 	GET_SINGLE(TimeManager)->DelayRun(1.0f, func, owner);
-	SetName(L"FallTrap");
+	SetName(L"Tile");
 }
 
 FallTileObject::FallTileObject()

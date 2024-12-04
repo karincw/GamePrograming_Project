@@ -49,6 +49,7 @@ void EndHit(Object* owner)
 void SetMoveToBeforeTile(Object* owner)
 {
 	Agent* agent = dynamic_cast<Agent*>(owner);
+	if (!agent->backUpTile) return;
 
 	Vec2 dir = agent->backUpTile->GetTransform()->GetPosition() - agent->GetTransform()->GetPosition();
 	agent->GetTransform()->Translate(dir);
@@ -130,7 +131,6 @@ void Agent::Update()
 	{
 		SetMoveToBeforeTile(this);
 		Hit();
-		isGroundCheck = true;
 	}
 	if (!isRolling)
 		isGroundCheck = false;
@@ -232,7 +232,7 @@ void Agent::Render(HDC _hdc)
 void Agent::EnterCollision(Collider* _other) //오직 피격만 구현
 {
 	std::wstring name = _other->GetOwner()->GetName();
-	if (name != L"Bullet" && name != L"Lazer" && name != L"Explosion") return;
+	if (name != L"Bullet" && name != L"Explosion") return;
 
 	if (!isRolling)
 		Hit();
@@ -253,6 +253,8 @@ void Agent::ExitCollision(Collider* _other)
 void Agent::Hit()
 {
 	if (!canHit) return;
+	isHit = true;
+	canHit = false;
 
 	Animator* ani = GetComponent<Animator>();
 	ani->StopAnimation();
@@ -270,7 +272,5 @@ void Agent::Hit()
 		//죽었음
 	}
 
-	isHit = true;
-	canHit = false;
 	isRun = false;
 }
