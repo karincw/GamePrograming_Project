@@ -15,7 +15,7 @@ RollingSkillUI::RollingSkillUI()
 
 	SetName(L"RollingSkillUI");
 
-	GetTransform()->SetPosition({ 100, 100 });
+	GetTransform()->SetPosition({ 100, SCREEN_HEIGHT - 100 });
 }
 
 RollingSkillUI::~RollingSkillUI()
@@ -29,11 +29,6 @@ void RollingSkillUI::Update()
 void RollingSkillUI::Render(HDC _hdc)
 {
 	ComponentRender(_hdc);
-}
-
-void RollingSkillUI::MoveUI(Vec2 vec)
-{
-	GetTransform()->Translate(vec);
 }
 
 void RollingSkillUI::EnterCollision(Collider* _other)
