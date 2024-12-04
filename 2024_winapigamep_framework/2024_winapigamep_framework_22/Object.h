@@ -33,6 +33,12 @@ public:
 		m_vecComponents.push_back(com);
 	}
 	template<typename T>
+	void AddComponent(T* compo)
+	{
+		compo->SetOwner(this);
+		m_vecComponents.push_back(compo);
+	}
+	template<typename T>
 	T* GetComponent()
 	{
 		T* component = nullptr;
@@ -43,6 +49,18 @@ public:
 				break;
 		}
 		return component;
+	}
+	template<typename T>
+	std::vector< T*> GetComponents()
+	{
+		std::vector< T*> components = {};
+		for (Component* com : m_vecComponents)
+		{
+			T* compo = dynamic_cast<T*>(com);
+			if (compo)
+				components.push_back(compo);
+		}
+		return components;
 	}
 	Transform* GetTransform()
 	{

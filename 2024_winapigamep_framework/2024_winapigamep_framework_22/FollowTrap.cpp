@@ -4,6 +4,9 @@
 #include "CircleCollider.h"
 #include "Action.h"
 #include "TimeManager.h"
+#include "SpriteRenderer.h"
+#include "Animator.h"
+#include "Animation.h"
 
 void DetectColliderEnter(Collider* _other, Object* owner)
 {
@@ -12,9 +15,7 @@ void DetectColliderEnter(Collider* _other, Object* owner)
 
 	FollowTrap* ft = dynamic_cast<FollowTrap*>(owner);
 	ft->currentTarget = obj;
-}
-void DetectColliderStay(Collider* _other, Object* owner)
-{
+	ft->GetComponent<Animator>()->PlayAnimation(L"warning", true);
 
 }
 void DetectColliderExit(Collider* _other, Object* owner)
@@ -24,18 +25,11 @@ void DetectColliderExit(Collider* _other, Object* owner)
 
 	FollowTrap* ft = dynamic_cast<FollowTrap*>(owner);
 	ft->currentTarget = nullptr;
+	ft->GetComponent<Animator>()->PlayAnimation(L"basic", false);
 }
 void ColliderEnter(Collider* _other, Object* owner)
 {
-
-}
-void ColliderStay(Collider* _other, Object* owner)
-{
-
-}
-void ColliderExit(Collider* _other, Object* owner)
-{
-
+	std::cout << "´êÀ½";
 }
 
 void FollowTrap::Accel()
@@ -55,7 +49,7 @@ void FollowTrap::Accel()
 	Vec2 midDir = (targetDir + moveDir);
 	midDir.Normalize();
 
-	moveDir = (targetDir + moveDir * 15);
+	moveDir = (targetDir + moveDir * 12);
 
 	if (moveDir.Length() == 0) moveDir = targetDir;
 
@@ -67,8 +61,6 @@ void FollowTrap::Accel()
 	{
 		Deceleration();
 	}
-
-	std::cout << moveDir.x << " " << moveDir.y << "\n";
 }
 
 FollowTrap::FollowTrap()
@@ -76,22 +68,26 @@ FollowTrap::FollowTrap()
 	, currentTarget(nullptr)
 	, moveDir({ 0,0 })
 {
+	GetTransform()->SetScale({ 40, 65 });
+	Animator* ani = new Animator();
+	AddComponent<Animator>(ani);
+	ani->CreateTexture(L"Texture\\FollowTrap.bmp", L"FollowTrap_sheet");
+	ani->CreateAnimation(L"basic", Vec2(0, 0), Vec2(16, 26), Vec2(0, 0), 1, 0.1f, false);
+	ani->CreateAnimation(L"warning", Vec2(0, 0), Vec2(16, 26), Vec2(16, 0), 2, 0.25f, false);
 
-	AddComponent<CircleCollider>();
-	CircleCollider* circleCol1 = GetComponent<CircleCollider>();
-	circleCol1->collisionEnterEvent->Insert(ColliderEnter);
-	circleCol1->collisionStayEvent->Insert(ColliderStay);
-	circleCol1->collisionExitEvent->Insert(ColliderExit);
+	CircleCollider* col = new CircleCollider();
+	CircleCollider* detectCol = new CircleCollider();
 
-	AddComponent<CircleCollider>();
-	CircleCollider* circleCol2 = GetComponent<CircleCollider>();
-	circleCol2->collisionEnterEvent->Insert(DetectColliderEnter);
-	circleCol2->collisionStayEvent->Insert(DetectColliderStay);
-	circleCol2->collisionExitEvent->Insert(DetectColliderExit);
+	col->collisionEnterEvent->Insert(ColliderEnter);
+	col->SetRadius(32);
+	AddComponent<CircleCollider>(col);
 
-	circleCol1->SetRadius(64);
-	circleCol2->SetRadius(256);
+	detectCol->collisionEnterEvent->Insert(DetectColliderEnter);
+	detectCol->collisionExitEvent->Insert(DetectColliderExit);
+	AddComponent<CircleCollider>(detectCol);
+	detectCol->SetRadius(256);
 
+	ani->PlayAnimation(L"basic", false);
 }
 
 FollowTrap::~FollowTrap()

@@ -52,7 +52,6 @@ void CollisionManager::CheckReset()
 	// 메모리 초기화
 	memset(m_arrLayer, 0, sizeof(UINT) * (UINT)LAYER::END);
 }
-
 void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 {
 	std::shared_ptr<Scene> pCurrentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
@@ -61,65 +60,75 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 	map<ULONGLONG, bool>::iterator iter;
 	for (size_t i = 0; i < vecLeftLayer.size(); ++i)
 	{
-		Collider* pLeftCollider = vecLeftLayer[i]->GetComponent<Collider>();
+		std::vector<Collider*> pLeftColliders = vecLeftLayer[i]->GetComponents<Collider>();
 		// 충돌체 없는 경우
-		if (nullptr == pLeftCollider || !pLeftCollider->GetEnable())
+		if (pLeftColliders.empty())
 			continue;
+
 		for (size_t j = 0; j < vecRightLayer.size(); j++)
 		{
-			Collider* pRightCollider = vecRightLayer[j]->GetComponent<Collider>();
+			std::vector<Collider*> pRightColliders = vecRightLayer[j]->GetComponents<Collider>();
 			// 충돌체가 없거나, 자기자신과의 충돌인 경우
-			if (nullptr == pRightCollider || vecLeftLayer[i] == vecRightLayer[j])
+			if (pRightColliders.empty() || vecLeftLayer[i] == vecRightLayer[j])
 				continue;
 
 			COLLIDER_ID colliderID; // 두 충돌체로만 만들 수 있는 ID
-			colliderID.left_ID = pLeftCollider->GetID();
-			colliderID.right_ID = pRightCollider->GetID();
 
-			iter = m_mapCollisionInfo.find(colliderID.ID);
-			// 이전 프레임 충돌한 적 없다.
-			if (iter == m_mapCollisionInfo.end())
+			for (auto leftCol : pLeftColliders)
 			{
-				// 충돌 정보가 미등록된 상태인 경우 등록(충돌하지 않았다로)
-				m_mapCollisionInfo.insert({ colliderID.ID, false });
-				//m_mapCollisionInfo[colliderID.ID] = false;
-				iter = m_mapCollisionInfo.find(colliderID.ID);
-			}
+				if (!leftCol->GetEnable()) continue;
+				for (auto rightCol : pRightColliders)
+				{
+					if (!rightCol->GetEnable()) continue;
+					colliderID.left_ID = leftCol->GetID();
+					colliderID.right_ID = rightCol->GetID();
 
-			if (IsCollision(pLeftCollider, pRightCollider))
-			{
-				// 이전에도 충돌중
-				if (iter->second)
-				{
-					if (vecLeftLayer[i]->GetIsDead() || vecRightLayer[j]->GetIsDead())
+					iter = m_mapCollisionInfo.find(colliderID.ID);
+					// 이전 프레임 충돌한 적 없다.
+					if (iter == m_mapCollisionInfo.end())
 					{
-						pLeftCollider->ExitCollision(pRightCollider);
-						pRightCollider->ExitCollision(pLeftCollider);
-						iter->second = false;
+						// 충돌 정보가 미등록된 상태인 경우 등록(충돌하지 않았다로)
+						m_mapCollisionInfo.insert({ colliderID.ID, false });
+						//m_mapCollisionInfo[colliderID.ID] = false;
+						iter = m_mapCollisionInfo.find(colliderID.ID);
 					}
-					else
+
+					if (IsCollision(leftCol, rightCol))
 					{
-						pLeftCollider->StayCollision(pRightCollider);
-						pRightCollider->StayCollision(pLeftCollider);
+						// 이전에도 충돌중
+						if (iter->second)
+						{
+							if (vecLeftLayer[i]->GetIsDead() || vecRightLayer[j]->GetIsDead())
+							{
+								leftCol->ExitCollision(rightCol);
+								rightCol->ExitCollision(leftCol);
+								iter->second = false;
+							}
+							else
+							{
+								leftCol->StayCollision(rightCol);
+								rightCol->StayCollision(leftCol);
+							}
+						}
+						else // 이전에 충돌 x
+						{
+							if (!vecLeftLayer[i]->GetIsDead() && !vecRightLayer[j]->GetIsDead())
+							{
+								leftCol->EnterCollision(rightCol);
+								rightCol->EnterCollision(leftCol);
+								iter->second = true;
+							}
+						}
 					}
-				}
-				else // 이전에 충돌 x
-				{
-					if (!vecLeftLayer[i]->GetIsDead() && !vecRightLayer[j]->GetIsDead())
+					else // 충돌 안하네?
 					{
-						pLeftCollider->EnterCollision(pRightCollider);
-						pRightCollider->EnterCollision(pLeftCollider);
-						iter->second = true;
+						if (iter->second) // 근데 이전에 충돌중
+						{
+							leftCol->ExitCollision(rightCol);
+							rightCol->ExitCollision(leftCol);
+							iter->second = false;
+						}
 					}
-				}
-			}
-			else // 충돌 안하네?
-			{
-				if (iter->second) // 근데 이전에 충돌중
-				{
-					pLeftCollider->ExitCollision(pRightCollider);
-					pRightCollider->ExitCollision(pLeftCollider);
-					iter->second = false;
 				}
 			}
 		}
@@ -151,7 +160,7 @@ bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 		Vec2 rectPos = square->GetTransform()->GetPosition() + square->GetComponent<Collider>()->GetOffSetPos();
 		Vec2 rectSize = square->GetComponent<Collider>()->GetSize();
 		Vec2 circlePos = circle->GetTransform()->GetPosition() + circle->GetComponent<CircleCollider>()->GetOffSetPos();
-		float circleRad = circle->GetComponent<CircleCollider>()->GetRadius();
+		float circleRad = circleLeft->GetRadius();
 
 		// 2. 사각형의 경계를 구해올겁니다.
 		float left = rectPos.x - (rectSize.x / 2);

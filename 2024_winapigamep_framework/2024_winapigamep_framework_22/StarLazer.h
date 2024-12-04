@@ -16,9 +16,10 @@ public:
 public:
 	void OpenHorizontal();
 	void OpenVertical();
-
+	void CloseLazer();
+	bool isHorizontal = true;
+	wstring idx = L"2";
 private:
 	Lazer* lazers[4];
-	bool isHorizontal = true;
 };
 
