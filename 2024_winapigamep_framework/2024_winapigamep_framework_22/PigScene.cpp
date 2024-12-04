@@ -91,7 +91,8 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
 
-	StarLazer* test = new StarLazer({ 500, -50 });
+	FollowTrap* test = new FollowTrap();
+	test->GetTransform()->SetPosition({ 500, -50 });
 	AddObject(test, LAYER::TRAP);
 }
 
