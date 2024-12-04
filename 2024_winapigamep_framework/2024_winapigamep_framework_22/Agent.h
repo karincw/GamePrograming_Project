@@ -3,6 +3,7 @@
 template <typename T>
 class Action;
 class Camera;
+class RollingSkillUI;
 
 class Agent :
 	public Object
@@ -28,6 +29,7 @@ public:
 
 	Object* backUpTile;
 	Camera* cam;
+	RollingSkillUI* rollingSkillUI;
 private:
 	bool isRight;
 	Vec2 rollingDir;

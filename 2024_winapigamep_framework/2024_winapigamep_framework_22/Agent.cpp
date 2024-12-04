@@ -13,6 +13,7 @@
 #include "Action.h"
 #include "Object.h"
 #include "FallTileObject.h"
+#include "RollingSkillUI.h"
 
 #define SPEED 350
 #define ROLLING_SPEED 600
@@ -52,6 +53,7 @@ void SetMoveToBeforeTile(Object* owner)
 	Vec2 dir = agent->backUpTile->GetTransform()->GetPosition() - agent->GetTransform()->GetPosition();
 	agent->GetTransform()->Translate(dir);
 	agent->cam->GetTransform()->Translate(dir);
+	agent->rollingSkillUI->GetTransform()->Translate(dir);
 }
 
 #pragma endregion
@@ -104,7 +106,16 @@ Agent::Agent()
 	col->SetSize({ 32,64 });
 
 	col->SetOffSetPos({ 0,16 });
-	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
+	SceneManager* sm = GET_SINGLE(SceneManager);
+	
+	cam = sm->GetCurrentScene()->GetCamera();
+	
+	for (auto s : sm->GetCurrentScene()->GetLayerObjects(LAYER::UI)) {
+		auto roll = dynamic_cast<RollingSkillUI*>(s);
+		if (roll) {
+			rollingSkillUI = roll;
+		}
+	}
 
 	SetName(L"Player");
 	isGroundCheck = true;
@@ -200,15 +211,16 @@ void Agent::Update()
 			rollingDir = moveDir;
 		}
 		moveDir = moveDir * SPEED * dt;
-		GetTransform()->Translate(moveDir);
-		cam->GetTransform()->Translate(moveDir);
+
 	}
 	else if (!isHit && isRolling)
 	{
 		moveDir = rollingDir * ROLLING_SPEED * dt;
-		GetTransform()->Translate(moveDir);
-		cam->GetTransform()->Translate(moveDir);
 	}
+
+	GetTransform()->Translate(moveDir);
+	cam->GetTransform()->Translate(moveDir);
+	rollingSkillUI->GetTransform()->Translate(moveDir);
 
 }
 

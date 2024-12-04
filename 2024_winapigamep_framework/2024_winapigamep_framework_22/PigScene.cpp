@@ -8,7 +8,8 @@
 #include "FallTileObject.h"
 #include "SpriteRenderer.h"
 #include "CollisionManager.h"
-
+#include "UIManager.h"
+#include "RollingSkillUI.h"
 
 void PigScene::Init()
 {
@@ -18,12 +19,17 @@ void PigScene::Init()
 	cm->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
 	cm->CheckLayer(LAYER::BACKGROUND, LAYER::PLAYER);
 
+	RollingSkillUI* rollingSkill = new RollingSkillUI;
+	AddObject(rollingSkill, LAYER::UI);
+
 	Agent* agent = new Agent;
 	AddObject(agent, LAYER::PLAYER);
 	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
 
-	Vec2 tilePos = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2};
 
+#pragma region Tile Create
+
+	Vec2 tilePos = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 10, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
@@ -54,7 +60,7 @@ void PigScene::Init()
 	CreateHorizontalTileGroup({ tilePos.x - 512, tilePos.y - 256 }, TILE::FALL, 2, 1, true, false);
 
 	// Cross
-	Vec2 tilePos2 = { tilePos.x - 256, tilePos.y - 512};
+	Vec2 tilePos2 = { tilePos.x - 256, tilePos.y - 512 };
 	tilePos2 = CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 3, false, false);
 	tilePos2.y += 512;
 	tilePos2.x += 512;
@@ -64,7 +70,7 @@ void PigScene::Init()
 	tilePos2.y -= 768;
 	tilePos2.x += 512;
 	tilePos2 = CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 2, 2, true, false);
-	
+
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 11, 2, true, false);
 	tilePos.x += 512;
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
@@ -89,7 +95,17 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
 
+#pragma endregion
+
 	CreateTile({ 256, 0 }, TILE::FALL);
+
+
+}
+
+void PigScene::Render(HDC _hdc)
+{
+	Scene::Render(_hdc);
+	GET_SINGLE(UIManager)->RenderHP(_hdc);
 }
 
 void PigScene::CreateTile(Vec2 vec, TILE tileType)
