@@ -6,6 +6,14 @@
 #include "Scene.h"
 #include "InputManager.h"
 
+void PlayLazer(Object* owner)
+{
+	StarLazer* sl = dynamic_cast<StarLazer*>(owner);
+
+	
+
+}
+
 StarLazer::StarLazer(Vec2 position)
 {
 	GetTransform()->SetScale(Vec2(1360, 1360));
@@ -14,8 +22,7 @@ StarLazer::StarLazer(Vec2 position)
 	AddComponent<Animator>();
 	Animator* animator = GetComponent<Animator>();
 	animator->CreateTexture(L"Texture\\StarLazer.bmp", L"StarLazer_Sheet");
-	animator->CreateAnimation(L"StarLazer", Vec2(0, 0), Vec2(512, 512), Vec2(0, 0), 1, 1.0f);
-	animator->CreateAnimation(L"StarLazer_rot", Vec2(512, 0), Vec2(512, 512), Vec2(0, 0), 1, 1.0f);
+	animator->CreateAnimation(L"StarLazer", Vec2(0, 0), Vec2(512, 512), Vec2(512, 0), 2, 0.5f);
 
 	Lazer* l = new Lazer(LAZER_DIR::Left, GetTransform()->GetScale());
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(l, LAYER::PROJECTILE);
@@ -42,27 +49,10 @@ StarLazer::StarLazer(Vec2 position)
 
 StarLazer::~StarLazer()
 {
-
 }
 
 void StarLazer::Update()
 {
-	if (GET_KEYDOWN(KEY_TYPE::LEFT))
-	{
-		lazers[0]->SetEnable(true);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::RIGHT))
-	{
-		lazers[1]->SetEnable(true);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::UP))
-	{
-		lazers[2]->SetEnable(true);
-	}
-	if (GET_KEYDOWN(KEY_TYPE::DOWN))
-	{
-		lazers[3]->SetEnable(true);
-	}
 }
 
 void StarLazer::Render(HDC _hdc)
@@ -80,4 +70,19 @@ void StarLazer::StayCollision(Collider* _other)
 
 void StarLazer::ExitCollision(Collider* _other)
 {
+}
+
+void StarLazer::OpenHorizontal()
+{
+	lazers[0]->SetEnable(true);
+	lazers[1]->SetEnable(true);
+	lazers[2]->SetEnable(false);
+	lazers[3]->SetEnable(false);
+}
+void StarLazer::OpenVertical()
+{
+	lazers[0]->SetEnable(false);
+	lazers[1]->SetEnable(false);
+	lazers[2]->SetEnable(true);
+	lazers[3]->SetEnable(true);
 }

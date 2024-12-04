@@ -3,6 +3,7 @@
 #include "SpriteRenderer.h"
 #include "Transform.h"
 #include "Collider.h"
+#include "Agent.h"
 
 TileObject::TileObject()
 {
@@ -12,7 +13,7 @@ TileObject::TileObject()
 
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
-	col->SetSize({ 256,256 });
+	col->SetSize({ 256, 256 });
 
 	SetName(L"Tile");
 }
@@ -36,6 +37,12 @@ void TileObject::EnterCollision(Collider* _other)
 
 void TileObject::StayCollision(Collider* _other)
 {
+	Object* obj = _other->GetOwner();
+	if (obj->GetName() == L"Player")
+	{
+		Agent* pObj = dynamic_cast<Agent*>(obj);
+		pObj->backUpTile = this;
+	}
 }
 
 void TileObject::ExitCollision(Collider* _other)

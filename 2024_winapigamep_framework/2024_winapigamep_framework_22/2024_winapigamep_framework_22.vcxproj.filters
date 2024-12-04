@@ -35,14 +35,20 @@
     <Filter Include="Engine\07. Module">
       <UniqueIdentifier>{ec499769-3097-4d06-8abb-b25ff4a1a933}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03. Object\Don%27tUse">
-      <UniqueIdentifier>{57c6e4bb-0a27-4e5f-8414-c953264511b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\04. Scene\Don%27tUse">
-      <UniqueIdentifier>{e651512f-225e-442c-bb88-2dd5cf3366de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\06. Component\RenderCompo">
       <UniqueIdentifier>{91e78eb3-f099-4a00-a947-bff097c7092b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Projectiles">
+      <UniqueIdentifier>{b88c414b-1ea5-4bec-ac5f-72cdd8238130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Traps">
+      <UniqueIdentifier>{7225b386-0785-44ed-9f95-80ff09558c98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\CoreObject">
+      <UniqueIdentifier>{6fb25b24-1ef2-4704-99ff-6f54db3a6dff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\06. Component\RigidCompo">
+      <UniqueIdentifier>{182e0c4e-4d00-4559-89a9-db3ea8b165b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +106,6 @@
     <ClInclude Include="Component.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
     <ClInclude Include="GDISelector.h">
       <Filter>Engine\07. Module</Filter>
     </ClInclude>
@@ -112,29 +115,8 @@
     <ClInclude Include="EventManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Rigidbody2D.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Engine\03. Object\Don%27tUse</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\03. Object\Don%27tUse</Filter>
-    </ClInclude>
-    <ClInclude Include="Agent.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Engine\04. Scene\Don%27tUse</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Engine\04. Scene\Don%27tUse</Filter>
     </ClInclude>
     <ClInclude Include="BishojoObject.h">
       <Filter>Engine\03. Object</Filter>
@@ -151,41 +133,11 @@
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Engine\06. Component\RenderCompo</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="TileObject.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="PigScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="BishojoScene.h">
       <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicTower.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollider.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="TrapTileObject.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Explosion.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="FallTileObject.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="StarLazer.h">
-      <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>Engine\02. Manager</Filter>
@@ -193,8 +145,53 @@
     <ClInclude Include="RenderUtils.h">
       <Filter>Engine\07. Module</Filter>
     </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Engine\03. Object\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Engine\03. Object\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Engine\03. Object\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClInclude>
     <ClInclude Include="Lazer.h">
-      <Filter>Engine\03. Object</Filter>
+      <Filter>Engine\03. Object\Projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="FallTileObject.h">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicTower.h">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="StarLazer.h">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapTileObject.h">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TileObject.h">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Engine\06. Component\RigidCompo</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Engine\06. Component\RigidCompo</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody2D.h">
+      <Filter>Engine\06. Component\RigidCompo</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowTrap.h">
+      <Filter>Engine\03. Object\Traps</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,9 +241,6 @@
     <ClCompile Include="Component.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
     <ClCompile Include="GDISelector.cpp">
       <Filter>Engine\07. Module</Filter>
     </ClCompile>
@@ -255,30 +249,6 @@
     </ClCompile>
     <ClCompile Include="EventManager.cpp">
       <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Rigidbody2D.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Engine\03. Object\Don%27tUse</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Engine\03. Object\Don%27tUse</Filter>
-    </ClCompile>
-    <ClCompile Include="Agent.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Engine\04. Scene\Don%27tUse</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Engine\04. Scene\Don%27tUse</Filter>
     </ClCompile>
     <ClCompile Include="BishojoObject.cpp">
       <Filter>Engine\03. Object</Filter>
@@ -292,41 +262,11 @@
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Engine\06. Component\RenderCompo</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TileObject.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="PigScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="BishojoScene.cpp">
       <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicTower.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollider.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Explosion.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="FallTileObject.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="StarLazer.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TrapTileObject.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Engine\02. Manager</Filter>
@@ -334,8 +274,59 @@
     <ClCompile Include="RenderUtils.cpp">
       <Filter>Engine\07. Module</Filter>
     </ClCompile>
-    <ClCompile Include="Lazer.cpp">
-      <Filter>Engine\03. Object</Filter>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Engine\03. Object\Projectiles</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Engine\03. Object\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Engine\03. Object\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Lazer.cpp">
+      <Filter>Engine\03. Object\Projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="FallTileObject.cpp">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicTower.cpp">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="StarLazer.cpp">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapTileObject.cpp">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClCompile>
+    <ClCompile Include="TileObject.cpp">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Engine\03. Object\CoreObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Engine\06. Component\RigidCompo</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Engine\06. Component\RigidCompo</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody2D.cpp">
+      <Filter>Engine\06. Component\RigidCompo</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowTrap.cpp">
+      <Filter>Engine\03. Object\Traps</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

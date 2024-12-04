@@ -12,15 +12,15 @@ void SceneManager::Init()
 	RegisterScene(L"BishojoScene",std::make_shared<BishojoScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"BishojoScene");
+	LoadScene(L"PigScene");
 }
 
 void SceneManager::Update()
 {
 	if (m_pCurrentScene == nullptr)
 		return;
-	m_pCurrentScene->Update();
 	m_pCurrentScene->LateUpdate();
+	m_pCurrentScene->Update();
 }
 
 void SceneManager::Render(HDC _hdc)

@@ -11,6 +11,8 @@
 #include "Camera.h"
 #include "UIManager.h"
 #include "Action.h"
+#include "Object.h"
+#include "FallTileObject.h"
 
 #define SPEED 350
 #define ROLLING_SPEED 600
@@ -22,6 +24,7 @@ void EndRolling(Object* owner)
 {
 	Agent* agent = dynamic_cast<Agent*>(owner);
 	agent->isRolling = false;
+	agent->isGroundCheck = false;
 
 	auto func = [](Object* obj) {
 		Agent* agent = dynamic_cast<Agent*>(obj);
@@ -42,6 +45,14 @@ void EndHit(Object* owner)
 
 	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
 }
+void SetMoveToBeforeTile(Object* owner)
+{
+	Agent* agent = dynamic_cast<Agent*>(owner);
+
+	Vec2 dir = agent->backUpTile->GetTransform()->GetPosition() - agent->GetTransform()->GetPosition();
+	agent->GetTransform()->Translate(dir);
+	agent->cam->GetTransform()->Translate(dir);
+}
 
 #pragma endregion
 
@@ -56,10 +67,13 @@ bool ApplyDamage()
 	return true;
 }
 
+
 Agent::Agent()
 	: isRight(true), isRun(false)
 	, isRolling(false), canRolling(true)
 	, isHit(false), canHit(true)
+	, backUpTile(nullptr)
+	, isGroundCheck(true)
 {
 	GetTransform()->SetScale({ 128, 128 });
 
@@ -93,6 +107,7 @@ Agent::Agent()
 	cam = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera();
 
 	SetName(L"Player");
+	isGroundCheck = true;
 }
 Agent::~Agent()
 {
@@ -100,6 +115,15 @@ Agent::~Agent()
 
 void Agent::Update()
 {
+	if (!isGroundCheck)
+	{
+		SetMoveToBeforeTile(this);
+		Hit();
+		isGroundCheck = true;
+	}
+	if (!isRolling)
+		isGroundCheck = false;
+
 	float dt = GET_SINGLE(TimeManager)->GetDT();
 	Vec2 moveDir = { 0, 0 };
 	if (GET_KEY(KEY_TYPE::W))
@@ -193,38 +217,48 @@ void Agent::Render(HDC _hdc)
 	ComponentRender(_hdc);
 }
 
-void Agent::EnterCollision(Collider* _other)
+void Agent::EnterCollision(Collider* _other) //오직 피격만 구현
 {
-	if (_other->GetOwner()->GetName() != L"Bullet") return;
+	std::wstring name = _other->GetOwner()->GetName();
+	if (name != L"Bullet" && name != L"Lazer" && name != L"Explosion") return;
 
-	if (canHit && !isRolling)
-	{
-		Animator* ani = GetComponent<Animator>();
-		ani->StopAnimation();
-
-		std::wstring animationName = L"Character_Hit";
-		if (isRight)
-			animationName += L"_r";
-		else
-			animationName += L"_l";
-
-		ani->PlayAnimation(animationName, false);
-		
-		if (!ApplyDamage())
-		{
-			//죽었음
-		}
-		
-		isHit = true;
-		canHit = false;
-		isRun = false;
-	}
+	if (!isRolling)
+		Hit();
 }
 
 void Agent::StayCollision(Collider* _other)
 {
+	if (_other->GetOwner()->GetName() == L"Tile")
+	{
+		isGroundCheck = true;
+	}
 }
 
 void Agent::ExitCollision(Collider* _other)
 {
+}
+
+void Agent::Hit()
+{
+	if (!canHit) return;
+
+	Animator* ani = GetComponent<Animator>();
+	ani->StopAnimation();
+
+	std::wstring animationName = L"Character_Hit";
+	if (isRight)
+		animationName += L"_r";
+	else
+		animationName += L"_l";
+
+	ani->PlayAnimation(animationName, false);
+
+	if (!ApplyDamage())
+	{
+		//죽었음
+	}
+
+	isHit = true;
+	canHit = false;
+	isRun = false;
 }

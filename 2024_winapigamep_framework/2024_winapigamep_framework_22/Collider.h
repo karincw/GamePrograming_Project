@@ -1,5 +1,10 @@
 #pragma once
 #include "Component.h"
+
+template<typename t, typename... Types>
+class VariadicAction;
+class Object;
+
 class Collider : public Component
 {
 public:
@@ -26,6 +31,10 @@ public:
 	{
 		return m_vLatePos;
 	}
+public:
+	VariadicAction<Collider*, Object*>* collisionEnterEvent;
+	VariadicAction<Collider*, Object*>* collisionStayEvent;
+	VariadicAction<Collider*, Object*>* collisionExitEvent;
 protected:
 	bool m_showDebug = false;
 	UINT m_ID; // 충돌체 고유 ID값

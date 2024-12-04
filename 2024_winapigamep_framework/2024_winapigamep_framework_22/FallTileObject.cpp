@@ -48,6 +48,7 @@ FallTileObject::FallTileObject()
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
 	col->SetSize({ 256,256 });
+	SetName(L"Tile");
 }
 
 FallTileObject::~FallTileObject()
