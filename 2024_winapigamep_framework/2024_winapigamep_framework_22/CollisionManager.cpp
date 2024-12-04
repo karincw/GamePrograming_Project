@@ -76,8 +76,10 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 
 			for (auto leftCol : pLeftColliders)
 			{
+				if (!leftCol->GetEnable()) continue;
 				for (auto rightCol : pRightColliders)
 				{
+					if (!rightCol->GetEnable()) continue;
 					colliderID.left_ID = leftCol->GetID();
 					colliderID.right_ID = rightCol->GetID();
 
