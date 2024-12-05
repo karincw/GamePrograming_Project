@@ -67,6 +67,7 @@ void PigScene::Init()
 	CreateTrap({ tilePos.x - 256, tilePos.y + 768 }, ATKTRAP::TOWER);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 4, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
+	CreateTrap({ tilePos.x - 256, tilePos.y - 348 }, ATKTRAP::FOLLOW);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
 	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, false);
 	tilePos.x += 640;
@@ -81,24 +82,27 @@ void PigScene::Init()
 	tilePos2.y += 512;
 	tilePos2.x += 512;
 	CreateTile({ tilePos2.x - 256, tilePos2.y -256}, TILE::TRAP);
+	CreateTrap({ tilePos2.x - 256, tilePos2.y}, ATKTRAP::FOLLOW);
 	CreateTile( tilePos2, TILE::TRAP);
 	CreateTrap( { tilePos2.x+512, tilePos2.y+256 }, ATKTRAP::TOWER);
 	CreateTrap( { tilePos2.x+768, tilePos2.y+256 }, ATKTRAP::TOWER);
-	CreateTrap( { tilePos2.x+1280, tilePos2.y+256 }, ATKTRAP::TOWER);
+	CreateTrap({ tilePos2.x + 1280, tilePos2.y - 256 }, ATKTRAP::FOLLOW);
 	CreateTrap( { tilePos2.x+1536, tilePos2.y+256 }, ATKTRAP::TOWER);
 	CreateTile({ tilePos2.x + 768, tilePos2.y }, TILE::TRAP);
 	CreateVerticalTileGroup({ tilePos2.x + 1024, tilePos2.y }, TILE::TRAP, 1, 2, false, false);
 	tilePos2 = CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 10, 2, true, false);
 	CreateTile({ tilePos2.x - 512, tilePos2.y }, TILE::TRAP);
+	CreateTrap({ tilePos2.x - 256, tilePos2.y + 256 }, ATKTRAP::FOLLOW);
 	tilePos2.y -= 256;
 	tilePos2 = CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 5, true, false);
+	CreateTrap({ tilePos2.x + 512, tilePos2.y - 512 }, ATKTRAP::FOLLOW);
 	tilePos2.y -= 768;
 	tilePos2.x += 512;
 	tilePos2 = CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 2, 2, true, false);
 
 	CreateTile({ tilePos.x + 512, tilePos.y - 256 }, TILE::TRAP);
 	CreateTile({ tilePos.x + 768, tilePos.y }, TILE::TRAP);
-	CreateHorizontalTileGroup({ tilePos.x + 1280, tilePos.y }, TILE::TRAP, 2, 1, true, false);
+	CreateHorizontalTileGroup({ tilePos.x + 1536, tilePos.y }, TILE::TRAP, 2, 1, true, false);
 	CreateTrap({ tilePos.x + 256, tilePos.y + 256 }, ATKTRAP::TOWER);
 	CreateTrap({ tilePos.x + 512, tilePos.y + 256 }, ATKTRAP::TOWER);
 	CreateTrap({ tilePos.x + 1280, tilePos.y + 256 }, ATKTRAP::TOWER);
