@@ -25,6 +25,7 @@ void FallTileObject::FallTile(Object* owner) {
 		auto func2 = [](Object* obj) {
 			FallTileObject* tile = dynamic_cast<FallTileObject*>(obj);
 			Animator* ani = tile->GetComponent<Animator>();
+			ani->StopAnimation();
 			tile->isEnter = false;
 			ani->PlayAnimation(L"FallTile_Idle", false);
 			tile->GetComponent<Collider>()->SetEnable(true);
