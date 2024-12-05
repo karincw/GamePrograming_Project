@@ -75,6 +75,10 @@ void FallTileObject::Render(HDC _hdc)
 
 void FallTileObject::EnterCollision(Collider* _other)
 {
+}
+
+void FallTileObject::StayCollision(Collider* _other)
+{
 	if (_other->GetOwner()->GetName() == L"Player" && !isEnter) {
 		isEnter = true;
 		Animator* ani = GetComponent<Animator>();
@@ -82,10 +86,6 @@ void FallTileObject::EnterCollision(Collider* _other)
 		ani->PlayAnimation(L"FallTile_Warning", true);
 		FallTile(this);
 	}
-}
-
-void FallTileObject::StayCollision(Collider* _other)
-{
 }
 
 void FallTileObject::ExitCollision(Collider* _other)
