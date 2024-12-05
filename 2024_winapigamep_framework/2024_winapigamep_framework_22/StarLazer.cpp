@@ -42,7 +42,7 @@ StarLazer::StarLazer(Vec2 position)
 	Animator* animator = GetComponent<Animator>();
 	animator->CreateTexture(L"Texture\\StarLazer.bmp", L"StarLazer_Sheet");
 	animator->CreateAnimation(L"StarLazer1", Vec2(0, 0), Vec2(512, 512), Vec2(512, 0), 2, 1);
-	animator->CreateAnimation(L"StarLazer2", Vec2(0, 0), Vec2(512, 512), Vec2(512, 0), 2, 1);
+	animator->CreateAnimation(L"StarLazer2", Vec2(1024, 0), Vec2(512, 512), Vec2(512, 0), 2, 1);
 
 	Lazer* l = new Lazer(LAZER_DIR::Left, GetTransform()->GetScale());
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(l, LAYER::PROJECTILE);
