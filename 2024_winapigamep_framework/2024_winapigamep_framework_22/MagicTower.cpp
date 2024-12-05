@@ -46,7 +46,7 @@ void MagicTower::Render(HDC _hdc)
 
 void MagicTower::Fire()
 {
-	Bullet* bullet = new Bullet(L"");
+	Bullet* bullet = new Bullet();
 
 	Transform* trm = bullet->GetTransform();
 	trm->SetPosition(GetTransform()->GetPosition() + Vec2(0, -16));
@@ -63,8 +63,7 @@ void MagicTower::Fire()
 	dirVec = pPlayer->GetTransform()->GetPosition() + Vec2(0, -16) - GetTransform()->GetPosition();
 
 	bullet->SetDir(dirVec);
-	bullet->SetSpeed(750);
-	bullet->SetName(L"Bullet");
+	bullet->SetSpeed(1250);
 
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(bullet, LAYER::PROJECTILE);
 }

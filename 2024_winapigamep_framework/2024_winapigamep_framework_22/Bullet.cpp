@@ -3,12 +3,13 @@
 #include "Collider.h"
 #include "SpriteRenderer.h"
 
-Bullet::Bullet(std::wstring t)
+Bullet::Bullet()
 {
 	GetTransform()->SetScale(Vec2(22, 22));
 	GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\Bullet_Red.bmp", L"Bullet_Red");
 
 	GetComponent<Collider>()->SetSize(Vec2(32, 32));
+	SetName(L"Bullet");
 }
 
 Bullet::~Bullet()

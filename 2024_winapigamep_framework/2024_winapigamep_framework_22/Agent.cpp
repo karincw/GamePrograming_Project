@@ -212,16 +212,19 @@ void Agent::Update()
 			rollingSkillUI->CoolTimeAnimation();
 		}
 		moveDir = moveDir * SPEED * dt;
+		GetTransform()->Translate(moveDir);
+		cam->GetTransform()->Translate(moveDir);
+		rollingSkillUI->GetTransform()->Translate(moveDir);
 
 	}
 	else if (!isHit && isRolling)
 	{
 		moveDir = rollingDir * ROLLING_SPEED * dt;
+		GetTransform()->Translate(moveDir);
+		cam->GetTransform()->Translate(moveDir);
+		rollingSkillUI->GetTransform()->Translate(moveDir);
 	}
 
-	GetTransform()->Translate(moveDir);
-	cam->GetTransform()->Translate(moveDir);
-	rollingSkillUI->GetTransform()->Translate(moveDir);
 
 }
 

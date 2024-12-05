@@ -4,7 +4,7 @@ class Bullet :
 	public Projectile
 {
 public:
-	Bullet(std::wstring t);
+	Bullet();
 	~Bullet();
 public:
 	void Update() override;
