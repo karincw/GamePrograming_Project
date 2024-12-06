@@ -13,6 +13,7 @@
 #include "MagicTower.h"
 #include "StarLazer.h"
 #include "FollowTrap.h"
+#include "Button.h"
 
 void PigScene::Init()
 {
@@ -76,9 +77,11 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 1, true, false);
 	tilePos = CreateHorizontalTileGroup({ tilePos .x - 512, tilePos.y-256 }, TILE::FALL, 2, 1, true, false);
 	tilePos.y += 256;
+	CreateTile({ tilePos.x - 256, tilePos.y}, TILE::BUTTON);
 	// Cross
 	Vec2 tilePos2 = { tilePos.x - 256, tilePos.y - 512 };
 	tilePos2 = CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 3, false, false);
+	CreateTile({ tilePos.x, tilePos.y - 256 }, TILE::BUTTON);
 	tilePos2.y += 512;
 	tilePos2.x += 512;
 	CreateTile({ tilePos2.x - 256, tilePos2.y -256}, TILE::TRAP);
@@ -91,6 +94,7 @@ void PigScene::Init()
 	CreateTile({ tilePos2.x + 768, tilePos2.y }, TILE::TRAP);
 	CreateVerticalTileGroup({ tilePos2.x + 1024, tilePos2.y }, TILE::TRAP, 1, 2, false, false);
 	tilePos2 = CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 10, 2, true, false);
+	CreateTile({ tilePos.x, tilePos.y - 256 }, TILE::BUTTON);
 	CreateTile({ tilePos2.x - 512, tilePos2.y }, TILE::TRAP);
 	CreateTrap({ tilePos2.x - 256, tilePos2.y + 256 }, ATKTRAP::FOLLOW);
 	tilePos2.y -= 256;
@@ -113,6 +117,7 @@ void PigScene::Init()
 	CreateHorizontalTileGroup({ tilePos.x -256, tilePos.y - 256 }, TILE::TRAP, 2, 1, false, false);
 	CreateTile({ tilePos.x + 256, tilePos.y}, TILE::TRAP);
 	tilePos.x += 512;
+	CreateTile({ tilePos.x, tilePos.y}, TILE::BUTTON);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
 	tilePos.y -= 256;
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
@@ -135,6 +140,9 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
 
 #pragma endregion
+
+	CreateTile({ 256, 0 }, TILE::FALL);
+	CreateTile({ 256, -256 }, TILE::BUTTON);
 }
 
 void PigScene::Render(HDC _hdc)
@@ -159,6 +167,9 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 		tile = new FallTileObject;
 		AddObject(tile, LAYER::TRAP);
 		break;
+	case TILE::BUTTON:
+		tile = new Button;
+		AddObject(tile, LAYER::TRAP);
 	}
 	
 	tile->GetTransform()->SetPosition(vec);
@@ -178,7 +189,7 @@ void PigScene::CreateTrap(Vec2 vec, ATKTRAP atkTrap)
 		break;
 	case ATKTRAP::FOLLOW:
 		trap = new FollowTrap();
-		AddObject(trap, LAYER::PROJECTILE);
+		AddObject(trap, LAYER::TRAP);
 		break;
 	}
 
