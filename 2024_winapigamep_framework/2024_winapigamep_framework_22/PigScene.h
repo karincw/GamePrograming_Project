@@ -6,6 +6,7 @@ enum class TILE
 	NORMAL,
 	TRAP,
 	FALL,
+	BUTTON,
 };
 
 enum class ATKTRAP
@@ -18,6 +19,7 @@ enum class ATKTRAP
 class PigScene :
     public Scene
 {
+public:
 	void Init() override;
 	void Render(HDC _hdc) override;
 	void CreateTile(Vec2 vec, TILE tileType);

@@ -193,6 +193,8 @@
     <ClInclude Include="FollowTrap.h">
       <Filter>Engine\03. Object\Traps</Filter>
     </ClInclude>
+    <ClInclude Include="RollingSkillUI.h" />
+    <ClInclude Include="Button.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -325,6 +327,8 @@
     <ClCompile Include="FollowTrap.cpp">
       <Filter>Engine\03. Object\Traps</Filter>
     </ClCompile>
+    <ClCompile Include="RollingSkillUI.cpp" />
+    <ClCompile Include="Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
