@@ -14,6 +14,7 @@
 #include "StarLazer.h"
 #include "FollowTrap.h"
 #include "Button.h"
+#include "ConditionTile.h"
 
 void PigScene::Init()
 {
@@ -25,10 +26,6 @@ void PigScene::Init()
 
 	RollingSkillUI* rollingSkill = new RollingSkillUI;
 	AddObject(rollingSkill, LAYER::UI);
-
-	Agent* agent = new Agent;
-	AddObject(agent, LAYER::PLAYER);
-	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
 
 
 #pragma region Tile Create
@@ -120,7 +117,7 @@ void PigScene::Init()
 	CreateTile({ tilePos.x, tilePos.y}, TILE::BUTTON);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
 	tilePos.y -= 256;
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
+	tilePos = CreateHorizontalTileGroup(tilePos, TILE::CONDITION, 2, 2, true, false);
 	tilePos.x += 128;
 	tilePos.y -= 128;
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
@@ -141,8 +138,10 @@ void PigScene::Init()
 
 #pragma endregion
 
-	CreateTile({ 256, 0 }, TILE::FALL);
-	CreateTile({ 256, -256 }, TILE::BUTTON);
+	Agent* agent = new Agent;
+	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
+	AddObject(agent, LAYER::PLAYER);
+
 }
 
 void PigScene::Render(HDC _hdc)
@@ -169,7 +168,12 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 		break;
 	case TILE::BUTTON:
 		tile = new Button;
-		AddObject(tile, LAYER::TRAP);
+		AddObject(tile, LAYER::PROJECTILE);
+		break;
+	case TILE::CONDITION:
+		tile = new ConditionTile;
+		AddObject(tile, LAYER::BACKGROUND);
+		break;
 	}
 	
 	tile->GetTransform()->SetPosition(vec);

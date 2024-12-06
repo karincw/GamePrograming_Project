@@ -1,5 +1,7 @@
 #pragma once
 #include "Component.h"
+
+class Collider;
 class Transform : public Component
 {
 public:
@@ -11,7 +13,7 @@ public:
 public:
 	void Translate(Vec2 v);
 public:
-	void SetPosition(Vec2 v) { _position = v; }
+	void SetPosition(Vec2 v);
 	void SetScale(Vec2 v) { _scale = v; }
 	Vec2 GetPosition() { return _position; };
 	Vec2 GetScale() { return _scale; };

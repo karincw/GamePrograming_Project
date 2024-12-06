@@ -14,7 +14,7 @@ MagicTower::MagicTower(float time)
 {
 	_time = time;
 
-	GetTransform()->SetScale({ 64,64 });
+	GetTransform()->SetScale({ 128,128 });
 
 	AddComponent<SpriteRenderer>();
 	SpriteRenderer* sp = GetComponent<SpriteRenderer>();
@@ -49,7 +49,7 @@ void MagicTower::Fire()
 	Bullet* bullet = new Bullet();
 
 	Transform* trm = bullet->GetTransform();
-	trm->SetPosition(GetTransform()->GetPosition() + Vec2(0, -16));
+	trm->SetPosition(GetTransform()->GetPosition() + Vec2(0, -32));
 
 	Vec2 dirVec = { 0.f, 0.f };
 

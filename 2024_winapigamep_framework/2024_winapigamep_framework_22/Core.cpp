@@ -79,8 +79,8 @@ void Core::MainUpdate()
 	// === Manager Update === 
 	GET_SINGLE(TimeManager)->Update();
 	GET_SINGLE(InputManager)->Update();
-	GET_SINGLE(CollisionManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
+	GET_SINGLE(CollisionManager)->Update();
 
 }
 

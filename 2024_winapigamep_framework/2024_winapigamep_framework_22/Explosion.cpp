@@ -4,11 +4,12 @@
 #include "Animation.h"
 #include "Collider.h"
 #include "Action.h"
+#include "EventManager.h"
 
 void EndExplosion(Object* owner)
 {
 	Explosion* ex = dynamic_cast<Explosion*>(owner);
-	ex->SetDead();
+	GET_SINGLE(EventManager)->DeleteObject(owner);
 }
 
 Explosion::Explosion()

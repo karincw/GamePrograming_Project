@@ -7,6 +7,8 @@
 #include "SpriteRenderer.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "Agent.h"
+#include "EventManager.h"
 
 void DetectColliderEnter(Collider* _other, Object* owner)
 {
@@ -27,9 +29,14 @@ void DetectColliderExit(Collider* _other, Object* owner)
 	ft->currentTarget = nullptr;
 	ft->GetComponent<Animator>()->PlayAnimation(L"basic", false);
 }
-void ColliderEnter(Collider* _other, Object* owner)
+void ColliderStay(Collider* _other, Object* owner)
 {
-	std::cout << "´êÀ½";
+	Object* obj = _other->GetOwner();
+	if (obj->GetName() != L"Player") return;
+	Agent* ag = dynamic_cast<Agent*>(obj);
+	if (!ag->isRolling && ag->canHit)
+		GET_SINGLE(EventManager)->DeleteObject(owner);
+	ag->Hit();
 }
 
 void FollowTrap::Accel()
@@ -78,14 +85,14 @@ FollowTrap::FollowTrap()
 	CircleCollider* col = new CircleCollider();
 	CircleCollider* detectCol = new CircleCollider();
 
-	col->collisionEnterEvent->Insert(ColliderEnter);
+	col->collisionStayEvent->Insert(ColliderStay);
 	col->SetRadius(32);
 	AddComponent<CircleCollider>(col);
 
 	detectCol->collisionEnterEvent->Insert(DetectColliderEnter);
 	detectCol->collisionExitEvent->Insert(DetectColliderExit);
 	AddComponent<CircleCollider>(detectCol);
-	detectCol->SetRadius(256);
+	detectCol->SetRadius(700);
 
 	ani->PlayAnimation(L"basic", false);
 }

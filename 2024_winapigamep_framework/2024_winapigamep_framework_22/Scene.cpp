@@ -6,15 +6,40 @@
 #include "SceneManager.h"
 
 Scene::Scene()
+	:m_vecObj{}
 {
-	Camera* cam = new Camera;
-	currentCamera = cam;
-	cam->SetScene(this);
+	currentCamera = new Camera;
+	currentCamera->SetScene(this);
 }
 
 Scene::~Scene()
 {
 	Release();
+}
+
+bool IsInWindow(Transform* trm)
+{
+	auto currentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
+	if (currentScene == nullptr || currentScene->GetCamera() == nullptr)
+		return false;
+
+	Vec2 CamPos = currentScene->GetCamera()->GetWorldPosition();
+	bool State = true;
+	Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
+	Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
+	Vec2 position = trm->GetPosition();
+	Vec2 scale = trm->GetScale();
+
+	if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
+		State = false;
+	else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
+		State = false;
+	else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
+		State = false;
+	else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
+		State = false;
+
+	return State;
 }
 
 void Scene::Update()
@@ -23,8 +48,13 @@ void Scene::Update()
 	{
 		for (size_t j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			if (!m_vecObj[i][j]->GetIsDead())
-				m_vecObj[i][j]->Update();
+			Object* nowObj = m_vecObj[i][j];
+
+			if (!nowObj->GetIsDead())
+			{
+				if (IsInWindow(nowObj->GetTransform()))
+					m_vecObj[i][j]->Update();
+			}
 		}
 	}
 
@@ -37,7 +67,9 @@ void Scene::LateUpdate()
 	{
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			m_vecObj[i][j]->LateUpdate();
+			Object* nowObj = m_vecObj[i][j];
+			if (IsInWindow(nowObj->GetTransform()))
+				m_vecObj[i][j]->LateUpdate();
 		}
 	}
 }
@@ -52,30 +84,15 @@ void Scene::Render(HDC _hdc)
 
 			if (!nowObj->GetIsDead())
 			{
-				bool Render = true;
-				Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
-				Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
-				Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
-				Transform* trm = nowObj->GetTransform();
-				Vec2 position = trm->GetPosition();
-				Vec2 scale = trm->GetScale();
-
-				if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
-					Render = false;
-				else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
-					Render = false;
-				else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
-					Render = false;
-				else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
-					Render = false;
-
-				if (Render)
+				if (IsInWindow(nowObj->GetTransform()))
 					m_vecObj[i][j]->Render(_hdc);
 
 				j++;
 			}
 			else
 			{
+				if (nowObj->GetDieToDelete())
+					delete nowObj;
 				m_vecObj[i].erase(m_vecObj[i].begin() + j);
 			}
 		}
@@ -86,13 +103,17 @@ void Scene::Render(HDC _hdc)
 void Scene::Release()
 {
 	delete currentCamera;
-	for (size_t i = 0; i < (UINT)LAYER::END; i++)
+	currentCamera = nullptr; // 안전하게 초기화
+
+	for (UINT i = 0; i < (UINT)LAYER::END; i++)
 	{
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
 			delete m_vecObj[i][j];
+			m_vecObj[i][j] = nullptr; // nullptr로 초기화
 		}
 		m_vecObj[i].clear();
 	}
+
 	GET_SINGLE(CollisionManager)->CheckReset();
 }

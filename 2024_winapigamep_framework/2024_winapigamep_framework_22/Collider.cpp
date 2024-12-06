@@ -69,3 +69,10 @@ void Collider::ExitCollision(Collider* _other)
 	m_showDebug = false;
 	collisionExitEvent->Invoke(_other, GetOwner());
 }
+
+void Collider::UpdateLatedUpatedPos()
+{
+	Transform* trm = m_pOwner->GetComponent<Transform>();
+	Vec2 vPos = trm->GetPosition();
+	m_vLatePos = vPos + m_vOffsetPos;
+}

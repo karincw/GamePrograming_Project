@@ -29,7 +29,8 @@ void EndRolling(Object* owner)
 
 	auto func = [](Object* obj) {
 		Agent* agent = dynamic_cast<Agent*>(obj);
-		agent->canRolling = true;
+		if (agent)
+			agent->canRolling = true;
 		};
 
 	GET_SINGLE(TimeManager)->DelayRun(0.2f, func, owner);
@@ -41,7 +42,8 @@ void EndHit(Object* owner)
 
 	auto func = [](Object* obj) {
 		Agent* agent = dynamic_cast<Agent*>(obj);
-		agent->canHit = true;
+		if (agent)
+			agent->canHit = true;
 		};
 
 	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
@@ -108,9 +110,9 @@ Agent::Agent()
 
 	col->SetOffSetPos({ 0,16 });
 	SceneManager* sm = GET_SINGLE(SceneManager);
-	
+
 	cam = sm->GetCurrentScene()->GetCamera();
-	
+
 	for (auto s : sm->GetCurrentScene()->GetLayerObjects(LAYER::UI)) {
 		auto roll = dynamic_cast<RollingSkillUI*>(s);
 		if (roll) {
@@ -120,6 +122,14 @@ Agent::Agent()
 
 	SetName(L"Player");
 	isGroundCheck = true;
+
+	canHit = false;
+	auto start = [](Object* owner) {
+		auto agent = dynamic_cast<Agent*>(owner);
+		if (agent)
+			agent->canHit = true;
+		};
+	GET_SINGLE(TimeManager)->DelayRun(0.3f, start, this);
 }
 Agent::~Agent()
 {
@@ -127,6 +137,8 @@ Agent::~Agent()
 
 void Agent::Update()
 {
+	if (GET_KEYDOWN(KEY_TYPE::P))
+		GET_SINGLE(SceneManager)->LoadScene(L"Title");
 	if (!isGroundCheck)
 	{
 		SetMoveToBeforeTile(this);

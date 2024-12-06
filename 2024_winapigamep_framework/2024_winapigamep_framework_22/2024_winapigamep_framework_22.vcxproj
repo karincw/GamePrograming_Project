@@ -175,8 +175,12 @@
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Condition.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ConditionTile.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DirectionArrow.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="FollowTrap.h" />
     <ClInclude Include="Lazer.h" />
@@ -196,6 +200,7 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="PigScene.h" />
+    <ClInclude Include="PlayButton.h" />
     <ClInclude Include="Projectile.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -212,12 +217,15 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="BishojoScene.h" />
+    <ClInclude Include="Stage2.h" />
     <ClInclude Include="StarLazer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="BishojoObject.h" />
     <ClInclude Include="TileObject.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleText.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TrapTileObject.h" />
     <ClInclude Include="UIManager.h" />
@@ -234,8 +242,12 @@
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Condition.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ConditionTile.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DirectionArrow.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="FollowTrap.cpp" />
     <ClCompile Include="Lazer.cpp" />
@@ -252,6 +264,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="PigScene.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
     <ClCompile Include="Projectile.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -267,11 +280,14 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="BishojoScene.cpp" />
+    <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="StarLazer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="BishojoObject.cpp" />
     <ClCompile Include="TileObject.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleText.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TrapTileObject.cpp" />
     <ClCompile Include="UIManager.cpp" />

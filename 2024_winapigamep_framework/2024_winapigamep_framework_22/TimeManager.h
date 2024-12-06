@@ -25,6 +25,10 @@ public:
 public:
 	const float& GetDT() const { return m_dT; }
 	void DelayRun(float time, std::function<void(Object*)> func, Object* owner);
+	void ReleaseDelays()
+	{
+		delays.clear();
+	}
 private:
 	// Delta time
 	LARGE_INTEGER m_llPrevCnt = {};

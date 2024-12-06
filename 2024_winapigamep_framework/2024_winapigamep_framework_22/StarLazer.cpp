@@ -33,7 +33,7 @@ void PlayLazer(Object* owner)
 }
 
 StarLazer::StarLazer(Vec2 position)
-	:isHorizontal(true)
+	:isHorizontal(false)
 {
 	GetTransform()->SetScale(Vec2(1360, 1360));
 	GetTransform()->SetPosition(position);
