@@ -81,7 +81,7 @@ void PigScene::Init()
 	// Cross
 	Vec2 tilePos2 = { tilePos.x - 256, tilePos.y - 512 };
 	tilePos2 = CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 3, false, false);
-	CreateTile({ tilePos.x, tilePos.y - 256 }, TILE::BUTTON);
+	CreateTile({ tilePos2.x, tilePos2.y +256 }, TILE::BUTTON);
 	tilePos2.y += 512;
 	tilePos2.x += 512;
 	CreateTile({ tilePos2.x - 256, tilePos2.y -256}, TILE::TRAP);
@@ -94,7 +94,7 @@ void PigScene::Init()
 	CreateTile({ tilePos2.x + 768, tilePos2.y }, TILE::TRAP);
 	CreateVerticalTileGroup({ tilePos2.x + 1024, tilePos2.y }, TILE::TRAP, 1, 2, false, false);
 	tilePos2 = CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 10, 2, true, false);
-	CreateTile({ tilePos.x, tilePos.y - 256 }, TILE::BUTTON);
+	CreateTile({ tilePos2.x, tilePos2.y - 256 }, TILE::BUTTON);
 	CreateTile({ tilePos2.x - 512, tilePos2.y }, TILE::TRAP);
 	CreateTrap({ tilePos2.x - 256, tilePos2.y + 256 }, ATKTRAP::FOLLOW);
 	tilePos2.y -= 256;
