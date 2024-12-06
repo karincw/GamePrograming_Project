@@ -9,7 +9,7 @@ class Collider : public Component
 {
 public:
 	Collider();
-	~Collider();
+	virtual ~Collider();
 public:
 	// Component을(를) 통해 상속됨
 	void LateUpdate() override;

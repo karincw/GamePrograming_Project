@@ -8,7 +8,7 @@
 void EndExplosion(Object* owner)
 {
 	Explosion* ex = dynamic_cast<Explosion*>(owner);
-	ex->SetDead();
+	ex->SetDead(true);
 }
 
 Explosion::Explosion()

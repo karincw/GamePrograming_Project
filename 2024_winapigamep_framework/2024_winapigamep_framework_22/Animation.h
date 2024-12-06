@@ -17,7 +17,7 @@ class Animation
 {
 public:
 	Animation();
-	~Animation();
+	virtual ~Animation();
 public:
 	void Update();
 	void Render(HDC _hdc);

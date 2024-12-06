@@ -4,7 +4,7 @@
 #define maxSpeed 400
 #define AccelationSpeed 2
 #define DecelationSpeed -0.5f;
-#define MaxAccelableDir 0.025f
+#define MaxAccelableDir 0.04f
 
 class FollowTrap : public Object
 {

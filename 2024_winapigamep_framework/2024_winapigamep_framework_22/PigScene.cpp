@@ -135,8 +135,6 @@ void PigScene::Init()
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
 
 #pragma endregion
-
-	CreateTile({ 256, 0 }, TILE::FALL);
 }
 
 void PigScene::Render(HDC _hdc)
@@ -180,7 +178,7 @@ void PigScene::CreateTrap(Vec2 vec, ATKTRAP atkTrap)
 		break;
 	case ATKTRAP::FOLLOW:
 		trap = new FollowTrap();
-		AddObject(trap, LAYER::TRAP);
+		AddObject(trap, LAYER::PROJECTILE);
 		break;
 	}
 

@@ -17,12 +17,14 @@ public:
 	virtual void StayCollision(Collider* _other);
 	virtual void ExitCollision(Collider* _other);
 	const bool& GetIsDead() const { return m_IsDie; }
-	void SetDead() { m_IsDie = true; }
+	const bool& GetDieToDelete() const { return m_dieToDelete; }
+	void SetDead(bool s = false) { m_IsDie = true; m_dieToDelete = s; }
 	void SetName(wstring _name) { m_name = _name; }
 	const wstring& GetName() const { return m_name; }
 
 private:
-	bool m_IsDie;
+	bool m_dieToDelete = false;
+	bool m_IsDie = false;
 	wstring m_name;
 public:
 	template<typename T>

@@ -23,8 +23,30 @@ void Scene::Update()
 	{
 		for (size_t j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			if (!m_vecObj[i][j]->GetIsDead())
-				m_vecObj[i][j]->Update();
+			Object* nowObj = m_vecObj[i][j];
+
+			if (!nowObj->GetIsDead())
+			{
+				bool state = true;
+				Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
+				Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
+				Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
+				Transform* trm = nowObj->GetTransform();
+				Vec2 position = trm->GetPosition();
+				Vec2 scale = trm->GetScale();
+
+				if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
+					state = false;
+				else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
+					state = false;
+				else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
+					state = false;
+				else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
+					state = false;
+
+				if (state)
+					m_vecObj[i][j]->Update();
+			}
 		}
 	}
 
@@ -37,7 +59,29 @@ void Scene::LateUpdate()
 	{
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			m_vecObj[i][j]->LateUpdate();
+			Object* nowObj = m_vecObj[i][j];
+
+			bool Render = true;
+			Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
+			Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
+			Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
+			Transform* trm = nowObj->GetTransform();
+			Vec2 position = trm->GetPosition();
+			Vec2 scale = trm->GetScale();
+
+			if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
+				Render = false;
+			else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
+				Render = false;
+			else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
+				Render = false;
+			else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
+				Render = false;
+
+			if (Render)
+				m_vecObj[i][j]->LateUpdate();
+
+
 		}
 	}
 }
@@ -76,6 +120,8 @@ void Scene::Render(HDC _hdc)
 			}
 			else
 			{
+				if (nowObj->GetDieToDelete())
+					delete nowObj;
 				m_vecObj[i].erase(m_vecObj[i].begin() + j);
 			}
 		}

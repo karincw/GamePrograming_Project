@@ -7,7 +7,7 @@ class Animator : public Component
 {
 public:
 	Animator();
-	~Animator();
+	virtual ~Animator();
 public:
 	virtual void LateUpdate() override;
 	virtual void Render(HDC _hdc) override;
