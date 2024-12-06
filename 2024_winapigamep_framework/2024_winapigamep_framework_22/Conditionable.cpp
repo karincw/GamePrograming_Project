@@ -9,11 +9,6 @@ Conditionable::Conditionable()
 
 Conditionable::~Conditionable()
 {
-	for (auto c : conditions)
-	{
-		delete c;
-	}
-	conditions.clear();
 }
 
 

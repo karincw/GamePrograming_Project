@@ -2,7 +2,7 @@
 #include "Object.h"
 
 #define maxSpeed 500
-#define AccelationSpeed 2
+#define AccelationSpeed 1.2f
 #define DecelationSpeed -0.7f
 #define MaxAccelableDir 0.035f
 

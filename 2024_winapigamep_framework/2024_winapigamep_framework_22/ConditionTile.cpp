@@ -13,11 +13,7 @@ ConditionTile::~ConditionTile()
 
 void ConditionTile::Update()
 {
-	if (CheckCondiiton() && !flag)
-	{
-		flag = true;
-		ApplyCondition();
-	}
+	ApplyCondition();
 }
 
 void ConditionTile::Render(HDC _hdc)
