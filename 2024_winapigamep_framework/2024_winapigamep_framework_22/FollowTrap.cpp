@@ -8,6 +8,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Agent.h"
+#include "EventManager.h"
 
 void DetectColliderEnter(Collider* _other, Object* owner)
 {
@@ -34,7 +35,7 @@ void ColliderStay(Collider* _other, Object* owner)
 	if (obj->GetName() != L"Player") return;
 	Agent* ag = dynamic_cast<Agent*>(obj);
 	if (!ag->isRolling && ag->canHit)
-		owner->SetDead(true);
+		GET_SINGLE(EventManager)->DeleteObject(owner);
 	ag->Hit();
 }
 

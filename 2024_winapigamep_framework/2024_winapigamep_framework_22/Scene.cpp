@@ -6,15 +6,36 @@
 #include "SceneManager.h"
 
 Scene::Scene()
+	:m_vecObj{}
 {
-	Camera* cam = new Camera;
-	currentCamera = cam;
-	cam->SetScene(this);
+	currentCamera = new Camera;
+	currentCamera->SetScene(this);
 }
 
 Scene::~Scene()
 {
 	Release();
+}
+
+bool IsInWindow(Transform* trm)
+{
+	bool State = true;
+	Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
+	Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
+	Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
+	Vec2 position = trm->GetPosition();
+	Vec2 scale = trm->GetScale();
+
+	if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
+		State = false;
+	else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
+		State = false;
+	else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
+		State = false;
+	else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
+		State = false;
+
+	return State;
 }
 
 void Scene::Update()
@@ -27,24 +48,7 @@ void Scene::Update()
 
 			if (!nowObj->GetIsDead())
 			{
-				bool state = true;
-				Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
-				Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
-				Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
-				Transform* trm = nowObj->GetTransform();
-				Vec2 position = trm->GetPosition();
-				Vec2 scale = trm->GetScale();
-
-				if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
-					state = false;
-				else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
-					state = false;
-				else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
-					state = false;
-				else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
-					state = false;
-
-				if (state)
+				if (IsInWindow(nowObj->GetTransform()))
 					m_vecObj[i][j]->Update();
 			}
 		}
@@ -60,28 +64,8 @@ void Scene::LateUpdate()
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
 			Object* nowObj = m_vecObj[i][j];
-
-			bool Render = true;
-			Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
-			Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
-			Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
-			Transform* trm = nowObj->GetTransform();
-			Vec2 position = trm->GetPosition();
-			Vec2 scale = trm->GetScale();
-
-			if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
-				Render = false;
-			else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
-				Render = false;
-			else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
-				Render = false;
-			else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
-				Render = false;
-
-			if (Render)
+			if (IsInWindow(nowObj->GetTransform()))
 				m_vecObj[i][j]->LateUpdate();
-
-
 		}
 	}
 }
@@ -96,24 +80,7 @@ void Scene::Render(HDC _hdc)
 
 			if (!nowObj->GetIsDead())
 			{
-				bool Render = true;
-				Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
-				Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
-				Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
-				Transform* trm = nowObj->GetTransform();
-				Vec2 position = trm->GetPosition();
-				Vec2 scale = trm->GetScale();
-
-				if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
-					Render = false;
-				else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
-					Render = false;
-				else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
-					Render = false;
-				else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
-					Render = false;
-
-				if (Render)
+				if (IsInWindow(nowObj->GetTransform()))
 					m_vecObj[i][j]->Render(_hdc);
 
 				j++;
@@ -132,13 +99,16 @@ void Scene::Render(HDC _hdc)
 void Scene::Release()
 {
 	delete currentCamera;
-	for (size_t i = 0; i < (UINT)LAYER::END; i++)
+	for (UINT i = 0; i < (UINT)LAYER::END; i++)
 	{
+		std::cout << "i : " << i << " iSize : " << std::to_string((UINT)LAYER::END) << "\n";
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
+			std::cout << "j : " << j << " jSize : " << std::to_string(m_vecObj[i].size()) << "\n";
 			delete m_vecObj[i][j];
 		}
 		m_vecObj[i].clear();
 	}
+	std::cout << "\nNextScene\n";
 	GET_SINGLE(CollisionManager)->CheckReset();
 }

@@ -14,7 +14,7 @@ public:
 	virtual void Render(HDC _hdc);
 	virtual void Release();
 public:
-	Camera* GetCamera() 
+	Camera* const GetCamera() 
 	{
 		return currentCamera;
 	}

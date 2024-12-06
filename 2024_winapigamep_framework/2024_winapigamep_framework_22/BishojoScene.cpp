@@ -8,6 +8,7 @@
 #include "MagicTower.h"
 #include "StarLazer.h"
 #include "UIManager.h"
+#include "RollingSkillUI.h"
 #include "FollowTrap.h"
 
 void BishojoScene::Init()
@@ -15,6 +16,18 @@ void BishojoScene::Init()
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	cm->CheckReset();
 	cm->CheckLayer(LAYER::TRAP, LAYER::PLAYER);
+
+
+	RollingSkillUI* rollingSkill = new RollingSkillUI;
+	AddObject(rollingSkill, LAYER::UI);
+
+	FollowTrap* test = new FollowTrap();
+	AddObject(test, LAYER::TRAP);
+
+	Agent* agent = new Agent;
+	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
+	AddObject(agent, LAYER::PLAYER);
+
 
 	//BishojoObject* tile1 = new BishojoObject;
 	//AddObject(tile1, LAYER::DEFAULT);
@@ -48,19 +61,8 @@ void BishojoScene::Init()
 	//AddObject(tile15, LAYER::DEFAULT);
 	//BishojoObject* tile16 = new BishojoObject;
 	//AddObject(tile16, LAYER::DEFAULT);
-
-	FollowTrap* test = new FollowTrap();
-	AddObject(test, LAYER::TRAP);
-
-	Agent* agent = new Agent;
-	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
-	AddObject(agent, LAYER::PLAYER);
-
 	//Transform* trm = tile1->GetTransform();
 	//trm->SetPosition({ SCREEN_WIDTH / 2 - trm->GetScale().x * 1.5f, SCREEN_HEIGHT / 2 - trm->GetScale().y * 0.5f });
-
-
-
 	//tile2->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 - trm->GetScale().x * 0.5f, SCREEN_HEIGHT / 2 - trm->GetScale().y * 0.5f });
 	//tile3->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 + trm->GetScale().x * 0.5f, SCREEN_HEIGHT / 2 - trm->GetScale().y * 0.5f });
 	//tile4->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 + trm->GetScale().x * 1.5f, SCREEN_HEIGHT / 2 - trm->GetScale().y * 0.5f });
@@ -76,7 +78,6 @@ void BishojoScene::Init()
 	//tile14->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 - trm->GetScale().x * 0.5f, SCREEN_HEIGHT / 2 - trm->GetScale().y * 1.5f });
 	//tile15->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 + trm->GetScale().x * 0.5f, SCREEN_HEIGHT / 2 + trm->GetScale().y * 1.5f });
 	//tile16->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 - trm->GetScale().x * 0.5f, SCREEN_HEIGHT / 2 + trm->GetScale().y * 1.5f });
-
 	//tile1->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo1.bmp", L"bishojo1");
 	//tile2->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo2.bmp", L"bishojo2");
 	//tile3->GetComponent<SpriteRenderer>()->CreateTexture(L"Texture\\bishojo3.bmp", L"bishojo3");

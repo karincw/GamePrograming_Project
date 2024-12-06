@@ -137,12 +137,9 @@ void PigScene::Init()
 
 #pragma endregion
 
-	CreateTile({ 256, 0 }, TILE::FALL);
-	CreateTile({ 256, -256 }, TILE::BUTTON);
-
 	Agent* agent = new Agent;
-	AddObject(agent, LAYER::PLAYER);
 	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
+	AddObject(agent, LAYER::PLAYER);
 
 }
 

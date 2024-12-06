@@ -2,17 +2,20 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "PigScene.h"
+#include "Title.h"
 #include "BishojoScene.h"
+#include "TimeManager.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
 
 	// ¾À µî·Ï
-	RegisterScene(L"PigScene",std::make_shared<PigScene>());
 	RegisterScene(L"BishojoScene",std::make_shared<BishojoScene>());
+	RegisterScene(L"Title",std::make_shared<Title>());
+	RegisterScene(L"PigScene",std::make_shared<PigScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"PigScene");
+	LoadScene(L"Title");
 }
 
 void SceneManager::Update()
@@ -43,6 +46,7 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 	if (m_pCurrentScene != nullptr)
 	{
 		m_pCurrentScene->Release();
+		GET_SINGLE(TimeManager)->ReleaseDelays();
 		m_pCurrentScene = nullptr;
 	}
 

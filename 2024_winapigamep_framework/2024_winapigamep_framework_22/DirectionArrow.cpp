@@ -39,7 +39,7 @@ void DirectionArrow::Update()
 		switch (selectType)
 		{
 		case SELECT_TYPE::PLAY:
-			GET_SINGLE(SceneManager)->LoadScene(L"PigScene");
+			GET_SINGLE(SceneManager)->LoadScene(L"BishojoScene");
 			break;
 		case SELECT_TYPE::EXIT:
 			HANDLE hProcess = GetCurrentProcess();

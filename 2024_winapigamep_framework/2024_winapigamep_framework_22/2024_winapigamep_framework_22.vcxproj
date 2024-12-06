@@ -215,6 +215,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="BishojoScene.h" />
+    <ClInclude Include="Stage2.h" />
     <ClInclude Include="StarLazer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="BishojoScene.cpp" />
+    <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="StarLazer.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="BishojoObject.cpp" />
