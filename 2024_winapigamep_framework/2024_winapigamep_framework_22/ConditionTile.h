@@ -4,6 +4,7 @@ class Condition;
 class ConditionTile :
 	public TileObject
 {
+public:
 	ConditionTile();
 	~ConditionTile();
 public:

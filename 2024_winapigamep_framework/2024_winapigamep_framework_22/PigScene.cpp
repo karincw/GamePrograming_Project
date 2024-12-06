@@ -14,6 +14,7 @@
 #include "StarLazer.h"
 #include "FollowTrap.h"
 #include "Button.h"
+#include "ConditionTile.h"
 
 void PigScene::Init()
 {
@@ -116,7 +117,7 @@ void PigScene::Init()
 	CreateTile({ tilePos.x, tilePos.y}, TILE::BUTTON);
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
 	tilePos.y -= 256;
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
+	tilePos = CreateHorizontalTileGroup(tilePos, TILE::CONDITION, 2, 2, true, false);
 	tilePos.x += 128;
 	tilePos.y -= 128;
 	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
@@ -168,6 +169,11 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 	case TILE::BUTTON:
 		tile = new Button;
 		AddObject(tile, LAYER::PROJECTILE);
+		break;
+	case TILE::CONDITION:
+		tile = new ConditionTile;
+		AddObject(tile, LAYER::BACKGROUND);
+		break;
 	}
 	
 	tile->GetTransform()->SetPosition(vec);
