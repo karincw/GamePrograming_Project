@@ -177,6 +177,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Conditionable.h" />
     <ClInclude Include="ConditionTile.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DirectionArrow.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Conditionable.cpp" />
     <ClCompile Include="ConditionTile.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DirectionArrow.cpp" />

@@ -30,13 +30,13 @@ bool IsInWindow(Transform* trm)
 	Vec2 position = trm->GetPosition();
 	Vec2 scale = trm->GetScale();
 
-	if (position.x + SCREEN_WIDTH / 2 < LeftTop.x)
+	if (position.x + SCREEN_WIDTH / 4 < LeftTop.x)
 		State = false;
-	else if (position.x - SCREEN_WIDTH / 2 > RightBottom.x)
+	else if (position.x - SCREEN_WIDTH / 4 > RightBottom.x)
 		State = false;
-	else if (position.y + SCREEN_HEIGHT / 2 < LeftTop.y)
+	else if (position.y + SCREEN_HEIGHT / 4 < LeftTop.y)
 		State = false;
-	else if (position.y - SCREEN_HEIGHT / 2 > RightBottom.y)
+	else if (position.y - SCREEN_HEIGHT / 4 > RightBottom.y)
 		State = false;
 
 	return State;

@@ -9,6 +9,9 @@
 #include "Animation.h"
 #include "Agent.h"
 #include "EventManager.h"
+#include "Explosion.h"
+#include "SceneManager.h"
+#include "Scene.h"
 
 void DetectColliderEnter(Collider* _other, Object* owner)
 {
@@ -35,7 +38,13 @@ void ColliderStay(Collider* _other, Object* owner)
 	if (obj->GetName() != L"Player") return;
 	Agent* ag = dynamic_cast<Agent*>(obj);
 	if (!ag->isRolling && ag->canHit)
+	{
+		Explosion* boom = new Explosion();
+		Transform* trm = boom->GetTransform();
+		trm->SetPosition(obj->GetTransform()->GetPosition() + Vec2(30, 20));
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(boom, LAYER::PROJECTILE);
 		GET_SINGLE(EventManager)->DeleteObject(owner);
+	}
 	ag->Hit();
 }
 

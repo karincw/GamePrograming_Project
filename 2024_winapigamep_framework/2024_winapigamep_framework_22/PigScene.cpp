@@ -193,7 +193,7 @@ void PigScene::CreateTrap(Vec2 vec, ATKTRAP atkTrap)
 		break;
 	case ATKTRAP::FOLLOW:
 		trap = new FollowTrap();
-		AddObject(trap, LAYER::TRAP);
+		AddObject(trap, LAYER::PROJECTILE);
 		break;
 	}
 

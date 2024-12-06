@@ -7,11 +7,13 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "Bullet.h"
+#include "ResourceManager.h"
 
 
 MagicTower::MagicTower(float time)
 	:_timer(0)
 {
+	GET_SINGLE(ResourceManager)->LoadSound(L"Tower_Shoot", L"Sound\\MagicTower_Shoot.wav", false);
 	_time = time;
 
 	GetTransform()->SetScale({ 128,128 });
@@ -46,6 +48,7 @@ void MagicTower::Render(HDC _hdc)
 
 void MagicTower::Fire()
 {
+	GET_SINGLE(ResourceManager)->Play(L"Tower_Shoot");
 	Bullet* bullet = new Bullet();
 
 	Transform* trm = bullet->GetTransform();

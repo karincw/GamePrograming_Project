@@ -16,8 +16,8 @@ public:
 	void Render(HDC _hdc) override;
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other)override;
-	void ExitCollision(Collider* _other)override;
 public:
+	void PlayAnimation(wstring animationName, bool repeat);
 	void Hit();
 public:
 	bool isRolling;
