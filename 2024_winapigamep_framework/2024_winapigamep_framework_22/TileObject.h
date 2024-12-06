@@ -4,9 +4,9 @@ class TileObject : public Object
 {
 public:
 	TileObject();
-	~TileObject();
+	virtual ~TileObject();
 public:
-	void Update() override;
+	virtual void Update() override;
 	void Render(HDC _hdc) override;
 public:
 	void EnterCollision(Collider* _other)override;

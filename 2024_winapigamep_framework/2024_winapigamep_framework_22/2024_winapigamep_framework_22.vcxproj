@@ -175,7 +175,9 @@
     <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Condition.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="ConditionTile.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DirectionArrow.h" />
     <ClInclude Include="ExitButton.h" />
@@ -240,7 +242,9 @@
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Condition.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ConditionTile.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DirectionArrow.cpp" />
     <ClCompile Include="ExitButton.cpp" />

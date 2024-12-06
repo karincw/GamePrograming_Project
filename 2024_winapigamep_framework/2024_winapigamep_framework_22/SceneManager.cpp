@@ -46,8 +46,8 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 	if (m_pCurrentScene != nullptr)
 	{
 		m_pCurrentScene->Release();
-		GET_SINGLE(TimeManager)->ReleaseDelays();
 		m_pCurrentScene = nullptr;
+		GET_SINGLE(TimeManager)->ReleaseDelays();
 	}
 
 	auto iter = m_mapScenes.find(_sceneName);

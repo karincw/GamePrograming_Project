@@ -5,7 +5,7 @@
 
 Button::Button()
 {
-	GetTransform()->SetScale({ 256,256 });
+	GetTransform()->SetScale({ 128,128 });
 
 	AddComponent<Animator>();
 	Animator* animator = GetComponent<Animator>();
@@ -15,7 +15,7 @@ Button::Button()
 
 	AddComponent<Collider>();
 	Collider* collider = GetComponent<Collider>();
-	collider->SetSize({ 256, 256 });
+	collider->SetSize({ 100, 100 });
 
 	SetName(L"Button");
 	animator->PlayAnimation(L"Button_Idle", false);
@@ -37,16 +37,8 @@ void Button::Render(HDC _hdc)
 void Button::EnterCollision(Collider* _other)
 {
 	if (_other->GetOwner()->GetName() == L"Player") {
-		std::cout << "Press\n";
 		Animator* animator = GetComponent<Animator>();
 		animator->PlayAnimation(L"Button_Press", false);
+		condition = true;
 	}
-}
-
-void Button::StayCollision(Collider* _other)
-{
-}
-
-void Button::ExitCollision(Collider* _other)
-{
 }

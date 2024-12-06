@@ -19,8 +19,12 @@ Scene::~Scene()
 
 bool IsInWindow(Transform* trm)
 {
+	auto currentScene = GET_SINGLE(SceneManager)->GetCurrentScene();
+	if (currentScene == nullptr || currentScene->GetCamera() == nullptr)
+		return false;
+
+	Vec2 CamPos = currentScene->GetCamera()->GetWorldPosition();
 	bool State = true;
-	Vec2 CamPos = GET_SINGLE(SceneManager)->GetCurrentScene()->GetCamera()->GetWorldPosition();
 	Vec2 LeftTop = { CamPos.x - SCREEN_WIDTH / 2, CamPos.y - SCREEN_WIDTH / 2 };
 	Vec2 RightBottom = { CamPos.x + SCREEN_WIDTH / 2, CamPos.y + SCREEN_HEIGHT / 2 };
 	Vec2 position = trm->GetPosition();
@@ -99,16 +103,17 @@ void Scene::Render(HDC _hdc)
 void Scene::Release()
 {
 	delete currentCamera;
+	currentCamera = nullptr; // 안전하게 초기화
+
 	for (UINT i = 0; i < (UINT)LAYER::END; i++)
 	{
-		std::cout << "i : " << i << " iSize : " << std::to_string((UINT)LAYER::END) << "\n";
 		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
 		{
-			std::cout << "j : " << j << " jSize : " << std::to_string(m_vecObj[i].size()) << "\n";
 			delete m_vecObj[i][j];
+			m_vecObj[i][j] = nullptr; // nullptr로 초기화
 		}
 		m_vecObj[i].clear();
 	}
-	std::cout << "\nNextScene\n";
+
 	GET_SINGLE(CollisionManager)->CheckReset();
 }
