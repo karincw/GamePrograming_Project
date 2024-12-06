@@ -26,10 +26,6 @@ void PigScene::Init()
 	RollingSkillUI* rollingSkill = new RollingSkillUI;
 	AddObject(rollingSkill, LAYER::UI);
 
-	Agent* agent = new Agent;
-	AddObject(agent, LAYER::PLAYER);
-	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
-
 
 #pragma region Tile Create
 
@@ -143,6 +139,11 @@ void PigScene::Init()
 
 	CreateTile({ 256, 0 }, TILE::FALL);
 	CreateTile({ 256, -256 }, TILE::BUTTON);
+
+	Agent* agent = new Agent;
+	AddObject(agent, LAYER::PLAYER);
+	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
+
 }
 
 void PigScene::Render(HDC _hdc)
@@ -169,7 +170,7 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 		break;
 	case TILE::BUTTON:
 		tile = new Button;
-		AddObject(tile, LAYER::TRAP);
+		AddObject(tile, LAYER::PROJECTILE);
 	}
 	
 	tile->GetTransform()->SetPosition(vec);

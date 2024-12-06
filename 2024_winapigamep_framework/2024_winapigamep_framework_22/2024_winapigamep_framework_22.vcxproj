@@ -177,6 +177,8 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="DirectionArrow.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="FollowTrap.h" />
     <ClInclude Include="Lazer.h" />
@@ -196,6 +198,7 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="PigScene.h" />
+    <ClInclude Include="PlayButton.h" />
     <ClInclude Include="Projectile.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -218,6 +221,8 @@
     <ClInclude Include="BishojoObject.h" />
     <ClInclude Include="TileObject.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleText.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TrapTileObject.h" />
     <ClInclude Include="UIManager.h" />
@@ -236,6 +241,8 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DirectionArrow.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="FollowTrap.cpp" />
     <ClCompile Include="Lazer.cpp" />
@@ -252,6 +259,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="PigScene.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
     <ClCompile Include="Projectile.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -272,6 +280,8 @@
     <ClCompile Include="BishojoObject.cpp" />
     <ClCompile Include="TileObject.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleText.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TrapTileObject.cpp" />
     <ClCompile Include="UIManager.cpp" />

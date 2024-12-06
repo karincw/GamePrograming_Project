@@ -191,6 +191,4 @@ bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 		RECT rt;
 		return ::IntersectRect(&rt, &leftRt, &rightRt);
 	}
-	return false;
-
 }

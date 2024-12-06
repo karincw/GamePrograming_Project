@@ -26,7 +26,4 @@ void Title::Init()
 	ExitButton* exit = new ExitButton;
 	AddObject(exit, LAYER::UI);
 
-	/*TestText* text = new TestText;
-	text->SetText(L"시작하기");
-	AddObject(text, LAYER::UI);*/
 }

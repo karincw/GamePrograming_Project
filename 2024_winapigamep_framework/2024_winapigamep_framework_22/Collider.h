@@ -31,6 +31,7 @@ public:
 	{
 		return m_vLatePos;
 	}
+	void UpdateLatedUpatedPos();
 public:
 	VariadicAction<Collider*, Object*>* collisionEnterEvent;
 	VariadicAction<Collider*, Object*>* collisionStayEvent;

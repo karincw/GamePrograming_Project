@@ -120,6 +120,12 @@ Agent::Agent()
 
 	SetName(L"Player");
 	isGroundCheck = true;
+
+	canHit = false;
+	auto start = [](Object* owner) {
+		dynamic_cast<Agent*>(owner)->canHit = true;
+		};
+	GET_SINGLE(TimeManager)->DelayRun(0.3f, start, this);
 }
 Agent::~Agent()
 {
