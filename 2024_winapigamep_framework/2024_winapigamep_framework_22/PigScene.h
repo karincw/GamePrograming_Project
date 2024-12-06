@@ -23,6 +23,7 @@ class PigScene :
 public:
 	void Init() override;
 	void Render(HDC _hdc) override;
+	void Release() override;
 	Object* CreateTile(Vec2 vec, TILE tileType, int plusX = 0, int plusY = 0);
 	void CreateTrap(Vec2 vec, ATKTRAP atkTrap, int plusX = 0, int plusY = 0);
 	vector<Object*> CreateVerticalTileGroup(Vec2* startVec, TILE tileType, int x, int y, bool isDown, bool isJump);

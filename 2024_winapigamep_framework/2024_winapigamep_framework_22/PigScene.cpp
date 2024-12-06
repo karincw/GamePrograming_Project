@@ -15,10 +15,14 @@
 #include "FollowTrap.h"
 #include "Button.h"
 #include "ConditionTile.h"
+#include "ResourceManager.h"
 
 void PigScene::Init()
 {
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
+	ResourceManager* rm = GET_SINGLE(ResourceManager);
+	rm->LoadSound(L"BGM", L"Sound\\BGM.mp3", true);
+	rm->Play(L"BGM");
 	cm->CheckReset();
 	cm->CheckLayer(LAYER::TRAP, LAYER::PLAYER);
 	cm->CheckLayer(LAYER::PROJECTILE, LAYER::PLAYER);
@@ -163,6 +167,13 @@ void PigScene::Render(HDC _hdc)
 {
 	Scene::Render(_hdc);
 	GET_SINGLE(UIManager)->RenderHP(_hdc);
+}
+
+void PigScene::Release()
+{
+	Scene::Release();
+	ResourceManager* rm = GET_SINGLE(ResourceManager);
+	rm->Stop(SOUND_CHANNEL::BGM);
 }
 
 Object* PigScene::CreateTile(Vec2 vec, TILE tileType, int plusX, int plusY)

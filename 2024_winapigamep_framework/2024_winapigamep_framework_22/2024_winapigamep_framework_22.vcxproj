@@ -180,6 +180,7 @@
     <ClInclude Include="Conditionable.h" />
     <ClInclude Include="ConditionTile.h" />
     <ClInclude Include="Core.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="DirectionArrow.h" />
     <ClInclude Include="ExitButton.h" />
     <ClInclude Include="Explosion.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="Conditionable.cpp" />
     <ClCompile Include="ConditionTile.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Direction.cpp" />
     <ClCompile Include="DirectionArrow.cpp" />
     <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="Explosion.cpp" />
