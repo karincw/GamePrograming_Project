@@ -30,111 +30,111 @@ void PigScene::Init()
 
 #pragma region Tile Create
 
-	Vec2 tilePos = { SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 10, false, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 10, false, true);
-	CreateTrap({ tilePos.x + 512 , tilePos.y + 2176 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x - 256 , tilePos.y + 1664 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x + 512 , tilePos.y + 1152 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x - 256 , tilePos.y + 640 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x + 512 , tilePos.y + 384 }, ATKTRAP::TOWER);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
-	CreateTrap({ tilePos.x + 512 , tilePos.y + 384 }, ATKTRAP::TOWER);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
-	CreateTrap({ tilePos.x + 512 , tilePos.y + 384 }, ATKTRAP::TOWER);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 2, true, true);
-	tilePos.x -= 640;
-	tilePos.y += 384;
+	Vec2* tilePos = new Vec2({ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 });
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 10, false, true);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, false, true);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 10, false, true);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 2176);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, -256, 1664);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 1152);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, -256, 640);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 384);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, -512, 384);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, false, true);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 384);
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 2, true, true);
+	tilePos->x -= 640;
+	tilePos->y += 384;
 	// Boom Trap
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 4, true, true);
-	CreateTile({ tilePos.x, tilePos.y - 1152 }, TILE::TRAP);
-	CreateTile({ tilePos.x + 256, tilePos.y - 896 }, TILE::TRAP);
-	CreateTile({ tilePos.x, tilePos.y - 640 }, TILE::TRAP);
-	CreateTile({ tilePos.x + 256, tilePos.y - 384 }, TILE::TRAP);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::TRAP, 2, 1, true, false);
-	CreateTrap(tilePos, ATKTRAP::FOLLOW);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, true, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 4, true, true);
+	CreateTile(*tilePos, TILE::TRAP, 0, -1152);
+	CreateTile(*tilePos, TILE::TRAP, +256, -896);
+	CreateTile(*tilePos, TILE::TRAP, 0, -640);
+	CreateTile(*tilePos, TILE::TRAP, 256, -384);
+	CreateVerticalTileGroup(tilePos, TILE::TRAP, 2, 1, true, false);
+	CreateTrap(*tilePos, ATKTRAP::FOLLOW, 0, 0);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 3, true, true);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
 	// Fall Tile
-	CreateTrap({ tilePos.x + 512, tilePos.y }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x - 256, tilePos.y + 256 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x + 512, tilePos.y + 512 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x - 256, tilePos.y + 768 }, ATKTRAP::TOWER);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 4, true, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
-	CreateTrap({ tilePos.x - 256, tilePos.y - 348 }, ATKTRAP::FOLLOW);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, false);
-	tilePos.x += 640;
-	tilePos.y -= 256;
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 1, true, false);
-	tilePos = CreateHorizontalTileGroup({ tilePos .x - 512, tilePos.y-256 }, TILE::FALL, 2, 1, true, false);
-	tilePos.y += 256;
-	CreateTile({ tilePos.x - 256, tilePos.y}, TILE::BUTTON);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 0);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, -256, 256);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 512);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, -256, 768);
+	CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 4, true, true);
+	CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
+	CreateTrap(*tilePos, ATKTRAP::FOLLOW, -256, -348);
+	CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, true);
+	CreateVerticalTileGroup(tilePos, TILE::FALL, 2, 2, true, false);
+	tilePos->x += 640;
+	tilePos->y -= 256;
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 1, true, false);
+	CreateHorizontalTileGroup(new Vec2(tilePos->x - 512, tilePos->y - 256 ), TILE::FALL, 2, 1, true, false);
+	//tilePos->y += 256;
+	CreateTile(*tilePos, TILE::BUTTON, -256, 0);
 	// Cross
-	Vec2 tilePos2 = { tilePos.x - 256, tilePos.y - 512 };
-	tilePos2 = CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 3, false, false);
-	CreateTile({ tilePos2.x, tilePos2.y +256 }, TILE::BUTTON);
-	tilePos2.y += 512;
-	tilePos2.x += 512;
-	CreateTile({ tilePos2.x - 256, tilePos2.y -256}, TILE::TRAP);
-	CreateTrap({ tilePos2.x - 256, tilePos2.y}, ATKTRAP::FOLLOW);
-	CreateTile( tilePos2, TILE::TRAP);
-	CreateTrap( { tilePos2.x+512, tilePos2.y+256 }, ATKTRAP::TOWER);
-	CreateTrap( { tilePos2.x+768, tilePos2.y+256 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos2.x + 1280, tilePos2.y - 256 }, ATKTRAP::FOLLOW);
-	CreateTrap( { tilePos2.x+1536, tilePos2.y+256 }, ATKTRAP::TOWER);
-	CreateTile({ tilePos2.x + 768, tilePos2.y }, TILE::TRAP);
-	CreateVerticalTileGroup({ tilePos2.x + 1024, tilePos2.y }, TILE::TRAP, 1, 2, false, false);
-	tilePos2 = CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 10, 2, true, false);
-	CreateTile({ tilePos2.x, tilePos2.y - 256 }, TILE::BUTTON);
-	CreateTile({ tilePos2.x - 512, tilePos2.y }, TILE::TRAP);
-	CreateTrap({ tilePos2.x - 256, tilePos2.y + 256 }, ATKTRAP::FOLLOW);
-	tilePos2.y -= 256;
-	tilePos2 = CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 5, true, false);
-	CreateTrap({ tilePos2.x + 512, tilePos2.y - 512 }, ATKTRAP::FOLLOW);
-	tilePos2.y -= 768;
-	tilePos2.x += 512;
-	tilePos2 = CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 2, 2, true, false);
+	Vec2* tilePos2 = new Vec2( tilePos->x - 256, tilePos->y - 512 );
+	CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 3, false, false);
+	CreateTile(*tilePos2, TILE::BUTTON, 0, 256);
+	tilePos2->y += 512;
+	tilePos2->x += 512;
+	CreateTile(*tilePos2, TILE::TRAP, -256, -256);
+	CreateTrap(*tilePos2, ATKTRAP::FOLLOW, -256, 0);
+	CreateTile(*tilePos2, TILE::TRAP, 0, 0);
+	CreateTrap(*tilePos2, ATKTRAP::TOWER, 512, 256);
+	CreateTrap(*tilePos2, ATKTRAP::TOWER, 768, 256);
+	CreateTrap(*tilePos2, ATKTRAP::FOLLOW, 1280, -256);
+	CreateTrap(*tilePos2, ATKTRAP::TOWER, 1536, 256);
+	CreateTile(*tilePos2, TILE::TRAP, 768, 0);
+	CreateVerticalTileGroup(new Vec2( tilePos2->x + 1024, tilePos2->y ), TILE::TRAP, 1, 2, false, false);
+	CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 10, 2, true, false);
+	CreateTile(*tilePos2, TILE::BUTTON, 0, -256);
+	CreateTile(*tilePos2, TILE::TRAP, -512, 0);
+	CreateTrap(*tilePos2, ATKTRAP::FOLLOW, -256, 256);
+	tilePos2->y -= 256;
+	CreateVerticalTileGroup(tilePos2, TILE::NORMAL, 2, 5, true, false);
+	CreateTrap(*tilePos2, ATKTRAP::FOLLOW, 512, -512);
+	tilePos2->y -= 768;
+	tilePos2->x += 512;
+	CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 2, 2, true, false);
 
-	CreateTile({ tilePos.x + 512, tilePos.y - 256 }, TILE::TRAP);
-	CreateTile({ tilePos.x + 768, tilePos.y }, TILE::TRAP);
-	CreateHorizontalTileGroup({ tilePos.x + 1536, tilePos.y }, TILE::TRAP, 2, 1, true, false);
-	CreateTrap({ tilePos.x + 256, tilePos.y + 256 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x + 512, tilePos.y + 256 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x + 1280, tilePos.y + 256 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x + 1536, tilePos.y + 256 }, ATKTRAP::TOWER);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 11, 2, true, false);
-	CreateTrap({ tilePos.x - 768, tilePos.y + 256 }, ATKTRAP::TOWER);
-	CreateTrap({ tilePos.x - 512, tilePos.y + 256 }, ATKTRAP::TOWER);
-	CreateHorizontalTileGroup({ tilePos.x -256, tilePos.y - 256 }, TILE::TRAP, 2, 1, false, false);
-	CreateTile({ tilePos.x + 256, tilePos.y}, TILE::TRAP);
-	tilePos.x += 512;
-	CreateTile({ tilePos.x, tilePos.y}, TILE::BUTTON);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
-	tilePos.y -= 256;
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::CONDITION, 2, 2, true, false);
-	tilePos.x += 128;
-	tilePos.y -= 128;
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
-	CreateTrap({ tilePos.x, tilePos.y- 384}, ATKTRAP::LAZER);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::NORMAL, 1, 1, false, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
-	tilePos = CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
-	CreateTrap({ tilePos.x, tilePos.y + 384}, ATKTRAP::LAZER);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
-	tilePos = CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
+	CreateTile(*tilePos, TILE::TRAP, 512, -256);
+	CreateTile(*tilePos, TILE::TRAP, 768, 0);
+	CreateHorizontalTileGroup(new Vec2(tilePos->x + 1536, tilePos->y), TILE::TRAP, 2, 1, true, false);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 256, 256);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 256);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 1280, 256);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, 1536, 256);
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 11, 2, true, false);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, -768, 256);
+	CreateTrap(*tilePos, ATKTRAP::TOWER, -512, 256);
+	CreateHorizontalTileGroup(new Vec2(tilePos->x -256, tilePos->y - 256), TILE::TRAP, 2, 1, false, false);
+	CreateTile(*tilePos, TILE::TRAP, 256, 0);
+	tilePos->x += 512;
+	CreateTile(*tilePos, TILE::BUTTON);
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
+	tilePos->y -= 256;
+	CreateHorizontalTileGroup(tilePos, TILE::CONDITION, 2, 2, true, false);
+	tilePos->x += 128;
+	tilePos->y -= 128;
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
+	CreateTrap(*tilePos, ATKTRAP::LAZER, 0, -384);
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
+	CreateVerticalTileGroup(tilePos, TILE::NORMAL, 1, 1, false, true);
+	CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
+	CreateHorizontalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
+	CreateHorizontalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
+	CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
+	CreateVerticalTileGroup(tilePos, TILE::FALL, 1, 1, false, true);
+	CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
+	CreateTrap(*tilePos, ATKTRAP::LAZER, 0, 384);
+	CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
+	CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
+	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
 
 #pragma endregion
 
@@ -150,8 +150,10 @@ void PigScene::Render(HDC _hdc)
 	GET_SINGLE(UIManager)->RenderHP(_hdc);
 }
 
-void PigScene::CreateTile(Vec2 vec, TILE tileType)
+Object* PigScene::CreateTile(Vec2 vec, TILE tileType, int plusX, int plusY)
 {
+	vec.x += plusX;
+	vec.y += plusY;
 	Object* tile = nullptr;
 	switch (tileType) {
 	case TILE::NORMAL:
@@ -177,10 +179,14 @@ void PigScene::CreateTile(Vec2 vec, TILE tileType)
 	}
 	
 	tile->GetTransform()->SetPosition(vec);
+
+	return tile;
 }
 
-void PigScene::CreateTrap(Vec2 vec, ATKTRAP atkTrap)
+void PigScene::CreateTrap(Vec2 vec, ATKTRAP atkTrap, int plusX, int plusY)
 {
+	vec.x += plusX;
+	vec.y += plusY;
 	Object* trap = nullptr;
 	switch (atkTrap) {
 	case ATKTRAP::TOWER:
@@ -200,34 +206,36 @@ void PigScene::CreateTrap(Vec2 vec, ATKTRAP atkTrap)
 	trap->GetTransform()->SetPosition(vec);
 }
 
-Vec2 PigScene::CreateVerticalTileGroup(Vec2 startVec, TILE tileType, int x, int y, bool isDown, bool isJump = true)
+Object* PigScene::CreateVerticalTileGroup(Vec2* startVec, TILE tileType, int x, int y, bool isDown, bool isJump = true)
 {
+	Object* obj = nullptr;
 	int dirY = isDown ? 1 : -1;
-	int vecX = startVec.x;
+	int vecX = startVec->x;
 	for (int i = 0; i < y; ++i) {
 		for (int j = 0; j < x; ++j) {
-			CreateTile(startVec, tileType);
-			startVec.x += 256;
+			obj = CreateTile(*startVec, tileType);
+			startVec->x += 256;
 		}
-		startVec.x = vecX;
-		startVec.y += dirY * 256;
+		startVec->x = vecX;
+		startVec->y += dirY * 256;
 	}
-	if (isJump) startVec.y += dirY * 128;
-	return startVec;
+	if (isJump) startVec->y += dirY * 128;
+	return obj;
 }
 
-Vec2 PigScene::CreateHorizontalTileGroup(Vec2 startVec, TILE tileType, int x, int y, bool isRight, bool isJump = true)
+Object* PigScene::CreateHorizontalTileGroup(Vec2* startVec, TILE tileType, int x, int y, bool isRight, bool isJump = true)
 {
+	Object* obj = nullptr;
 	int dirX = isRight ? 1 : -1;
-	int vecY = startVec.y;
+	int vecY = startVec->y;
 	for (int i = 0; i < x; ++i) {
 		for (int j = 0; j < y; ++j) {
-			CreateTile(startVec, tileType);
-			startVec.y -= 256;
+			obj = CreateTile(*startVec, tileType);
+			startVec->y -= 256;
 		}
-		startVec.y = vecY;
-		startVec.x += dirX * 256;
+		startVec->y = vecY;
+		startVec->x += dirX * 256;
 	}
-	if(isJump) startVec.x += dirX * 128;
-	return startVec;
+	if(isJump) startVec->x += dirX * 128;
+	return obj;
 }
