@@ -232,6 +232,7 @@ Object* PigScene::CreateTile(Vec2 vec, TILE tileType, int plusX, int plusY)
 
 void PigScene::CreateTrap(Vec2 vec, ATKTRAP atkTrap, int plusX, int plusY)
 {
+	if (atkTrap == ATKTRAP::FOLLOW) return;
 	vec.x += plusX;
 	vec.y += plusY;
 	Object* trap = nullptr;

@@ -211,6 +211,12 @@
     <ClInclude Include="StageText.h" />
     <ClInclude Include="StageSelectButton.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="EndingManager.h" />
+    <ClInclude Include="EndingScene.h" />
+    <ClInclude Include="GameClearText.h" />
+    <ClInclude Include="GameOverText.h" />
+    <ClInclude Include="ReturnTitle.h" />
+    <ClInclude Include="TimeText.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -222,6 +228,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="2024_winapigamep_framework_22.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="..\Output\build\Resource\Texture\Noah.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -361,6 +370,13 @@
     <ClCompile Include="StageText.cpp" />
     <ClCompile Include="StageSelectButton.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="EndingManager.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
+    <ClCompile Include="GameClearText.cpp" />
+    <ClCompile Include="GameOverText.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="ReturnTitle.cpp" />
+    <ClCompile Include="TimeText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

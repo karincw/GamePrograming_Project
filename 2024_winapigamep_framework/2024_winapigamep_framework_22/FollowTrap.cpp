@@ -101,7 +101,7 @@ FollowTrap::FollowTrap()
 	detectCol->collisionEnterEvent->Insert(DetectColliderEnter);
 	detectCol->collisionExitEvent->Insert(DetectColliderExit);
 	AddComponent<CircleCollider>(detectCol);
-	detectCol->SetRadius(600);
+	detectCol->SetRadius(1);
 
 	ani->PlayAnimation(L"basic", false);
 }
