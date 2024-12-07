@@ -21,7 +21,7 @@ void SceneManager::Init()
 	RegisterScene(L"EndingScene",std::make_shared<EndingScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"Title");
+	LoadScene(L"PigScene");
 }
 
 void SceneManager::Update()

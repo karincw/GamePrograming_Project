@@ -13,7 +13,7 @@ void EndingManager::SetEnding(bool isTrue)
 
 bool EndingManager::GetEnding()
 {
-	//endTime = time(NULL);
-	//cout << endTime - startTime << endl;
+	endTime = time(NULL);
+	cout << endTime - startTime << endl;
 	return isClear;
 }

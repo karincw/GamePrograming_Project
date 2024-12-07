@@ -81,7 +81,8 @@ void PigScene::Init()
 	tilePos->y -= 256;
 	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 2, true, false);
 	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 2, 1, true, false);
-	CreateHorizontalTileGroup(new Vec2(tilePos->x - 512, tilePos->y - 256), TILE::FALL, 2, 1, true, false);
+	Vec2* vec = new Vec2(tilePos->x - 512, tilePos->y - 256);
+	CreateHorizontalTileGroup(vec, TILE::FALL, 2, 1, true, false);
 	//tilePos->y += 256;
 	btns.push_back(CreateTile(*tilePos, TILE::BUTTON, -256, 0));
 	// Cross
@@ -98,7 +99,8 @@ void PigScene::Init()
 	CreateTrap(*tilePos2, ATKTRAP::FOLLOW, 1280, -256);
 	CreateTrap(*tilePos2, ATKTRAP::TOWER, 1536, 256);
 	CreateTile(*tilePos2, TILE::TRAP, 768, 0);
-	CreateVerticalTileGroup(new Vec2(tilePos2->x + 1024, tilePos2->y), TILE::TRAP, 1, 2, false, false);
+	vec = new Vec2(tilePos2->x + 1024, tilePos2->y);
+	CreateVerticalTileGroup(vec, TILE::TRAP, 1, 2, false, false);
 	CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 10, 2, true, false);
 	btns.push_back(CreateTile(*tilePos2, TILE::BUTTON, 0, -256));
 	CreateTile(*tilePos2, TILE::TRAP, -512, 0);
@@ -112,7 +114,8 @@ void PigScene::Init()
 
 	CreateTile(*tilePos, TILE::TRAP, 512, -256);
 	CreateTile(*tilePos, TILE::TRAP, 768, 0);
-	CreateHorizontalTileGroup(new Vec2(tilePos->x + 1536, tilePos->y), TILE::TRAP, 2, 1, true, false);
+	vec = new Vec2(tilePos->x + 1536, tilePos->y);
+	CreateHorizontalTileGroup(vec, TILE::TRAP, 2, 1, true, false);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, 256, 256);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, 512, 256);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, 1280, 256);
@@ -120,7 +123,8 @@ void PigScene::Init()
 	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 11, 2, true, false);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, -768, 256);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, -512, 256);
-	CreateHorizontalTileGroup(new Vec2(tilePos->x - 256, tilePos->y - 256), TILE::TRAP, 2, 1, false, false);
+	vec = new Vec2(tilePos->x - 256, tilePos->y - 256);
+	CreateHorizontalTileGroup(vec, TILE::TRAP, 2, 1, false, false);
 	CreateTile(*tilePos, TILE::TRAP, 256, 0);
 	tilePos->x += 512;
 	btns.push_back(CreateTile(*tilePos, TILE::BUTTON));
@@ -165,6 +169,10 @@ void PigScene::Init()
 		}
 	}
 
+
+	delete tilePos;
+	delete tilePos2;
+	delete vec;
 }
 
 void PigScene::Render(HDC _hdc)
