@@ -9,8 +9,17 @@
 #include "DirectionArrow.h"
 #include "Background.h"
 
+Title::Title()
+{
+}
+
+Title::~Title()
+{
+}
+
 void Title::Init()
 {
+	Scene::Init();
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	cm->CheckReset();
 	cm->CheckLayer(LAYER::UI, LAYER::UI);

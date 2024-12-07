@@ -56,6 +56,7 @@ void Stage2::CreateArrow(Vec2 v, wstring d)
 
 void Stage2::Init()
 {
+	Scene::Init();
 	GET_SINGLE(EndingManager)->Init();
 
 	CollisionManager* cm = GET_SINGLE(CollisionManager);

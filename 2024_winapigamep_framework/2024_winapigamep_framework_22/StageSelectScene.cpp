@@ -7,6 +7,7 @@
 
 void StageSelectScene::Init()
 {
+	Scene::Init();
 	StageText* stageText = new StageText;
 	StageButton* stage1 = new StageButton;
 	StageButton* stage2 = new StageButton;

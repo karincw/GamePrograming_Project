@@ -8,8 +8,6 @@
 Scene::Scene()
 	:m_vecObj{}
 {
-	currentCamera = new Camera;
-	currentCamera->SetScene(this);
 }
 
 Scene::~Scene()
@@ -40,6 +38,12 @@ bool IsInWindow(Transform* trm)
 		State = false;
 
 	return State;
+}
+
+void Scene::Init()
+{
+	currentCamera = new Camera;
+	currentCamera->SetScene(this);
 }
 
 void Scene::Update()

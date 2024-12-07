@@ -11,6 +11,7 @@
 
 void EndingScene::Init()
 {
+	Scene::Init();
 	Object* gameResultText = nullptr;
 
 	if(GET_SINGLE(EndingManager)->GetEnding())

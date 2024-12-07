@@ -22,7 +22,7 @@ ReturnTitle::~ReturnTitle()
 void ReturnTitle::Update()
 {
     if (GET_KEYDOWN(KEY_TYPE::SPACE)) {
-        GET_SINGLE(SceneManager)->SafeLoadScene(L"Title");
+        GET_SINGLE(SceneManager)->LoadScene(L"Title");
     }
 }
 
