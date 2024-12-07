@@ -35,6 +35,7 @@ void Collider::LateUpdate()
 
 void Collider::Render(HDC _hdc)
 {
+	return;
 	if (!_enable) return;
 	PEN_TYPE ePen = PEN_TYPE::GREEN;
 	if (m_showDebug)

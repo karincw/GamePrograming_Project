@@ -4,9 +4,7 @@
 #include "Object.h"
 #include "Texture.h"
 #include "TimeManager.h"
-
 #include "Action.h"
-#include "Object.h"
 #include "Camera.h"
 #include "Scene.h"
 #include "SceneManager.h"

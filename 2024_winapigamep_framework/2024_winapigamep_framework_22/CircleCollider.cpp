@@ -23,6 +23,7 @@ void CircleCollider::LateUpdate()
 
 void CircleCollider::Render(HDC _hdc)
 {
+	return;
 	PEN_TYPE ePen = PEN_TYPE::GREEN;
 	if (m_showDebug)
 		ePen = PEN_TYPE::RED;

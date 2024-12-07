@@ -44,8 +44,8 @@ void ColliderStay(Collider* _other, Object* owner)
 		trm->SetPosition(obj->GetTransform()->GetPosition() + Vec2(30, 20));
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(boom, LAYER::PROJECTILE);
 		GET_SINGLE(EventManager)->DeleteObject(owner);
+		ag->Hit();
 	}
-	ag->Hit();
 }
 
 void FollowTrap::Accel()
@@ -101,7 +101,7 @@ FollowTrap::FollowTrap()
 	detectCol->collisionEnterEvent->Insert(DetectColliderEnter);
 	detectCol->collisionExitEvent->Insert(DetectColliderExit);
 	AddComponent<CircleCollider>(detectCol);
-	detectCol->SetRadius(700);
+	detectCol->SetRadius(600);
 
 	ani->PlayAnimation(L"basic", false);
 }
