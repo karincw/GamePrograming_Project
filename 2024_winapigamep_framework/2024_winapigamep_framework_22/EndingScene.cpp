@@ -40,7 +40,3 @@ void EndingScene::Render(HDC _hdc)
 {
 	Scene::Render(_hdc);
 }
-
-void EndingScene::Release()
-{
-}

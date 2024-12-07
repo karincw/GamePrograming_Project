@@ -31,7 +31,3 @@ void StageSelectScene::Render(HDC _hdc)
 {
 	Scene::Render(_hdc);
 }
-
-void StageSelectScene::Release()
-{
-}

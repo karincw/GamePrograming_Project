@@ -18,7 +18,7 @@
 
 #define SPEED 350
 #define ROLLING_SPEED 600
-#define DAMAGE 10
+#define DAMAGE 100
 
 void EndRolling(Object* owner);
 void EndHit(Object* owner);

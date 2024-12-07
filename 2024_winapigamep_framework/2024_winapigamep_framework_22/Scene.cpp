@@ -42,6 +42,7 @@ bool IsInWindow(Transform* trm)
 
 void Scene::Init()
 {
+	std::cout << "Init\n";
 	currentCamera = new Camera;
 	currentCamera->SetScene(this);
 }
@@ -106,6 +107,7 @@ void Scene::Render(HDC _hdc)
 
 void Scene::Release()
 {
+	std::cout << "Release\n";
 	delete currentCamera;
 	currentCamera = nullptr; // 안전하게 초기화
 

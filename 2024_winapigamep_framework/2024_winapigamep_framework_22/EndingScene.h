@@ -6,6 +6,5 @@ class EndingScene :
 public:
 	void Init() override;
 	void Render(HDC _hdc) override;
-	void Release() override;
 };
 
