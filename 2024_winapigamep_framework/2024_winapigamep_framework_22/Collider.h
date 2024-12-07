@@ -33,9 +33,9 @@ public:
 	}
 	void UpdateLatedUpatedPos();
 public:
-	VariadicAction<Collider*, Object*>* collisionEnterEvent;
-	VariadicAction<Collider*, Object*>* collisionStayEvent;
-	VariadicAction<Collider*, Object*>* collisionExitEvent;
+	std::unique_ptr<VariadicAction<Collider*, Object*>> collisionEnterEvent;
+	std::unique_ptr<VariadicAction<Collider*, Object*>> collisionStayEvent;
+	std::unique_ptr<VariadicAction<Collider*, Object*>> collisionExitEvent;
 protected:
 	bool m_showDebug = false;
 	UINT m_ID; // 충돌체 고유 ID값

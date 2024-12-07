@@ -14,16 +14,14 @@ Collider::Collider()
 	, m_vOffsetPos(0.f, 0.f)
 	, m_ID(m_sNextID++)
 {
-	collisionEnterEvent = new VariadicAction<Collider*, Object*>();
-	collisionStayEvent = new VariadicAction<Collider*, Object*>();
-	collisionExitEvent = new VariadicAction<Collider*, Object*>();
+	collisionEnterEvent = std::make_unique<VariadicAction<Collider*, Object*>>();
+	collisionStayEvent = std::make_unique<VariadicAction<Collider*, Object*>>();
+	collisionExitEvent = std::make_unique<VariadicAction<Collider*, Object*>>();
 }
 
 Collider::~Collider()
 {
-	delete collisionEnterEvent;
-	delete collisionStayEvent;
-	delete collisionExitEvent;
+
 }
 
 void Collider::LateUpdate()
@@ -49,25 +47,25 @@ void Collider::Render(HDC _hdc)
 
 void Collider::EnterCollision(Collider* _other)
 {
-	if (!_enable) return;
+	if (!_enable || !_other) return;
 	m_showDebug = true;
-	GetOwner()->EnterCollision(_other);
 	collisionEnterEvent->Invoke(_other, GetOwner());
+	GetOwner()->EnterCollision(_other);
 }
 
 void Collider::StayCollision(Collider* _other)
 {
-	if (!_enable) return;
-	GetOwner()->StayCollision(_other);
+	if (!_enable || !_other) return;
 	collisionStayEvent->Invoke(_other, GetOwner());
+	GetOwner()->StayCollision(_other);
 }
 
 void Collider::ExitCollision(Collider* _other)
 {
-	if (!_enable) return;
-	GetOwner()->ExitCollision(_other);
+	if (!_enable || !_other) return;
 	m_showDebug = false;
 	collisionExitEvent->Invoke(_other, GetOwner());
+	GetOwner()->ExitCollision(_other);
 }
 
 void Collider::UpdateLatedUpatedPos()

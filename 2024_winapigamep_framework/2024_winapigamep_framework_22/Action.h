@@ -65,7 +65,7 @@ public:
 
 	void Invoke(T t, Types... value)
 	{
-		if (funcs.size() <= 0) return;
+		if (funcs.empty()) return;
 		for (auto f : funcs)
 		{
 			f(t, value...);

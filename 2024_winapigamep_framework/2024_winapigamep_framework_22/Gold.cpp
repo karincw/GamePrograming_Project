@@ -39,6 +39,6 @@ void Gold::EnterCollision(Collider* _other)
 	{
 		std::cout << "°ÔÀÓ ³¡";
 		GET_SINGLE(EndingManager)->SetEnding(true);
-		GET_SINGLE(SceneManager)->LoadScene(L"EndingScene");
+		GET_SINGLE(SceneManager)->SafeLoadScene(L"EndingScene");
 	}
 }

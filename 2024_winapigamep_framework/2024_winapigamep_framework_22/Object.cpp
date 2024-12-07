@@ -13,11 +13,16 @@ Object::Object()
 
 Object::~Object()
 {
-	for (Component* com : m_vecComponents)
+	for (int i = 0; i < m_vecComponents.size(); i++)
 	{
-		if (com != nullptr)
-			delete com;
+		if (m_vecComponents[i] != nullptr)
+		{
+			m_vecComponents[i]->SetEnable(false);
+			delete m_vecComponents[i];
+			m_vecComponents[i] = nullptr;
+		}
 	}
+
 	m_vecComponents.clear();
 }
 
