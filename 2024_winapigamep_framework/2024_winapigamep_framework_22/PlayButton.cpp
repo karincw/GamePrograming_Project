@@ -5,12 +5,12 @@
 
 PlayButton::PlayButton()
 {
-	GetTransform()->SetScale({ 240, 80 });
+	GetTransform()->SetScale({ 150, 75 });
 
 	AddComponent<SpriteRenderer>();
 	SpriteRenderer* spriteRenderer = GetComponent<SpriteRenderer>();
 	spriteRenderer->CreateTexture(L"Texture\\Play.bmp", L"play");
-	GetTransform()->SetPosition({ 250 , 400 });
+	GetTransform()->SetPosition({ 200 , 300 });
 }
 
 PlayButton::~PlayButton()

@@ -5,12 +5,12 @@
 
 ExitButton::ExitButton()
 {
-	GetTransform()->SetScale({ 240, 80 });
+	GetTransform()->SetScale({ 150, 75 });
 
 	AddComponent<SpriteRenderer>();
 	SpriteRenderer* spriteRenderer = GetComponent<SpriteRenderer>();
 	spriteRenderer->CreateTexture(L"Texture\\Exit.bmp", L"exit");
-	GetTransform()->SetPosition({ 250 , 500 });
+	GetTransform()->SetPosition({ 200 , 400 });
 }
 
 ExitButton::~ExitButton()

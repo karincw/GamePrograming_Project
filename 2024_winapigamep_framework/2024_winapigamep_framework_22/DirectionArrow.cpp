@@ -10,8 +10,8 @@ DirectionArrow::DirectionArrow()
 
 	AddComponent<SpriteRenderer>();
 	SpriteRenderer* spriteRenderer = GetComponent<SpriteRenderer>();
-	spriteRenderer->CreateTexture(L"Texture\\DirectionArrow_Right.bmp", L"direction_arrow");
-	GetTransform()->SetPosition({ 100 , 400 });
+	spriteRenderer->CreateTexture(L"Texture\\SelectArrow.bmp", L"selectArrow");
+	GetTransform()->SetPosition({ 100 , 300 });
 }
 
 DirectionArrow::~DirectionArrow()
@@ -39,7 +39,7 @@ void DirectionArrow::Update()
 		switch (selectType)
 		{
 		case SELECT_TYPE::PLAY:
-			GET_SINGLE(SceneManager)->LoadScene(L"PigScene");
+			GET_SINGLE(SceneManager)->LoadScene(L"StageSelectScene");
 			break;
 		case SELECT_TYPE::EXIT:
 			HANDLE hProcess = GetCurrentProcess();

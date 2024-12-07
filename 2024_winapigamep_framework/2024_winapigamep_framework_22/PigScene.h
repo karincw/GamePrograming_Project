@@ -7,7 +7,8 @@ enum class TILE
 	TRAP,
 	FALL,
 	BUTTON,
-	CONDITION
+	CONDITION,
+	GOLD,
 };
 
 enum class ATKTRAP

@@ -25,7 +25,7 @@ public:
 	void ChangeTypeToPlay();
 private:
 	SELECT_TYPE selectType = SELECT_TYPE::PLAY;
-	int playPos = 400;
-	int exitPos = 500;
+	int playPos = 300;
+	int exitPos = 400;
 };
 

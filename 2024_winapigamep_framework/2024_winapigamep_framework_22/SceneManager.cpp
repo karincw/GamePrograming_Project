@@ -6,6 +6,7 @@
 #include "BishojoScene.h"
 #include "TimeManager.h"
 #include "Stage2.h"
+#include "StageSelectScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -14,10 +15,11 @@ void SceneManager::Init()
 	RegisterScene(L"BishojoScene",std::make_shared<BishojoScene>());
 	RegisterScene(L"Title",std::make_shared<Title>());
 	RegisterScene(L"PigScene",std::make_shared<PigScene>());
+	RegisterScene(L"StageSelectScene",std::make_shared<StageSelectScene>());
 	RegisterScene(L"Stage2",std::make_shared<Stage2>());
 
 	// ¾À ·Îµå
-	LoadScene(L"Stage2");
+	LoadScene(L"Title");
 }
 
 void SceneManager::Update()

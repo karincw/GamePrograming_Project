@@ -1,13 +1,13 @@
 #pragma once
 #include "Object.h"
-class Collider;
-class Gold : public Object
+class StageText :
+    public Object
 {
 public:
-	Gold();
-	~Gold();
+	StageText();
+	~StageText();
 public:
 	void Update() override;
 	void Render(HDC _hdc) override;
-	void EnterCollision(Collider* _other) override;
 };
+

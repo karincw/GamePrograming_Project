@@ -1,19 +1,19 @@
 #include "pch.h"
 #include "Gold.h"
 #include "SpriteRenderer.h"
-#include "CircleCollider.h"
+#include "Collider.h"
 
 Gold::Gold()
 {
-	GetTransform()->SetScale({ 32,32 });
+	GetTransform()->SetScale({ 200, 200 });
 
 	AddComponent<SpriteRenderer>();
 	SpriteRenderer* sp = GetComponent<SpriteRenderer>();
-	//sp->CreateTexture(L"", L"");
+	sp->CreateTexture(L"Texture\\Gold.bmp", L"gold");
 
-	AddComponent<CircleCollider>();
-	CircleCollider* cc = GetComponent<CircleCollider>();
-	cc->SetRadius(48);
+	AddComponent<Collider>();
+	Collider* collider = GetComponent<Collider>();
+	collider->SetSize({ 200, 200 });
 
 }
 

@@ -195,6 +195,22 @@
     </ClInclude>
     <ClInclude Include="RollingSkillUI.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Condition.h" />
+    <ClInclude Include="Conditionable.h" />
+    <ClInclude Include="ConditionTile.h" />
+    <ClInclude Include="Direction.h" />
+    <ClInclude Include="DirectionArrow.h" />
+    <ClInclude Include="ExitButton.h" />
+    <ClInclude Include="PlayButton.h" />
+    <ClInclude Include="Stage2.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleText.h" />
+    <ClInclude Include="Gold.h" />
+    <ClInclude Include="StageButton.h" />
+    <ClInclude Include="StageSelectScene.h" />
+    <ClInclude Include="StageText.h" />
+    <ClInclude Include="StageSelectButton.h" />
+    <ClInclude Include="Background.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -329,6 +345,22 @@
     </ClCompile>
     <ClCompile Include="RollingSkillUI.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Condition.cpp" />
+    <ClCompile Include="Conditionable.cpp" />
+    <ClCompile Include="ConditionTile.cpp" />
+    <ClCompile Include="Direction.cpp" />
+    <ClCompile Include="DirectionArrow.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
+    <ClCompile Include="PlayButton.cpp" />
+    <ClCompile Include="Stage2.cpp" />
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleText.cpp" />
+    <ClCompile Include="Gold.cpp" />
+    <ClCompile Include="StageButton.cpp" />
+    <ClCompile Include="StageSelectScene.cpp" />
+    <ClCompile Include="StageText.cpp" />
+    <ClCompile Include="StageSelectButton.cpp" />
+    <ClCompile Include="Background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

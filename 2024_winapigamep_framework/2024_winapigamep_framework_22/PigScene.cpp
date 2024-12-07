@@ -16,6 +16,7 @@
 #include "Button.h"
 #include "ConditionTile.h"
 #include "ResourceManager.h"
+#include "Gold.h"
 
 void PigScene::Init()
 {
@@ -141,6 +142,7 @@ void PigScene::Init()
 	CreateHorizontalTileGroup(tilePos, TILE::TRAP, 1, 1, true, true);
 	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 1, 1, true, true);
 	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 8, 1, true, false);
+	CreateTile({ tilePos->x - 256, tilePos->y }, TILE::GOLD, 0, 0);
 
 #pragma endregion
 
@@ -200,6 +202,10 @@ Object* PigScene::CreateTile(Vec2 vec, TILE tileType, int plusX, int plusY)
 		break;
 	case TILE::CONDITION:
 		tile = new ConditionTile;
+		AddObject(tile, LAYER::BACKGROUND);
+		break;
+	case TILE::GOLD:
+		tile = new Gold;
 		AddObject(tile, LAYER::BACKGROUND);
 		break;
 	}

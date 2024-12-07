@@ -7,6 +7,7 @@
 #include "PlayButton.h"
 #include "ExitButton.h"
 #include "DirectionArrow.h"
+#include "Background.h"
 
 void Title::Init()
 {
@@ -26,4 +27,6 @@ void Title::Init()
 	ExitButton* exit = new ExitButton;
 	AddObject(exit, LAYER::UI);
 
+	Background* background = new Background;
+	AddObject(background, LAYER::BACKGROUND);
 }
