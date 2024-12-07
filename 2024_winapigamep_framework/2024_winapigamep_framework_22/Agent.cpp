@@ -29,7 +29,7 @@ Vec2 GetMoveDir();
 Agent::Agent()
 	: isRight(true), isRun(false)
 	, isRolling(false), canRolling(true)
-	, isHit(false), canHit(true)
+	, isHit(false), canHit(false)
 	, backUpTile(nullptr)
 	, isGroundCheck(true)
 {
@@ -77,13 +77,12 @@ Agent::Agent()
 	SetName(L"Player");
 	isGroundCheck = true;
 
-	canHit = false;
 	auto start = [](Object* owner) {
 		auto agent = dynamic_cast<Agent*>(owner);
 		if (agent)
 			agent->canHit = true;
 		};
-	GET_SINGLE(TimeManager)->DelayRun(0.3f, start, this);
+	GET_SINGLE(TimeManager)->DelayRun(0.5f, start, this);
 }
 Agent::~Agent()
 {

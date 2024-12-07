@@ -15,6 +15,7 @@
 #include "ConditionTile.h"
 #include "Button.h"
 #include "Direction.h"
+#include "Gold.h"
 
 #define offset 128;
 
@@ -317,6 +318,9 @@ void Stage2::Init()
 	move(tsp, 8, 2);
 	CreateObject(tsp, OBJECT_TYPE::FOLLOW);
 
+	move(tsp, 10, -14);
+	CreateObject(tsp, OBJECT_TYPE::GOLD);
+
 }
 
 void Stage2::Render(HDC _hdc)
@@ -361,6 +365,10 @@ Object* Stage2::CreateObject(Vec2 vec, OBJECT_TYPE type)
 	case OBJECT_TYPE::FOLLOW:
 		tile = new FollowTrap;
 		AddObject(tile, LAYER::PROJECTILE);
+		break;
+	case OBJECT_TYPE::GOLD:
+		tile = new Gold;
+		AddObject(tile, LAYER::BACKGROUND);
 		break;
 	default:
 		break;

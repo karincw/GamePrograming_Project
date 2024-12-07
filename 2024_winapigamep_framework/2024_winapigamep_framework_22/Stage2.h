@@ -11,6 +11,7 @@ enum class OBJECT_TYPE
 	TOWER,
 	LAZER,
 	FOLLOW,
+	GOLD
 };
 
 class Stage2 : public Scene

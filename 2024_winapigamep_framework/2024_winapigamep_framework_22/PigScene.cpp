@@ -99,6 +99,7 @@ void PigScene::Init()
 	CreateTrap(*tilePos2, ATKTRAP::FOLLOW, 1280, -256);
 	CreateTrap(*tilePos2, ATKTRAP::TOWER, 1536, 256);
 	CreateTile(*tilePos2, TILE::TRAP, 768, 0);
+	delete vec;
 	vec = new Vec2(tilePos2->x + 1024, tilePos2->y);
 	CreateVerticalTileGroup(vec, TILE::TRAP, 1, 2, false, false);
 	CreateHorizontalTileGroup(tilePos2, TILE::NORMAL, 10, 2, true, false);
@@ -114,6 +115,7 @@ void PigScene::Init()
 
 	CreateTile(*tilePos, TILE::TRAP, 512, -256);
 	CreateTile(*tilePos, TILE::TRAP, 768, 0);
+	delete vec;
 	vec = new Vec2(tilePos->x + 1536, tilePos->y);
 	CreateHorizontalTileGroup(vec, TILE::TRAP, 2, 1, true, false);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, 256, 256);
@@ -123,6 +125,7 @@ void PigScene::Init()
 	CreateHorizontalTileGroup(tilePos, TILE::NORMAL, 11, 2, true, false);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, -768, 256);
 	CreateTrap(*tilePos, ATKTRAP::TOWER, -512, 256);
+	delete vec;
 	vec = new Vec2(tilePos->x - 256, tilePos->y - 256);
 	CreateHorizontalTileGroup(vec, TILE::TRAP, 2, 1, false, false);
 	CreateTile(*tilePos, TILE::TRAP, 256, 0);
@@ -151,11 +154,6 @@ void PigScene::Init()
 	CreateTile({ tilePos->x - 256, tilePos->y }, TILE::GOLD, 0, 0);
 
 #pragma endregion
-
-
-	auto tile = new Gold;
-	tile->GetTransform()->SetPosition({ 600 ,0 });
-	AddObject(tile, LAYER::BACKGROUND);
 
 	Agent* agent = new Agent;
 	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
