@@ -273,7 +273,7 @@ void Agent::Hit()
 
 	if (!ApplyDamage())
 	{
-		//Á×¾úÀ½
+		GET_SINGLE(SceneManager)->SafeLoadScene(L"EndingScene");
 	}
 
 	isRun = false;

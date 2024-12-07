@@ -15,7 +15,7 @@
 #include "ConditionTile.h"
 #include "Button.h"
 #include "Direction.h"
-#include "Gold.h"
+#include "EndingManager.h"
 
 #define offset 128;
 
@@ -56,6 +56,8 @@ void Stage2::CreateArrow(Vec2 v, wstring d)
 
 void Stage2::Init()
 {
+	GET_SINGLE(EndingManager)->Init();
+
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	ResourceManager* rm = GET_SINGLE(ResourceManager);
 	rm->LoadSound(L"BGM", L"Sound\\BGM.mp3", true);
@@ -318,15 +320,19 @@ void Stage2::Init()
 	move(tsp, 8, 2);
 	CreateObject(tsp, OBJECT_TYPE::FOLLOW);
 
-	move(tsp, 10, -14);
-	CreateObject(tsp, OBJECT_TYPE::GOLD);
-
 }
 
 void Stage2::Render(HDC _hdc)
 {
 	Scene::Render(_hdc);
 	GET_SINGLE(UIManager)->RenderHP(_hdc);
+}
+
+void Stage2::Release()
+{
+	Scene::Release();
+	ResourceManager* rm = GET_SINGLE(ResourceManager);
+	rm->Stop(SOUND_CHANNEL::BGM);
 }
 
 Object* Stage2::CreateObject(Vec2 vec, OBJECT_TYPE type)
@@ -365,10 +371,6 @@ Object* Stage2::CreateObject(Vec2 vec, OBJECT_TYPE type)
 	case OBJECT_TYPE::FOLLOW:
 		tile = new FollowTrap;
 		AddObject(tile, LAYER::PROJECTILE);
-		break;
-	case OBJECT_TYPE::GOLD:
-		tile = new Gold;
-		AddObject(tile, LAYER::BACKGROUND);
 		break;
 	default:
 		break;

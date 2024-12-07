@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "BaseWindow.h"
+#include "Windows.h"
 #include "Resource.h"
 #include "Core.h"
 BaseWindow::BaseWindow()
@@ -57,12 +58,12 @@ ATOM BaseWindow::MyRegisterClass()
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = m_hInst;
-    wcex.hIcon = LoadIcon(m_hInst, MAKEINTRESOURCE(IDI_MY2024WINAPIGAMEPFRAMEWORK22));
+    wcex.hIcon = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_ICON1));
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
     wcex.lpszMenuName = nullptr;
-    wcex.lpszClassName = L"2-2 Gamep";
-    wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    wcex.lpszClassName = L"TRAP RUNNER";
+    wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_ICON1));
 
     return RegisterClassExW(&wcex);
 }
@@ -76,8 +77,8 @@ void BaseWindow::createWindow()
     int Winposy = ResolutionY / 2 - SCREEN_HEIGHT / 2;
 
     m_hWnd = CreateWindowW(
-        L"2-2 Gamep", // 윈도우 클래스 식별자
-        L"준용의 윈도우",   // 제목
+        L"TRAP RUNNER", // 윈도우 클래스 식별자
+        L"TRAP RUNNER",   // 제목
         WS_OVERLAPPEDWINDOW, // 윈도우 어떤 스타일로 만들것인가
         Winposx,  // ★ 띄울 위치의 LEFT
         Winposy,             // ★ 띄울 위치의 TOP
