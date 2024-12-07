@@ -8,6 +8,7 @@
 #include "Stage2.h"
 #include "StageSelectScene.h"
 #include "EndingScene.h"
+#include "CollisionManager.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -48,6 +49,7 @@ void SceneManager::RegisterScene(const wstring& _sceneName, std::shared_ptr<Scen
 
 void SceneManager::LoadScene(const wstring& _sceneName)
 {
+	GET_SINGLE(CollisionManager)->CheckReset();
 	// ¾ÀÀÌ ÀÖÀ¸¸é
 	if (m_pCurrentScene != nullptr)
 	{
@@ -62,4 +64,9 @@ void SceneManager::LoadScene(const wstring& _sceneName)
 		m_pCurrentScene = iter->second;
 		m_pCurrentScene->Init();
 	}
+}
+
+void SceneManager::SafeLoadScene(const wstring& _sceneName)
+{
+	GET_SINGLE(CollisionManager)->SafeLoadScene(_sceneName);
 }

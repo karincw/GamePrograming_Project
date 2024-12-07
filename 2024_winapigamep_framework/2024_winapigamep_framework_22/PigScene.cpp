@@ -148,6 +148,11 @@ void PigScene::Init()
 
 #pragma endregion
 
+
+	auto tile = new Gold;
+	tile->GetTransform()->SetPosition({ 600 ,0 });
+	AddObject(tile, LAYER::BACKGROUND);
+
 	Agent* agent = new Agent;
 	agent->GetTransform()->SetPosition({ SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2 });
 	AddObject(agent, LAYER::PLAYER);

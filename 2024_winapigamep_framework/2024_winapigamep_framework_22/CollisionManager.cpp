@@ -7,6 +7,9 @@
 #include "CircleCollider.h"
 void CollisionManager::Update()
 {
+	if (!GET_SINGLE(SceneManager)->GetCurrentScene())
+		return;
+
 	for (UINT Row = 0; Row < (UINT)LAYER::END; ++Row)
 	{
 		for (UINT Col = Row; Col < (UINT)LAYER::END; ++Col)
@@ -76,10 +79,10 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 
 			for (auto leftCol : pLeftColliders)
 			{
-				if (!leftCol->GetEnable()) continue;
+				if (!leftCol->GetEnable() || !leftCol) continue;
 				for (auto rightCol : pRightColliders)
 				{
-					if (!rightCol->GetEnable()) continue;
+					if (!rightCol->GetEnable() || !rightCol) continue;
 					colliderID.left_ID = leftCol->GetID();
 					colliderID.right_ID = rightCol->GetID();
 
@@ -133,6 +136,12 @@ void CollisionManager::CollisionLayerUpdate(LAYER _left, LAYER _right)
 			}
 		}
 	}
+	if (loadScene)
+	{
+		loadScene = false;
+		GET_SINGLE(SceneManager)->LoadScene(sceneName);
+	}
+
 }
 
 bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
@@ -191,4 +200,10 @@ bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 		RECT rt;
 		return ::IntersectRect(&rt, &leftRt, &rightRt);
 	}
+}
+
+void CollisionManager::SafeLoadScene(wstring s)
+{
+	sceneName = s;
+	loadScene = true;
 }
