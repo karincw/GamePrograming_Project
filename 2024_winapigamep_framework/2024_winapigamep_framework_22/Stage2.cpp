@@ -15,6 +15,7 @@
 #include "ConditionTile.h"
 #include "Button.h"
 #include "Direction.h"
+#include "EndingManager.h"
 
 #define offset 128;
 
@@ -55,6 +56,8 @@ void Stage2::CreateArrow(Vec2 v, wstring d)
 
 void Stage2::Init()
 {
+	GET_SINGLE(EndingManager)->Init();
+
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	ResourceManager* rm = GET_SINGLE(ResourceManager);
 	rm->LoadSound(L"BGM", L"Sound\\BGM.mp3", true);
@@ -323,6 +326,13 @@ void Stage2::Render(HDC _hdc)
 {
 	Scene::Render(_hdc);
 	GET_SINGLE(UIManager)->RenderHP(_hdc);
+}
+
+void Stage2::Release()
+{
+	Scene::Release();
+	ResourceManager* rm = GET_SINGLE(ResourceManager);
+	rm->Stop(SOUND_CHANNEL::BGM);
 }
 
 Object* Stage2::CreateObject(Vec2 vec, OBJECT_TYPE type)

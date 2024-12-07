@@ -219,6 +219,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ReturnTitle.h" />
     <ClInclude Include="Rigidbody2D.h" />
     <ClInclude Include="RollingSkillUI.h" />
     <ClInclude Include="Scene.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="BishojoObject.h" />
     <ClInclude Include="TileObject.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TimeText.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="TitleText.h" />
     <ClInclude Include="Transform.h" />
@@ -294,6 +296,7 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="ReturnTitle.cpp" />
     <ClCompile Include="Rigidbody2D.cpp" />
     <ClCompile Include="RollingSkillUI.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -310,6 +313,7 @@
     <ClCompile Include="BishojoObject.cpp" />
     <ClCompile Include="TileObject.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TimeText.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="TitleText.cpp" />
     <ClCompile Include="Transform.cpp" />
