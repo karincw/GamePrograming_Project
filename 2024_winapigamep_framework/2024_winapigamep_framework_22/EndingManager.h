@@ -8,7 +8,8 @@ public:
 	void Init();
 	void SetEnding(bool isClear);
 	bool GetEnding();
-	LPCWSTR GetTime();
+	void ResetTime();
+	std::wstring GetTime();
 private:
 	bool isClear = false;
 	time_t startTime = NULL;

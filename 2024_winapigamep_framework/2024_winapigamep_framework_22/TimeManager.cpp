@@ -42,8 +42,7 @@ void TimeManager::Update()
 		static wchar_t buf[100] = {};
 		swprintf_s(buf, L"FPS: %d, DT: %f, Mouse: (%d, %d)", m_fps, m_dT
 			, mousepos.x, mousepos.y);
-		::SetWindowText(GET_SINGLE(Core)->GetHwnd()
-			, buf);
+		//::SetWindowText(GET_SINGLE(Core)->GetHwnd(), buf);
 	}
 
 	for (size_t i = 0; i < delays.size();)

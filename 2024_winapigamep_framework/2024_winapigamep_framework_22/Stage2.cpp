@@ -16,6 +16,7 @@
 #include "Button.h"
 #include "Direction.h"
 #include "EndingManager.h"
+#include "Gold.h"
 
 #define offset 128;
 
@@ -376,6 +377,10 @@ Object* Stage2::CreateObject(Vec2 vec, OBJECT_TYPE type)
 	case OBJECT_TYPE::FOLLOW:
 		tile = new FollowTrap;
 		AddObject(tile, LAYER::PROJECTILE);
+		break;
+	case OBJECT_TYPE::GOLD:
+		tile = new Gold;
+		AddObject(tile, LAYER::BACKGROUND);
 		break;
 	default:
 		break;

@@ -4,7 +4,7 @@
 
 void EndingManager::Init()
 {
-	startTime = time(NULL);
+	ResetTime();
 }
 
 void EndingManager::SetEnding(bool isTrue)
@@ -19,13 +19,12 @@ bool EndingManager::GetEnding()
 	return isClear;
 }
 
-LPCWSTR EndingManager::GetTime()
+void EndingManager::ResetTime()
 {
-    double elapsedSeconds = difftime(endTime, startTime);
+	startTime = time(NULL);
+}
 
-    std::wstringstream wss;
-    wss << elapsedSeconds << L" SEC";
-
-    static std::wstring result = wss.str();
-    return result.c_str();
+std::wstring EndingManager::GetTime()
+{
+	return std::to_wstring(endTime - startTime) + L" SEC";
 }

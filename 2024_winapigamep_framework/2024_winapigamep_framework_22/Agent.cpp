@@ -83,6 +83,9 @@ Agent::Agent()
 			agent->canHit = true;
 		};
 	GET_SINGLE(TimeManager)->DelayRun(0.5f, start, this);
+
+	UIManager* uiManager = GET_SINGLE(UIManager);
+	uiManager->SetHPPercent(100);
 }
 Agent::~Agent()
 {

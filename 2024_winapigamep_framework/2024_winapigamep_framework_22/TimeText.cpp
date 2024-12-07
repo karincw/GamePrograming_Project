@@ -24,6 +24,12 @@ void TimeText::Update()
 
 void TimeText::Render(HDC _hdc)
 {
+    ComponentRender(_hdc);
+    PrintText(_hdc);
+}
+
+void TimeText::PrintText(HDC _hdc)
+{
     HFONT hFont = CreateFont(
         80,                // Height (폰트 크기)
         0,                 // Width (0이면 자동 설정)
@@ -45,8 +51,6 @@ void TimeText::Render(HDC _hdc)
 
     HFONT oldFont = (HFONT)SelectObject(_hdc, hFont);
 
-	TextOut(_hdc, 400, 210, GET_SINGLE(EndingManager)->GetTime(), 8);
+    TextOut(_hdc, 400, 210, GET_SINGLE(EndingManager)->GetTime().c_str(), 8);
     DeleteObject(hFont);
-
-    ComponentRender(_hdc);
 }

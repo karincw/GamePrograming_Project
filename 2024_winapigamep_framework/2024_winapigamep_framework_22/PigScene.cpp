@@ -25,6 +25,7 @@ void PigScene::Init()
 	GET_SINGLE(EndingManager)->Init();
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	ResourceManager* rm = GET_SINGLE(ResourceManager);
+
 	rm->LoadSound(L"BGM", L"Sound\\BGM.mp3", true);
 	rm->Play(L"BGM");
 	cm->CheckReset();
