@@ -14,64 +14,17 @@
 #include "Object.h"
 #include "FallTileObject.h"
 #include "RollingSkillUI.h"
+#include "ResourceManager.h"
 
 #define SPEED 350
 #define ROLLING_SPEED 600
 #define DAMAGE 10
 
-#pragma region Callback Actions
-
-void EndRolling(Object* owner)
-{
-	Agent* agent = dynamic_cast<Agent*>(owner);
-	agent->isRolling = false;
-	agent->isGroundCheck = false;
-
-	auto func = [](Object* obj) {
-		Agent* agent = dynamic_cast<Agent*>(obj);
-		if (agent)
-			agent->canRolling = true;
-		};
-
-	GET_SINGLE(TimeManager)->DelayRun(0.2f, func, owner);
-}
-void EndHit(Object* owner)
-{
-	Agent* agent = dynamic_cast<Agent*>(owner);
-	agent->isHit = false;
-
-	auto func = [](Object* obj) {
-		Agent* agent = dynamic_cast<Agent*>(obj);
-		if (agent)
-			agent->canHit = true;
-		};
-
-	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
-}
-void SetMoveToBeforeTile(Object* owner)
-{
-	Agent* agent = dynamic_cast<Agent*>(owner);
-	if (!agent->backUpTile) return;
-
-	Vec2 dir = agent->backUpTile->GetTransform()->GetPosition() - agent->GetTransform()->GetPosition();
-	agent->GetTransform()->Translate(dir);
-	agent->cam->GetTransform()->Translate(dir);
-	agent->rollingSkillUI->GetTransform()->Translate(dir);
-}
-
-#pragma endregion
-
-bool ApplyDamage()
-{
-	UIManager* uiManager = GET_SINGLE(UIManager);
-	uiManager->SetHPPercent(uiManager->GetHPPercent() - DAMAGE);
-	if (uiManager->GetHPPercent() <= 0)
-	{
-		return false;
-	}
-	return true;
-}
-
+void EndRolling(Object* owner);
+void EndHit(Object* owner);
+void SetMoveToBeforeTile(Object* owner);
+bool ApplyDamage();
+Vec2 GetMoveDir();
 
 Agent::Agent()
 	: isRight(true), isRun(false)
@@ -80,6 +33,7 @@ Agent::Agent()
 	, backUpTile(nullptr)
 	, isGroundCheck(true)
 {
+	GET_SINGLE(ResourceManager)->LoadSound(L"rolling", L"Sound\\Rolling.mp3", false);
 	GetTransform()->SetScale({ 128, 128 });
 
 	AddComponent<Animator>();
@@ -137,8 +91,6 @@ Agent::~Agent()
 
 void Agent::Update()
 {
-	if (GET_KEYDOWN(KEY_TYPE::P))
-		GET_SINGLE(SceneManager)->LoadScene(L"Title");
 	if (!isGroundCheck)
 	{
 		SetMoveToBeforeTile(this);
@@ -147,49 +99,18 @@ void Agent::Update()
 	if (!isRolling)
 		isGroundCheck = false;
 
-	float dt = GET_SINGLE(TimeManager)->GetDT();
-	Vec2 moveDir = { 0, 0 };
-	if (GET_KEY(KEY_TYPE::W))
-	{
-		moveDir += Vec2(0, -1);
-	}
-	if (GET_KEY(KEY_TYPE::A))
-	{
-		moveDir += Vec2(-1, 0);
-	}
-	if (GET_KEY(KEY_TYPE::S))
-	{
-		moveDir += Vec2(0, 1);
-	}
-	if (GET_KEY(KEY_TYPE::D))
-	{
-		moveDir += Vec2(1, 0);
-	}
-
-	moveDir.Normalize();
+	Vec2 moveDir = GetMoveDir();
 
 	if (!isRolling && !isHit)
 	{
 		if (moveDir.Length() == 0)
 		{
-			std::wstring animationName = L"Character_Idle";
-			if (isRight)
-				animationName += L"_r";
-			else
-				animationName += L"_l";
-
-			GetComponent<Animator>()->PlayAnimation(animationName, true);
+			PlayAnimation(L"Character_Idle", true);
 			isRun = false;
 		}
 		else if (!isRun && moveDir.y != 0)
 		{
-			std::wstring animationName = L"Character_Run";
-			if (isRight)
-				animationName += L"_r";
-			else
-				animationName += L"_l";
-
-			GetComponent<Animator>()->PlayAnimation(animationName, true);
+			PlayAnimation(L"Character_Run", true);
 			isRun = true;
 		}
 		else if (!isRun || (isRight && moveDir.x < 0))
@@ -204,40 +125,32 @@ void Agent::Update()
 			GetComponent<Animator>()->PlayAnimation(L"Character_Run_r", true);
 			isRight = true;
 			isRun = true;
-
 		}
 
 		if (GET_KEYDOWN(KEY_TYPE::SPACE) && moveDir.Length() > 0 && canRolling)
 		{
-			Animator* ani = GetComponent<Animator>();
-			std::wstring animationName = L"Character_Rolling";
-			if (isRight)
-				animationName += L"_r";
-			else
-				animationName += L"_l";
-
-			ani->PlayAnimation(animationName, false);
+			GET_SINGLE(ResourceManager)->Play(L"rolling");
+			PlayAnimation(L"Character_Rolling", false);
 			isRolling = true;
 			isRun = false;
 			canRolling = false;
 			rollingDir = moveDir;
 			rollingSkillUI->CoolTimeAnimation();
 		}
-		moveDir = moveDir * SPEED * dt;
-		GetTransform()->Translate(moveDir);
-		cam->GetTransform()->Translate(moveDir);
-		rollingSkillUI->GetTransform()->Translate(moveDir);
-
+		moveDir = moveDir * SPEED * fDT;
 	}
 	else if (!isHit && isRolling)
 	{
-		moveDir = rollingDir * ROLLING_SPEED * dt;
-		GetTransform()->Translate(moveDir);
-		cam->GetTransform()->Translate(moveDir);
-		rollingSkillUI->GetTransform()->Translate(moveDir);
+		moveDir = rollingDir * ROLLING_SPEED * fDT;
+	}
+	else if (isHit)
+	{
+		moveDir = { 0,0 };
 	}
 
-
+	GetTransform()->Translate(moveDir);
+	cam->GetTransform()->Translate(moveDir);
+	rollingSkillUI->GetTransform()->Translate(moveDir);
 }
 
 void Agent::Render(HDC _hdc)
@@ -262,8 +175,84 @@ void Agent::StayCollision(Collider* _other)
 	}
 }
 
-void Agent::ExitCollision(Collider* _other)
+
+#pragma region Callback Actions
+
+void EndRolling(Object* owner)
 {
+	Agent* agent = dynamic_cast<Agent*>(owner);
+	agent->isRolling = false;
+	agent->isGroundCheck = false;
+
+	auto func = [](Object* obj) {
+		Agent* agent = dynamic_cast<Agent*>(obj);
+		if (agent)
+			agent->canRolling = true;
+		};
+
+	GET_SINGLE(TimeManager)->DelayRun(0.2f, func, owner);
+}
+void EndHit(Object* owner)
+{
+	Agent* agent = dynamic_cast<Agent*>(owner);
+	agent->isHit = false;
+
+	auto func = [](Object* obj) {
+		Agent* agent = dynamic_cast<Agent*>(obj);
+		if (agent)
+			agent->canHit = true;
+		};
+
+	GET_SINGLE(TimeManager)->DelayRun(1, func, owner);
+}
+void SetMoveToBeforeTile(Object* owner)
+{
+	Agent* agent = dynamic_cast<Agent*>(owner);
+	if (!agent->backUpTile) return;
+
+	Vec2 dir = agent->backUpTile->GetTransform()->GetPosition() - agent->GetTransform()->GetPosition();
+	agent->GetTransform()->Translate(dir);
+	agent->cam->GetTransform()->Translate(dir);
+	agent->rollingSkillUI->GetTransform()->Translate(dir);
+}
+
+#pragma endregion
+
+bool ApplyDamage()
+{
+	UIManager* uiManager = GET_SINGLE(UIManager);
+	uiManager->SetHPPercent(uiManager->GetHPPercent() - DAMAGE);
+	if (uiManager->GetHPPercent() <= 0)
+	{
+		return false;
+	}
+	return true;
+}
+
+Vec2 GetMoveDir()
+{
+	Vec2 moveDir = { 0, 0 };
+	if (GET_KEY(KEY_TYPE::W))
+		moveDir += Vec2(0, -1);
+	if (GET_KEY(KEY_TYPE::A))
+		moveDir += Vec2(-1, 0);
+	if (GET_KEY(KEY_TYPE::S))
+		moveDir += Vec2(0, 1);
+	if (GET_KEY(KEY_TYPE::D))
+		moveDir += Vec2(1, 0);
+
+	moveDir.Normalize();
+	return moveDir;
+}
+
+void Agent::PlayAnimation(wstring animationName, bool repeat)
+{
+	if (isRight)
+		animationName += L"_r";
+	else
+		animationName += L"_l";
+
+	GetComponent<Animator>()->PlayAnimation(animationName, repeat);
 }
 
 void Agent::Hit()

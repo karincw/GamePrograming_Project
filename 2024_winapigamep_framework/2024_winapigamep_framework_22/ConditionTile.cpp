@@ -3,52 +3,28 @@
 #include "Condition.h"
 
 ConditionTile::ConditionTile()
-	: conditions{}
 {
-	for (auto com : m_vecComponents)
-	{
-		com->SetEnable(false);
-	}
+	ApplyCondition();
 }
 
 ConditionTile::~ConditionTile()
 {
-	for (auto c : conditions)
-	{
-		delete c;
-	}
-	conditions.clear();
 }
 
 void ConditionTile::Update()
 {
-	if (CheckCondiiton() && !flag)
-	{
-		flag = true;
-		ApplyEnable();
-	}
+	ApplyCondition();
 }
 
-bool ConditionTile::CheckCondiiton()
+void ConditionTile::Render(HDC _hdc)
 {
-	bool state = true;
-	for (auto c : conditions)
-	{
-		if (c->condition == false)
-			state = false;
-	}
-	return state;
+	TileObject::ComponentRender(_hdc);
 }
 
-void ConditionTile::AddCondiiton(Condition* c)
-{
-	conditions.push_back(c);
-}
-
-void ConditionTile::ApplyEnable()
+void ConditionTile::ApplyCondition()
 {
 	for (auto com : m_vecComponents)
 	{
-		com->SetEnable(true);
+		com->SetEnable(CheckCondiiton());
 	}
 }

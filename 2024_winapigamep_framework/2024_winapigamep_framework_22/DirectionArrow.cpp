@@ -10,7 +10,7 @@ DirectionArrow::DirectionArrow()
 
 	AddComponent<SpriteRenderer>();
 	SpriteRenderer* spriteRenderer = GetComponent<SpriteRenderer>();
-	spriteRenderer->CreateTexture(L"Texture\\DirectionArrow.bmp", L"direction_arrow");
+	spriteRenderer->CreateTexture(L"Texture\\DirectionArrow_Right.bmp", L"direction_arrow");
 	GetTransform()->SetPosition({ 100 , 400 });
 }
 

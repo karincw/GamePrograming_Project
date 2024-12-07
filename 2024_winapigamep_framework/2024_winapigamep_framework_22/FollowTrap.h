@@ -1,10 +1,10 @@
 #pragma once
 #include "Object.h"
 
-#define maxSpeed 400
-#define AccelationSpeed 2
-#define DecelationSpeed -0.5f;
-#define MaxAccelableDir 0.04f
+#define maxSpeed 450
+#define AccelationSpeed 1.2
+#define DecelationSpeed -0.3f
+#define MaxAccelableDir 0.035f
 
 class FollowTrap : public Object
 {

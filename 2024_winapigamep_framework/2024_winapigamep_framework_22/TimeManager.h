@@ -16,6 +16,7 @@ public:
 	bool flag = false;
 	Object* owner;
 };
+
 class TimeManager
 {
 	DECLARE_SINGLE(TimeManager);

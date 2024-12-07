@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "Action.h"
 #include "EventManager.h"
+#include "ResourceManager.h"
 
 void EndExplosion(Object* owner)
 {
@@ -14,19 +15,21 @@ void EndExplosion(Object* owner)
 
 Explosion::Explosion()
 {
+	GET_SINGLE(ResourceManager)->LoadSound(L"explosion", L"Sound\\explosion.wav", false);
+	GET_SINGLE(ResourceManager)->Play(L"explosion");
 	GetTransform()->SetScale({ 400,400 });
 
 	AddComponent<Animator>();
 	Animator* animator = GetComponent<Animator>();
 	animator->CreateTexture(L"Texture\\Explosion.bmp", L"Explosion_Sheet");
 
-	animator->CreateAnimation(L"Explosion", Vec2(0, 0), Vec2(128, 144), Vec2(128, 0), 11, 0.07f);
+	animator->CreateAnimation(L"Explosion", Vec2(0, 0), Vec2(128, 144), Vec2(128, 0), 11, 0.04f);
 	animator->PlayAnimation(L"Explosion", false);
 	animator->FindAnimation(L"Explosion")->animationEndEvent->Insert(EndExplosion);
 	AddComponent<Collider>();
 	Collider* col = GetComponent<Collider>();
 	col->SetOffSetPos(Vec2(-30, -20));
-	col->SetSize({ 256, 256});
+	col->SetSize({ 256, 256 });
 
 	SetName(L"Explosion");
 }

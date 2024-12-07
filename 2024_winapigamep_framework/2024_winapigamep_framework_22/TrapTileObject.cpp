@@ -29,7 +29,7 @@ void TrapTileObject::ExplosionTile(Object* owner) {
 			tile->isEnter = false;
 			};
 
-		GET_SINGLE(TimeManager)->DelayRun(0.8f, func, obj);
+		GET_SINGLE(TimeManager)->DelayRun(1.2f, func, obj);
 		};
 
 	GET_SINGLE(TimeManager)->DelayRun(0.75f, func, owner);
