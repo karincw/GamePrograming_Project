@@ -2,6 +2,8 @@
 #include "Gold.h"
 #include "SpriteRenderer.h"
 #include "Collider.h"
+#include "EndingManager.h"
+#include "SceneManager.h"
 
 Gold::Gold()
 {
@@ -36,5 +38,7 @@ void Gold::EnterCollision(Collider* _other)
 	if (_other->GetOwner()->GetName() == L"Player")
 	{
 		std::cout << "°ÔÀÓ ³¡";
+		GET_SINGLE(EndingManager)->SetEnding(true);
+		GET_SINGLE(SceneManager)->LoadScene(L"EndingScene");
 	}
 }

@@ -183,9 +183,13 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="DirectionArrow.h" />
+    <ClInclude Include="EndingManager.h" />
+    <ClInclude Include="EndingScene.h" />
     <ClInclude Include="ExitButton.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="FollowTrap.h" />
+    <ClInclude Include="GameClearText.h" />
+    <ClInclude Include="GameOverText.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Lazer.h" />
     <ClInclude Include="MagicTower.h" />
@@ -258,9 +262,13 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Direction.cpp" />
     <ClCompile Include="DirectionArrow.cpp" />
+    <ClCompile Include="EndingManager.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="ExitButton.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="FollowTrap.cpp" />
+    <ClCompile Include="GameClearText.cpp" />
+    <ClCompile Include="GameOverText.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="Lazer.cpp" />
     <ClCompile Include="MagicTower.cpp" />

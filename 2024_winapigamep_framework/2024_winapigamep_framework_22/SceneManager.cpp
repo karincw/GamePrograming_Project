@@ -7,6 +7,7 @@
 #include "TimeManager.h"
 #include "Stage2.h"
 #include "StageSelectScene.h"
+#include "EndingScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -17,6 +18,7 @@ void SceneManager::Init()
 	RegisterScene(L"PigScene",std::make_shared<PigScene>());
 	RegisterScene(L"StageSelectScene",std::make_shared<StageSelectScene>());
 	RegisterScene(L"Stage2",std::make_shared<Stage2>());
+	RegisterScene(L"EndingScene",std::make_shared<EndingScene>());
 
 	// ¾À ·Îµå
 	LoadScene(L"Title");

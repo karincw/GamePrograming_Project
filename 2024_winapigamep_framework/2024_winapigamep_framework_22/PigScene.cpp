@@ -17,9 +17,11 @@
 #include "ConditionTile.h"
 #include "ResourceManager.h"
 #include "Gold.h"
+#include "EndingManager.h"
 
 void PigScene::Init()
 {
+	GET_SINGLE(EndingManager)->Init();
 	CollisionManager* cm = GET_SINGLE(CollisionManager);
 	ResourceManager* rm = GET_SINGLE(ResourceManager);
 	rm->LoadSound(L"BGM", L"Sound\\BGM.mp3", true);

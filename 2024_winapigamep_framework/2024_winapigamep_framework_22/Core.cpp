@@ -7,6 +7,7 @@
 #include "CollisionManager.h"
 #include "EventManager.h"
 #include "UIManager.h"
+#include "EndingManager.h"
 
 bool Core::Init(HWND _hwnd)
 {
