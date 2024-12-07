@@ -321,6 +321,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="2024_winapigamep_framework_22.ico" />
+    <Image Include="C:\Users\user\Downloads\GameIcon.bmp" />
+    <Image Include="C:\Users\user\Downloads\Noah.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
