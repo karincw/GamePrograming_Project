@@ -320,6 +320,10 @@ void Stage2::Init()
 	move(tsp, 8, 2);
 	CreateObject(tsp, OBJECT_TYPE::FOLLOW);
 
+	move(tsp, 10, -14);
+	CreateObject(tsp, OBJECT_TYPE::GOLD);
+
+
 }
 
 void Stage2::Render(HDC _hdc)
